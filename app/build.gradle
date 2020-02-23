@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.hidero.test"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def autoImageSliderVersion = '1.3.2'
+    def textViewVersion = "0.1.6"
+    def gifVersion = "1.2.7"
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+    implementation "com.github.smarteist:autoimageslider:$autoImageSliderVersion"
+    //animated button for login
+    implementation 'br.com.simplepass:loading-button-android:1.14.0'
+
+    implementation "com.airbnb.android:lottie:$rootProject.lottieVersion"
+
+    //animation
+    implementation 'com.daimajia.easing:library:2.0@aar'
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
+
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    // as 3.0 use implementation
+    implementation "com.hanks:htextview-base:$textViewVersion"        // base library
+
+    implementation "com.hanks:htextview-fade:$textViewVersion"        // optional
+    implementation "com.hanks:htextview-line:$textViewVersion"        // optional
+    implementation "com.hanks:htextview-rainbow:$textViewVersion"     // optional
+    implementation "com.hanks:htextview-typer:$textViewVersion"       // optional
+
+    implementation "com.hanks:htextview-scale:$textViewVersion"       // optional
+    implementation "com.hanks:htextview-evaporate:$textViewVersion"   // optional
+    implementation "com.hanks:htextview-fall:$textViewVersion"        // optional
+
+    implementation "pl.droidsonroids.gif:android-gif-drawable:$gifVersion"
+    implementation 'com.krsticdragan:autotypetextview:1.1'
+
+    //Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+}

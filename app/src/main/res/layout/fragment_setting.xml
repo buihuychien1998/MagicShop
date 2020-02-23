@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#20808080"
+    tools:context=".ui.fragments.SettingFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:padding="@dimen/btnToolBarPadding"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/btnBack"
+            android:text="@string/title_setting"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/black" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnInfoAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolBar"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@android:color/white"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:text="Thông tin tài khoản"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/btnAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnInfoAccount"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:background="@android:color/white"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:text="Sổ địa chỉ"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black" />
+
+    <LinearLayout
+        android:id="@+id/btnMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAddress"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:textAllCaps="false">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tin nhắn"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gửi cho tôi các thông báo và khuyến mại đặc biệt."
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/btnCountry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnMessage"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:textAllCaps="false">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:src="@drawable/ic_vietnam"
+            app:civ_border_color="@android:color/background_dark"
+            app:civ_border_width="@dimen/_2sdp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ivCountry"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quốc gia"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vietnam hiện tại là quốc gia của bạn."
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/btnLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnCountry"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:textAllCaps="false">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngôn ngữ - Language"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tiếng Việt"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnPolicy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnLanguage"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:background="@android:color/white"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:text="Chính sách"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/btnHelp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnPolicy"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:background="@android:color/white"
+        android:gravity="start|center_vertical"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:text="Trợ giúp"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnHelp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:text="Đăng xuất"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/holo_red_dark" />
+
+    <TextView
+        android:padding="@dimen/_8sdp"
+        android:layout_centerHorizontal="true"
+        android:text="Version: 1.0.0"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
