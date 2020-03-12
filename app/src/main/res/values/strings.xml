@@ -27,7 +27,12 @@
     <string name="laz_service">\u2713 7 ngày trả hàng cho nhà bán hàng</string>
     <string name="laz_warning">⚠ Đây là sản phẩm được bán bởi Nhà Bán Hàng bên thứ ba và việc xuất hóa đơn VAT(nếu áp dụng) sẽ được thực hiện bởi nhà bán hàng theo quy định của pháp luật.</string>
     <string name="zero">0</string>
-    <string name="empty_cart">Your cart is empty.\\n Add something to make me happy :))</string>
+    <string name="empty_cart">Your cart is empty.\n Add something to make me happy :))</string>
     <string name="please_check_your_connection_status_and_try_again">Please check your connection status and try again</string>
     <string name="no_internet">No Internet</string>
+    <string name="magic">Magic</string>
+    <string name="search_here">Search here...</string>
+    <string name="flash_sale">Flash Sale</string>
+    <string name="xem_th_m"><![CDATA[Xem thêm >]]></string>
+    <string name="da_nh_ri_ng_cho_ba_n">Dành riêng cho bạn</string>
 </resources>

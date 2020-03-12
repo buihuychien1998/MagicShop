@@ -25,6 +25,4 @@ class AccountFragment : BaseFragment() {
             findNavController().navigate(R.id.action_accountFragment_to_settingFragment)
         }
     }
-
-
 }

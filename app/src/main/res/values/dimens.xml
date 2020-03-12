@@ -5,6 +5,5 @@
     <dimen name="headerTextSize">25sp</dimen>
     <dimen name="newsMoreTextSize">12sp</dimen>
     <dimen name="loginViewsMargin">20dp</dimen>
-    <dimen name="btnToolBarPadding">12dp</dimen>
-    <dimen name="dimen_2x">16dp</dimen>
+    <dimen name="dp16">16dp</dimen>
 </resources>

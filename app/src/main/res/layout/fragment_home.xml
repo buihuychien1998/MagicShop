@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:gravity="center"
-            android:text="Magic"
+            android:text="@string/magic"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:colorSpace="@dimen/_100sdp" />
 
@@ -37,7 +37,7 @@
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="@dimen/_8sdp"
             android:gravity="start|center_vertical"
-            android:hint="Search here..."
+            android:hint="@string/search_here"
             android:padding="@dimen/_8sdp" />
 
         <androidx.cardview.widget.CardView
@@ -56,14 +56,15 @@
                 app:sliderAutoCycleDirection="back_and_forth"
                 app:sliderAutoCycleEnabled="true"
                 app:sliderCircularHandlerEnabled="true"
+                app:sliderIndicatorRtlMode="auto"
                 app:sliderIndicatorAnimationDuration="600"
                 app:sliderIndicatorGravity="center_horizontal|bottom"
                 app:sliderIndicatorMargin="15dp"
                 app:sliderIndicatorOrientation="horizontal"
                 app:sliderIndicatorPadding="3dp"
                 app:sliderIndicatorRadius="2dp"
-                app:sliderIndicatorSelectedColor="#5A5A5A"
-                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderIndicatorUnselectedColor="@android:color/darker_gray"
+                app:sliderIndicatorSelectedColor="@android:color/white"
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
         </androidx.cardview.widget.CardView>
@@ -90,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8sdp"
-                android:text="Flash Sale"
+                android:text="@string/flash_sale"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
             <TextView
@@ -102,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="@dimen/_8sdp"
-                android:text="Xem thêm >"
+                android:text="@string/xem_th_m"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/holo_red_dark"
                 android:textStyle="italic" />
@@ -126,7 +127,7 @@
             android:layout_margin="@dimen/_8sdp"
             android:gravity="center"
             android:textColor="@color/black"
-            android:text="Dành riêng cho bạn"
+            android:text="@string/da_nh_ri_ng_cho_ba_n"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
         <androidx.recyclerview.widget.RecyclerView

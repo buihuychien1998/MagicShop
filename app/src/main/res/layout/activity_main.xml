@@ -14,12 +14,14 @@
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph"/>
+        app:navGraph="@navigation/nav_graph"
+        tools:ignore="FragmentTagUsage" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:forceHasOverlappingRendering="true"
         android:background="?android:attr/windowBackground"
         android:foreground="?attr/selectableItemBackground"
         app:itemIconTint="@drawable/bottom_navigation_colors"

@@ -10,13 +10,13 @@ import com.hidero.test.R
 
 class InternetDialog(context: Context): Dialog(context, R.style.df_dialog) {
     fun showDialog() {
-        this.setContentView(R.layout.dialog_no_internet)
-        this.setCancelable(true)
-        this.setCanceledOnTouchOutside(true)
-        this.findViewById<Button>(R.id.btnSpinAndWinRedeem).setOnClickListener {
-            this.dismiss()
+        setContentView(R.layout.dialog_no_internet)
+        setCancelable(false)
+        setCanceledOnTouchOutside(false)
+        findViewById<Button>(R.id.btnSpinAndWinRedeem).setOnClickListener {
+            dismiss()
         }
-        this.show()
+        show()
     }
 
 

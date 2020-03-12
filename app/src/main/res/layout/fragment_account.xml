@@ -374,7 +374,7 @@
                     app:cardCornerRadius="@dimen/_6sdp">
 
                     <com.smarteist.autoimageslider.SliderView
-                        android:id="@+id/imageSlider"
+                        android:id="@+id/sliderView"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"
                         app:sliderAnimationDuration="600"

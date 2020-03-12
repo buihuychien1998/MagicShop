@@ -59,6 +59,8 @@ public class SliderAdapterExample extends
         viewHolder.textViewDescription.setTextColor(Color.WHITE);
         Glide.with(viewHolder.itemView)
                 .load(sliderItem.getImageUrl())
+                .placeholder(R.drawable.ic_no_image)
+                .error(R.drawable.ic_error)
                 .fitCenter()
                 .into(viewHolder.imageViewBackground);
 
