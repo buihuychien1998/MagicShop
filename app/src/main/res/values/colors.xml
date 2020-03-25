@@ -3,12 +3,15 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#B9BBBD</color>
+    <color name="colorAccentDefault">#D81B60</color>
+    <color name="colorPurple">#FF4081</color>
     <color name="colorBackground">#333C46</color>
     <color name="colorSplashText">#F0F0F0</color>
     <color name="colorProgressBar">#FFCE511C</color>
     <color name="colorTextView">#83898E</color>
     <color name="colorMain">#EF6C00</color>
-    <color name="colorDefault">#808080</color>
+    <color name="colorTextDefault">#808080</color>
+    <color name="colorButtonDefault">#FFA000</color>
 
     <color name="bottomNavigationTintColor">#B2B2B2</color>
     <color name="bottomNavigationSelectedColor">#FC4926</color>
@@ -24,7 +27,7 @@
     <color name="bottomNavigationBackground">#F7F7F7</color>
 
     <color name="df_transparent_black_background">#80000000</color>
-    <color name="whiteCardColor">#fff</color>
+    <color name="white">#fff</color>
     <color name="blackTextColor">#000</color>
 
     <!--colors for light mode-->
@@ -33,6 +36,10 @@
     <color name="themeColor">#11CFC5</color>
     <color name="background_press">#8676FB</color>
     <color name="colorOrange">#d45203</color>
+    <color name="bg_color">#1A808080</color>
+    <color name="theme_primary">#B6B6B6</color>
+    <color name="red">#f20</color>
+    <color name="green">#05EA11</color>
 
 
 </resources>

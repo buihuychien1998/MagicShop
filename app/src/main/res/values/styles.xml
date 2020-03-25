@@ -10,7 +10,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+<!--        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>-->
+
     </style>
     <!--styles for internet dialog-->
 
@@ -72,11 +73,11 @@
 
     <style name="modifiedEditText" parent="parent">
         <item name="android:textSize">@dimen/newsMoreTextSize</item>
-        <item name="android:backgroundTint">@color/primaryTextColor</item>
+        <item name="android:backgroundTint">@color/colorButtonDefault</item>
     </style>
 
     <style name="loginButton" parent="viewParent">
-        <item name="android:background">@drawable/button_background_blue</item>
+        <item name="android:background">@drawable/button_background_orange</item>
         <item name="android:textColor">@color/whiteTextColor</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -104,7 +105,29 @@
     </style>
     <!-- This will set the fade in animation on all your activities by default -->
     <style name="WindowAnimationTransition">
-        <item name="android:windowEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:windowEnterAnimation">@anim/slide_fade_out</item>
         <item name="android:windowExitAnimation">@anim/slide_out_right</item>
     </style>
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="CustomRatingBar" parent="@style/Widget.AppCompat.RatingBar.Small">
+        <item name="android:progressTint">@color/colorAccentDefault</item>
+        <item name="android:secondaryProgressTint">@android:color/darker_gray</item>
+    </style>
+
+    <style name="CustomImageButton" parent="BorderLessBackground">
+        <item name="android:layout_margin">@dimen/dp8</item>
+        <item name="android:padding">@dimen/dp8</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:contentDescription">@string/no_image</item>
+    </style>
+
 </resources>

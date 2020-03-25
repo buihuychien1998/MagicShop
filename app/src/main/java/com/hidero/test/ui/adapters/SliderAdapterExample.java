@@ -1,4 +1,4 @@
-package com.hidero.test.customview;
+package com.hidero.test.ui.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.hidero.test.R;
-import com.hidero.test.data.SliderItem;
+import com.hidero.test.data.valueobject.SliderItem;
+import com.hidero.test.util.UtilsKt;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
@@ -57,13 +56,13 @@ public class SliderAdapterExample extends
         viewHolder.textViewDescription.setText(sliderItem.getDescription());
         viewHolder.textViewDescription.setTextSize(14);
         viewHolder.textViewDescription.setTextColor(Color.WHITE);
-        Glide.with(viewHolder.itemView)
-                .load(sliderItem.getImageUrl())
-                .placeholder(R.drawable.ic_no_image)
-                .error(R.drawable.ic_error)
-                .fitCenter()
-                .into(viewHolder.imageViewBackground);
-
+//        Glide.with(viewHolder.itemView)
+//                .load(sliderItem.getImageUrl())
+//                .placeholder(R.drawable.ic_no_image)
+//                .error(R.drawable.ic_error)
+//                .fitCenter()
+//                .into(viewHolder.imageViewBackground);
+        UtilsKt.loadUrl(viewHolder.imageViewBackground, viewHolder.itemView, sliderItem.getImageUrl());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +70,7 @@ public class SliderAdapterExample extends
                 animation.setDuration(500);
                 v.setAlpha(1f);
                 v.startAnimation(animation);
-                Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();
+                UtilsKt.showToast(context, "This is item in position " + position);
             }
         });
     }

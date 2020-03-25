@@ -4,10 +4,11 @@ package com.hidero.test.ui.fragments
 import android.graphics.Color
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.hidero.test.R
-import com.hidero.test.base.BaseFragment
-import com.hidero.test.customview.SliderAdapterExample
-import com.hidero.test.data.SliderItem
+import com.hidero.test.ui.adapters.SliderAdapterExample
+import com.hidero.test.ui.base.BaseFragment
+import com.hidero.test.data.valueobject.SliderItem
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -24,10 +25,11 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun initView(view: View) {
-        adapter = SliderAdapterExample(this@HomeFragment.context)
+        adapter =
+            SliderAdapterExample(this@HomeFragment.context)
         sliderView.sliderAdapter = adapter
         renewItems(null)
-        with(sliderView) {
+        sliderView.apply {
             setIndicatorAnimation(IndicatorAnimations.FILL) //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
             setSliderTransformAnimation(SliderAnimations.CUBEINROTATIONTRANSFORMATION)
             autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH
@@ -36,6 +38,9 @@ class HomeFragment : BaseFragment() {
             scrollTimeInSec = 3
             isAutoCycle = true
             startAutoCycle()
+        }
+        btnSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
 
     }
@@ -77,9 +82,9 @@ class HomeFragment : BaseFragment() {
 
     fun addNewItem(view: View) {
         val sliderItem = SliderItem()
-        sliderItem.description = "Slider Item Added Manually"
         sliderItem.imageUrl =
             "https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        sliderItem.description = sliderItem.imageUrl
         adapter.addItem(sliderItem)
     }
 

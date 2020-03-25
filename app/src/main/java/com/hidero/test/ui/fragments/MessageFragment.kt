@@ -1,26 +1,30 @@
 package com.hidero.test.ui.fragments
 
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.hidero.test.R
+import com.hidero.test.ui.adapters.ViewPagerAdapter
+import com.hidero.test.ui.base.BaseFragment
+import kotlinx.android.synthetic.main.fragment_message.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class MessageFragment : Fragment() {
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message, container, false)
+class MessageFragment : BaseFragment() {
+    private val viewPagerAdapter by lazy {
+        ViewPagerAdapter(activity!!.supportFragmentManager)
     }
 
+    override fun getLayoutId(): Int {
+        return R.layout.fragment_message
+    }
 
+    override fun initView(view: View) {
+        setHasOptionsMenu(true)
+        viewPagerAdapter.addFragment(ChatsFragment(), "Tin nhắn")
+        viewPagerAdapter.addFragment(UsersFragment(), "Người dùng")
+        viewPager.adapter = viewPagerAdapter
+        tabLayout.setupWithViewPager(viewPager)
+    }
 }

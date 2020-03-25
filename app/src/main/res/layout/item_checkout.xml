@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_marginTop="@dimen/dp8"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.hidero.test.ui.customviews.MaskedCardView
+        android:id="@+id/cvBook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_1sdp"
+        app:cardPreventCornerOverlap="false"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.Card">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivProduct"
+                    android:layout_width="@dimen/dp80"
+                    android:layout_height="@dimen/dp120"
+                    android:layout_marginEnd="@dimen/dp16"
+                    android:src="@drawable/ic_no_image" />
+
+                <TextView
+                    android:id="@+id/tvNameProduct"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:layout_toEndOf="@id/ivProduct"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:maxLines="2"
+                    android:text="@string/app_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp16" />
+
+                <TextView
+                    android:id="@+id/tvCost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvNameProduct"
+                    android:layout_toEndOf="@id/ivProduct"
+                    android:gravity="start"
+                    android:paddingStart="@dimen/dp8"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:text="@string/zero"
+                    android:textColor="#f20"
+                    android:textSize="@dimen/sp16"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:paddingStart="@dimen/dp8"
+                    android:paddingEnd="@dimen/dp4"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/sp14"
+                    android:id="@+id/tv1"
+                    android:text="@string/s_l_ng"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvCost"
+                    android:layout_toEndOf="@id/ivProduct"/>
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp16"
+                    android:textStyle="bold"
+                    android:text="@string/zero"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvCost"
+                    android:layout_toEndOf="@id/tv1"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </com.hidero.test.ui.customviews.MaskedCardView>
+</RelativeLayout>

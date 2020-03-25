@@ -7,63 +7,64 @@
     android:clickable="true"
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
+    android:background="@android:color/white"
+    android:layout_margin="@dimen/dp4"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     tools:ignore="UnusedAttribute">
 
-    <com.hidero.test.customview.MaskedCardView
+    <com.hidero.test.ui.customviews.MaskedCardView
         android:id="@+id/cvBook"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
         app:cardElevation="@dimen/_2sdp"
+        app:cardCornerRadius="@dimen/dp8"
         app:cardPreventCornerOverlap="false"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.Card">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:padding="@dimen/_8sdp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/ivProduct"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_100sdp"
-                android:padding="@dimen/_8sdp"
+                android:id="@+id/productThubnail"
+                android:layout_width="200dp"
+                android:layout_height="170dp"
                 android:src="@drawable/ic_no_image" />
 
             <TextView
-                android:id="@+id/tvNameProduct"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:ellipsize="end"
+                android:layout_below="@id/productThubnail"
+                android:textColor="@color/frutorial_title"
+                android:layout_margin="5dp"
                 android:maxLines="1"
-                android:paddingHorizontal="@dimen/_8sdp"
-                android:text="@string/app_name"
-                android:textAppearance="?attr/textAppearanceSubtitle1"
-                android:textColor="@color/colorDefault" />
+                android:text="@string/name"
+                android:textSize="@dimen/sp14"
+                />
 
+
+            <RatingBar
+                android:id="@+id/rb"
+                android:numStars="5"
+                style="@style/CustomRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:layout_marginStart="5dp"
+                android:stepSize="0.1"
+                android:rating="3.4" />
             <TextView
-                android:id="@+id/tvCost"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_8sdp"
-                android:maxLines="1"
-                android:paddingHorizontal="@dimen/_8sdp"
-                android:text="@string/zero"
-                android:textAppearance="?attr/textAppearanceSubtitle2"
-                android:textColor="?attr/colorAccent"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="top|end"
-            android:padding="@dimen/_8sdp"
-            android:src="@drawable/ic_new" />
-    </com.hidero.test.customview.MaskedCardView>
+                android:text="$15.30"
+                android:layout_below="@id/rb"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="#f20"
+                android:layout_marginEnd="5dp"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+    </com.hidero.test.ui.customviews.MaskedCardView>
 </RelativeLayout>

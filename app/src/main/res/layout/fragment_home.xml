@@ -23,7 +23,7 @@
             android:layout_height="?attr/actionBarSize"
             android:gravity="center"
             android:text="@string/magic"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="@dimen/sp20"
             app:colorSpace="@dimen/_100sdp" />
 
         <Button
@@ -37,8 +37,12 @@
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="@dimen/_8sdp"
             android:gravity="start|center_vertical"
-            android:hint="@string/search_here"
-            android:padding="@dimen/_8sdp" />
+            android:padding="@dimen/_8sdp"
+            android:text="@string/search_here"
+            android:textAllCaps="false"
+            android:textColor="@color/colorButtonDefault"
+            android:textSize="@dimen/sp14"
+            android:textStyle="normal" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/slider_layout"
@@ -56,79 +60,86 @@
                 app:sliderAutoCycleDirection="back_and_forth"
                 app:sliderAutoCycleEnabled="true"
                 app:sliderCircularHandlerEnabled="true"
-                app:sliderIndicatorRtlMode="auto"
                 app:sliderIndicatorAnimationDuration="600"
                 app:sliderIndicatorGravity="center_horizontal|bottom"
                 app:sliderIndicatorMargin="15dp"
                 app:sliderIndicatorOrientation="horizontal"
                 app:sliderIndicatorPadding="3dp"
                 app:sliderIndicatorRadius="2dp"
-                app:sliderIndicatorUnselectedColor="@android:color/darker_gray"
+                app:sliderIndicatorRtlMode="auto"
                 app:sliderIndicatorSelectedColor="@android:color/white"
+                app:sliderIndicatorUnselectedColor="@android:color/darker_gray"
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCategory"
-            tools:listitem="@layout/item_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/slider_layout"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="5" />
+            app:spanCount="5"
+            tools:listitem="@layout/item_category" />
 
         <RelativeLayout
+            android:layout_marginTop="@dimen/dp4"
+            android:layout_marginBottom="@dimen/dp4"
             android:id="@+id/rlFlashSale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rvCategory">
 
             <TextView
-                android:fontFamily="@font/squaresharpsitalic"
-                android:textStyle="bold"
                 android:id="@+id/tvFlashSale"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8sdp"
+                android:fontFamily="@font/squaresharpsitalic"
                 android:text="@string/flash_sale"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textStyle="bold" />
 
             <TextView
-                style="@style/BorderBackground"
-                android:focusable="true"
-                android:clickable="true"
                 android:id="@+id/tvMoreFS"
+                style="@style/BorderBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="@dimen/_8sdp"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="@string/xem_th_m"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@android:color/holo_red_dark"
+                android:textSize="@dimen/sp12"
                 android:textStyle="italic" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFlashSale"
-                tools:listitem="@layout/item_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvFlashSale"
+                android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:orientation="horizontal" />
+                tools:listitem="@layout/item_product" />
         </RelativeLayout>
 
 
-        <TextView
+        <Button
+            android:background="@android:color/transparent"
             android:id="@+id/tvProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rlFlashSale"
-            android:layout_margin="@dimen/_8sdp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:text="@string/da_nh_ri_ng_cho_ba_n"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:paddingStart="@dimen/dp8"
+            android:paddingEnd="@dimen/dp8"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:gravity="start|center_vertical"
+            android:text="@string/g_i_y_h_m_nay"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="@dimen/sp16" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProduct"
@@ -137,9 +148,9 @@
             android:layout_below="@id/tvProduct"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="8dp"
-            tools:listitem="@layout/item_product"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3" />
+            app:spanCount="3"
+            tools:listitem="@layout/item_product" />
     </RelativeLayout>
 
 </ScrollView>

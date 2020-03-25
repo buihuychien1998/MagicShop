@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.AccountFragment">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:background="@color/colorMain">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -20,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_margin="8dp"
+                android:layout_margin="@dimen/dp8"
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/ic_user_profile"
@@ -29,23 +31,23 @@
                 app:civ_circle_background_color="@android:color/white" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_toStartOf="@id/btnSetting"
                 android:layout_toEndOf="@+id/ivProfile"
+                android:gravity="center_vertical"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp16" />
 
             <ImageButton
                 android:id="@+id/btnSetting"
-                style="@style/BorderBackground"
-                android:layout_width="@dimen/_36sdp"
-                android:layout_height="@dimen/_36sdp"
+                style="@style/CustomImageButton"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="@android:color/transparent"
                 android:src="@drawable/ic_settings" />
         </RelativeLayout>
 
@@ -59,6 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorMain"
+                android:baselineAligned="false"
                 android:orientation="horizontal"
                 android:visibility="visible"
                 android:weightSum="2">
@@ -88,8 +91,8 @@
                         android:gravity="center"
                         android:text="Yêu thích\ncủa tôi"
                         android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp14" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -116,8 +119,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Gian hàng đã\ntheo dõi"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/sp14" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -126,20 +129,22 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorMain"
                 android:gravity="center"
-                android:paddingTop="@dimen/_20sdp"
-                android:paddingBottom="@dimen/_20sdp"
-                android:visibility="gone">
+                android:paddingTop="@dimen/dp16"
+                android:paddingBottom="@dimen/dp16"
+                android:visibility="visible">
 
                 <Button
+                    android:id="@+id/btnAuthentication"
                     style="@style/BorderBackground"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/button_border_white"
-                    android:padding="@dimen/_10sdp"
-                    android:text="Đăng nhập / Đăng ký"
+                    android:background="@drawable/btn_border_white"
+                    android:paddingStart="@dimen/dp16"
+                    android:paddingEnd="@dimen/dp16"
+                    android:text="@string/ng_nh_p_ng_ky"
                     android:textAllCaps="false"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/sp14" />
             </LinearLayout>
         </FrameLayout>
 
@@ -150,214 +155,156 @@
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/tv"
+                android:id="@+id/tvOptionPayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:text="Đơn hàng của tôi"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/sp16" />
 
             <TextView
                 style="@style/BorderBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
                 android:clickable="true"
                 android:descendantFocusability="blocksDescendants"
                 android:focusable="true"
                 android:text="Xem tất cả đơn hàng >"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="#f20" />
+                android:textColor="#f20"
+                android:textSize="@dimen/sp12" />
 
             <LinearLayout
                 android:id="@+id/lnl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv"
+                android:layout_below="@id/tvOptionPayment"
                 android:orientation="horizontal"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:visibility="visible"
                 android:weightSum="4">
 
-                <LinearLayout
+
+                <TextView
                     style="@style/BorderBackground"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:descendantFocusability="blocksDescendants"
+                    android:drawableTop="@drawable/ic_credit_card"
                     android:focusable="true"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp">
+                    android:text="Chờ\nthanh toán"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp14" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_credit_card" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Chờ\nThanh toán"
-                        android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
                     style="@style/BorderBackground"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:descendantFocusability="blocksDescendants"
+                    android:drawableTop="@drawable/ic_delivery_cart"
                     android:focusable="true"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp">
+                    android:text="Chờ\nvận chuyển"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp14" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_delivery_cart" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Chờ\nvận chuyển"
-                        android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
                     style="@style/BorderBackground"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:descendantFocusability="blocksDescendants"
+                    android:drawableTop="@drawable/ic_delivery_truck"
                     android:focusable="true"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp">
+                    android:text="Chờ\ngiao hàng"
+                    android:textAllCaps="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp14" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_delivery_truck" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Chờ\ngiao hàng"
-                        android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
                     style="@style/BorderBackground"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:descendantFocusability="blocksDescendants"
+                    android:drawableTop="@drawable/ic_evaluate"
                     android:focusable="true"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_evaluate" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="Chưa\nđánh giá"
-                        android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
+                    android:text="Chưa\nđánh giá"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp14" />
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/lnl2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/lnl"
-                android:orientation="horizontal"
-                android:visibility="visible"
-                android:weightSum="2">
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:visibility="visible">
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvOrderReturn"
                     style="@style/BorderBackground"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:clickable="true"
-                    android:descendantFocusability="blocksDescendants"
+                    android:drawableStart="@drawable/ic_re_delivery"
+                    android:drawablePadding="4dp"
                     android:focusable="true"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="8dp"
+                    android:text="Đơn hàng đổi trả"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toStartOf="@id/tvOrderCancel"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_re_delivery" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center"
-                        android:text="Đơn hàng đổi trả"
-                        android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tvOrderCancel"
                     style="@style/BorderBackground"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:clickable="true"
-                    android:descendantFocusability="blocksDescendants"
+                    android:drawableStart="@drawable/ic_cancel_file"
+                    android:drawablePadding="4dp"
                     android:focusable="true"
                     android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_cancel_file" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:gravity="center"
-                        android:text="Đơn hàng đã hủy"
-                        android:textAllCaps="false"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                        android:textColor="@android:color/black" />
-                </LinearLayout>
-            </LinearLayout>
+                    android:padding="8dp"
+                    android:text="Đơn hàng đã hủy"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvOrderReturn" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/lnl3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/lnl2"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:orientation="vertical"
                 android:visibility="visible">
 
@@ -365,7 +312,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Kiểm tra kiện hàng"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp16" />
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -396,334 +344,185 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/lnl4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/lnl3"
-                android:orientation="vertical"
-                android:visibility="visible">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Ví eM"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@android:color/black" />
-
-                    <ImageButton
-                        style="@style/BorderBackground"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:background="@android:color/transparent"
-                        android:src="@drawable/ic_visibility" />
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <LinearLayout
-                        style="@style/BorderBackground"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:descendantFocusability="blocksDescendants"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingBottom="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                            android:textColor="@android:color/holo_blue_dark" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="VND"
-                            android:textAllCaps="false"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@android:color/black" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        style="@style/BorderBackground"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:clickable="true"
-                        android:descendantFocusability="blocksDescendants"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingBottom="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                            android:textColor="@android:color/holo_blue_dark" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Mã giảm giá"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                            android:textColor="@android:color/black" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/lnl4"
+                android:layout_marginTop="4dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Dịch vụ của tôi"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp16" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:orientation="horizontal"
                     android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
+                    android:paddingBottom="2dp"
                     android:weightSum="2">
 
-                    <RelativeLayout
-                        android:id="@+id/rl1"
+
+                    <TextView
                         style="@style/BorderBackground"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:clickable="true"
-                        android:descendantFocusability="blocksDescendants"
+                        android:drawableEnd="@drawable/ic_navigate_next"
                         android:focusable="true"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Tin nhắn"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/sp14" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tin nhắn"
-                            android:textColor="@android:color/black" />
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_navigate_next"
-                            android:textColor="@android:color/black" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rl2"
+                    <TextView
                         style="@style/BorderBackground"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:clickable="true"
-                        android:descendantFocusability="blocksDescendants"
+                        android:drawableEnd="@drawable/ic_navigate_next"
                         android:focusable="true"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Đánh giá của tôi"
-                            android:textColor="@android:color/black" />
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_navigate_next"
-                            android:textColor="@android:color/black" />
-                    </RelativeLayout>
+                        android:gravity="center_vertical"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Đánh giá của tôi"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/sp14" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
                     android:weightSum="2">
 
-                    <RelativeLayout
-                        android:id="@+id/rl3"
+
+                    <TextView
                         style="@style/BorderBackground"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:clickable="true"
-                        android:descendantFocusability="blocksDescendants"
+                        android:drawableEnd="@drawable/ic_navigate_next"
                         android:focusable="true"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Tùy chọn thanh toán"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/sp14" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tùy chọn thanh toán"
-                            android:textColor="@android:color/black" />
 
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_navigate_next"
-                            android:textColor="@android:color/black" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:descendantFocusability="blocksDescendants"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:id="@+id/rl4"
+                    <TextView
                         style="@style/BorderBackground"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:clickable="true"
+                        android:drawableEnd="@drawable/ic_navigate_next"
+                        android:focusable="true"
+                        android:gravity="center_vertical"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Chat với CLEO"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/sp14" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Chat với CLEO"
-                            android:textColor="@android:color/black" />
 
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_navigate_next"
-                            android:textColor="@android:color/black" />
-                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
                     android:weightSum="2">
 
-                    <RelativeLayout
-                        android:id="@+id/rl5"
+
+                    <TextView
                         style="@style/BorderBackground"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:clickable="true"
-                        android:descendantFocusability="blocksDescendants"
+                        android:drawableEnd="@drawable/ic_navigate_next"
                         android:focusable="true"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Trợ giúp"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/sp14" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Trợ giúp"
-                            android:textColor="@android:color/black" />
 
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_navigate_next"
-                            android:textColor="@android:color/black" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rl6"
+                    <TextView
                         style="@style/BorderBackground"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:clickable="true"
-                        android:descendantFocusability="blocksDescendants"
+                        android:drawableEnd="@drawable/ic_navigate_next"
                         android:focusable="true"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Miễn phí vận chuyển"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/sp14" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Miễn phí vận chuyển"
-                            android:textColor="@android:color/black" />
 
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_navigate_next"
-                            android:textColor="@android:color/black" />
-                    </RelativeLayout>
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:baselineAligned="false"
                     android:orientation="horizontal"
-                    android:paddingTop="8dp"
+                    android:paddingTop="2dp"
                     android:weightSum="2">
 
-                    <RelativeLayout
-                        android:id="@+id/rl7"
+
+                    <TextView
                         style="@style/BorderBackground"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:clickable="true"
-                        android:descendantFocusability="blocksDescendants"
+                        android:drawableEnd="@drawable/ic_navigate_next"
                         android:focusable="true"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Bán hàng trên Lazada"
-                            android:textColor="@android:color/black" />
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:background="@android:color/transparent"
-                            android:src="@drawable/ic_navigate_next"
-                            android:textColor="@android:color/black" />
-                    </RelativeLayout>
-
+                        android:gravity="center_vertical"
+                        android:paddingStart="4dp"
+                        android:paddingTop="4dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="4dp"
+                        android:text="Bán hàng trên Magic Shop"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/sp14" />
                 </LinearLayout>
 
             </LinearLayout>

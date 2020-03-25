@@ -1,48 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_marginTop="@dimen/dp8"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.hidero.test.customview.MaskedCardView
+    <com.hidero.test.ui.customviews.MaskedCardView
         android:id="@+id/cvBook"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
-        app:cardElevation="@dimen/_2sdp"
+        app:cardElevation="@dimen/_1sdp"
         app:cardPreventCornerOverlap="false"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.Card">
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/lnlHeader"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:button="@drawable/custom_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_marginStart="@dimen/dp8"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp14"
+                    android:gravity="center_vertical"
+                    android:text="@string/da_nh_ri_ng_cho_ba_n"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+            <View
+                android:background="#80D6D6D6"
+                android:layout_below="@id/lnlHeader"
+                android:id="@+id/vHeader"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp1"/>
             <RelativeLayout
+                android:layout_below="@id/vHeader"
+                android:id="@+id/rlProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/ivProduct"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_100sdp"
-                    android:layout_marginEnd="@dimen/_8sdp"
-                    android:padding="@dimen/_8sdp"
+                    android:layout_width="@dimen/dp80"
+                    android:layout_height="@dimen/dp120"
+                    android:layout_marginEnd="@dimen/dp16"
                     android:src="@drawable/ic_no_image" />
 
                 <TextView
                     android:id="@+id/tvNameProduct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_margin="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp16"
                     android:layout_toEndOf="@id/ivProduct"
                     android:ellipsize="end"
                     android:gravity="start"
                     android:maxLines="2"
                     android:text="@string/app_name"
-                    android:padding="@dimen/_8sdp"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp16" />
 
                 <TextView
                     android:id="@+id/tvCost"
@@ -51,69 +74,87 @@
                     android:layout_below="@id/tvNameProduct"
                     android:layout_toEndOf="@id/ivProduct"
                     android:gravity="start"
-                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingStart="@dimen/dp8"
                     android:paddingEnd="@dimen/_8sdp"
                     android:text="@string/zero"
-                    android:textAppearance="?attr/textAppearanceSubtitle2"
-                    android:textColor="?attr/colorAccent"
+                    android:textColor="#f20"
+                    android:textSize="@dimen/sp16"
                     android:textStyle="bold" />
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize">
-
-                <ImageButton
-                    style="@style/BorderBackground"
-                    android:id="@+id/btnMinus"
+                <RelativeLayout
+                    android:layout_marginTop="@dimen/dp16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/bg_plus_minus"
-                    android:padding="@dimen/_8sdp"
-                    android:src="@drawable/ic_minus" />
+                    android:layout_below="@id/tvCost"
+                    android:layout_toEndOf="@id/ivProduct">
+
+                    <ImageButton
+                        android:minHeight="@dimen/dp0"
+                        android:minWidth="@dimen/dp0"
+                        android:id="@+id/btnMinus"
+                        style="@style/BorderBackground"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/bg_plus_minus"
+                        android:padding="@dimen/dp8"
+                        android:src="@drawable/ic_minus" />
+
+                    <TextView
+                        android:background="@drawable/bg_plus_minus"
+                        android:id="@+id/tvQuantity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp32"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/btnMinus"
+                        android:gravity="center"
+                        android:paddingStart="@dimen/dp20"
+                        android:paddingEnd="@dimen/dp20"
+                        android:text="@string/zero"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/sp16" />
+
+                    <ImageButton
+                        android:minHeight="@dimen/dp0"
+                        android:minWidth="@dimen/dp0"
+                        android:id="@+id/btnPlus"
+                        style="@style/BorderBackground"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/tvQuantity"
+                        android:background="@drawable/bg_plus_minus"
+                        android:padding="@dimen/dp8"
+                        android:src="@drawable/ic_plus" />
+                </RelativeLayout>
+            </RelativeLayout>
+            <View
+                android:background="#80D6D6D6"
+                android:id="@+id/vFooter"
+                android:layout_below="@id/rlProduct"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp1"/>
+            <LinearLayout
+                android:layout_below="@id/vFooter"
+                android:padding="@dimen/dp8"
+                android:orientation="horizontal"
+                android:id="@+id/lnlFree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/ic_free_delivery_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
                 <TextView
-                    android:id="@+id/tvQuantity"
-                    android:layout_width="wrap_content"
+                    android:textSize="@dimen/sp14"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/btnMinus"
-                    android:background="@drawable/bg_plus_minus"
-                    android:gravity="center"
-                    android:paddingTop="@dimen/_8sdp"
-                    android:paddingBottom="@dimen/_8sdp"
-                    android:paddingStart="@dimen/_32sdp"
-                    android:paddingEnd="@dimen/_32sdp"
-                    android:text="@string/zero"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/black"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    />
-
-                <ImageButton
-                    style="@style/BorderBackground"
-                    android:id="@+id/btnPlus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/tvQuantity"
-                    android:background="@drawable/bg_plus_minus"
-                    android:padding="@dimen/_8sdp"
-                android:src="@drawable/ic_plus" />
-
-                <ImageButton
-                    style="@style/BorderBackground"
-                    android:id="@+id/btnDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/bg_plus_minus"
-                    android:padding="@dimen/_8sdp"
-                    android:src="@drawable/ic_clear" />
-            </RelativeLayout>
-        </LinearLayout>
-    </com.hidero.test.customview.MaskedCardView>
+                    android:layout_marginStart="@dimen/dp8"
+                    android:fontFamily="@font/quicksand_light"
+                    android:text="Miễn phí vận chuyển"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </RelativeLayout>
+    </com.hidero.test.ui.customviews.MaskedCardView>
 </RelativeLayout>

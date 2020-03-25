@@ -1,14 +1,428 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.CheckoutFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentInsetEnd="@dimen/dp0"
+            app:contentInsetStart="@dimen/dp0">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                style="@style/CustomImageButton"
+                android:src="@drawable/ic_arrow_back" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/ki_m_tra"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp20" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/rlOrder"
+        app:layout_constraintTop_toBottomOf="@id/abl">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/vHeader"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp4"
+                android:background="@color/bg_color"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.shuhart.stepview.StepView
+                android:id="@+id/stepView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp16"
+                app:layout_constraintTop_toBottomOf="@id/vHeader"
+                app:sv_animationType="All"
+                app:sv_doneCircleColor="@color/colorMain"
+                app:sv_doneCircleRadius="@dimen/dp12"
+                app:sv_doneStepLineColor="@color/colorMain"
+                app:sv_doneStepMarkColor="@android:color/holo_green_light"
+                app:sv_nextStepLineColor="@android:color/darker_gray"
+                app:sv_nextTextColor="@color/colorPrimary"
+                app:sv_selectedCircleColor="@android:color/darker_gray"
+                app:sv_selectedCircleRadius="@dimen/dp12"
+                app:sv_selectedStepNumberColor="@color/colorPrimary"
+                app:sv_selectedTextColor="@color/colorPrimary"
+                app:sv_stepLineWidth="@dimen/dp1"
+                app:sv_stepNumberTextSize="@dimen/sp12"
+                app:sv_stepPadding="@dimen/dp12"
+                app:sv_stepViewStyle="@style/StepView"
+                app:sv_steps="@array/checkout_step" />
+
+            <View
+                android:id="@+id/v1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp4"
+                android:background="@color/bg_color"
+                app:layout_constraintTop_toBottomOf="@id/stepView" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp8"
+                android:paddingEnd="@dimen/dp8"
+                app:layout_constraintTop_toBottomOf="@+id/v1">
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/giao_ha_ng_t_i"
+                    android:textColor="@color/colorTextDefault"
+                    android:textSize="@dimen/sp16"
+                    app:layout_constraintEnd_toStartOf="@id/tvEdit"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvEdit"
+                    style="@style/BorderBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="end"
+                    android:text="@string/chi_nh_s_a"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_marginHorizontal="@dimen/dp8"
+                    android:id="@+id/tvCustomerName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:text="@string/app_name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toStartOf="@id/tvCustomerPhone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv1" />
+
+                <TextView
+                    android:id="@+id/tvCustomerPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:gravity="end"
+                    android:text="@string/_0123456789"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvCustomerName"
+                    app:layout_constraintTop_toBottomOf="@id/tvEdit" />
+
+                <TextView
+                    android:layout_marginHorizontal="@dimen/dp8"
+                    android:id="@+id/tvCustomerAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:lineSpacingMultiplier="1.2"
+                    android:text="@string/your_address"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintTop_toBottomOf="@id/tvCustomerName" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:background="@drawable/bg_help"
+                    android:padding="@dimen/dp8"
+                    app:layout_constraintTop_toBottomOf="@id/tvCustomerAddress">
+
+                    <TextView
+                        android:id="@+id/tv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/d_da_ng_l_y_ha_ng_v_i_ca_c_i_m_l_y_ha_ng_sau"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp14" />
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tv2"
+                        android:layout_marginTop="@dimen/dp4"
+                        android:text="@string/_1_suggested_collection_point_s_nearby"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/sp12" />
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:padding="@dimen/dp4"
+                        android:src="@drawable/ic_help" />
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/v2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp4"
+                android:layout_marginTop="@dimen/dp4"
+                android:layout_marginBottom="@dimen/dp4"
+                android:background="@color/bg_color"
+                app:layout_constraintTop_toBottomOf="@+id/clAddress" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp8"
+                android:paddingEnd="@dimen/dp8"
+                app:layout_constraintTop_toBottomOf="@+id/v2">
+
+                <TextView
+                    android:id="@+id/tvOptionDelivery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tu_y_cho_n_giao_ha_ng"
+                    android:textSize="@dimen/sp16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvHelpDelivery"
+                    style="@style/BorderBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/tr_giu_p"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:id="@+id/rgDelivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvOptionDelivery">
+
+                    <RadioButton
+                        android:id="@+id/rbFastDelivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorMain"
+                        android:checked="false"
+                        android:text="@string/giao_ha_ng_nhanh" />
+
+                    <RadioButton
+                        android:id="@+id/rbStandardDelivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorMain"
+                        android:checked="true"
+                        android:text="@string/giao_ha_ng_ti_u_chu_n" />
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/v3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_marginBottom="@dimen/dp4"
+                    android:background="@color/bg_color"
+                    app:layout_constraintTop_toBottomOf="@+id/rgDelivery" />
+
+                <TextView
+                    android:id="@+id/tvOptionPayment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:text="@string/tu_y_cho_n_thanh_toa_n"
+                    android:textSize="@dimen/sp16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v3" />
+
+                <TextView
+                    android:id="@+id/tvHelpPayment"
+                    style="@style/BorderBackground"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="@string/tr_giu_p"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v3" />
+
+                <RadioGroup
+                    android:id="@+id/rgPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/tvOptionPayment">
+
+                    <RadioButton
+                        android:id="@+id/rbImmediate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorMain"
+                        android:checked="true"
+                        android:text="@string/thanh_toa_n_khi_nh_n_ha_ng" />
+
+                    <RadioButton
+                        android:id="@+id/rbCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorMain"
+                        android:checked="false"
+                        android:text="@string/thanh_toa_n_qua_the" />
+                    <RadioButton
+                        android:id="@+id/rbMomo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorMain"
+                        android:checked="false"
+                        android:text="@string/vi_momo" />
+                    <RadioButton
+                        android:id="@+id/rb"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorMain"
+                        android:checked="false"
+                        android:text="@string/tra_go_p" />
+                </RadioGroup>
+
+                <View
+                    android:id="@+id/v4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_marginBottom="@dimen/dp4"
+                    android:background="@color/bg_color"
+                    app:layout_constraintTop_toBottomOf="@+id/rgPayment" />
+
+                <TextView
+                    android:id="@+id/tvInfoOder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:text="@string/th_ng_tin_xu_t_ho_a_n"
+                    android:textSize="@dimen/sp16"
+                    app:layout_constraintTop_toBottomOf="@id/v4" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvInfoOder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/tvInfoOder"
+                    tools:listitem="@layout/item_checkout" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/rlOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_toStartOf="@id/btnOrder"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="bottom|end"
+                    android:text="@string/t_ng_c_ng"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toStartOf="@id/tvTotal"
+                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="bottom|end"
+                    android:text="@string/zero"
+                    android:textColor="#f20"
+                    android:textSize="@dimen/sp16"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:gravity="top|end"
+                    android:text="@string/a_bao_g_m_ca_vat_n_u_co"
+                    android:textColor="@color/colorTextDefault"
+                    android:textSize="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnOrder"
+            style="@style/BorderBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginEnd="@dimen/dp8"
+            android:background="@drawable/button_drawable"
+            android:gravity="center"
+            android:minWidth="@dimen/dp0"
+            android:minHeight="@dimen/dp0"
+            android:padding="@dimen/dp8"
+            android:text="@string/thanh_toa_n"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

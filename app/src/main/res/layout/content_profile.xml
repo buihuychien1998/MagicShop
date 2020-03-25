@@ -9,16 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/whiteBodyColor"
-        android:paddingStart="@dimen/_20sdp"
+        android:paddingStart="@dimen/_16sdp"
         android:paddingTop="@dimen/_8sdp"
-        android:paddingEnd="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_16sdp"
         android:paddingBottom="@dimen/_8sdp">
 
         <TextView
+            android:textSize="@dimen/sp16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tên"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black" />
 
         <ImageButton
@@ -31,11 +31,13 @@
             android:src="@drawable/ic_navigate_next" />
 
         <TextView
+            android:layout_centerVertical="true"
+            android:autoSizeTextType="uniform"
             android:layout_toStartOf="@+id/btn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Admin"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -45,16 +47,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/whiteBodyColor"
-        android:paddingStart="@dimen/_20sdp"
+        android:paddingStart="@dimen/_16sdp"
         android:paddingTop="@dimen/_8sdp"
-        android:paddingEnd="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_16sdp"
         android:paddingBottom="@dimen/_8sdp">
 
         <TextView
+            android:textSize="@dimen/sp16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thay đổi mật khẩu"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black" />
 
         <ImageButton
@@ -67,11 +69,12 @@
             android:src="@drawable/ic_navigate_next" />
 
         <TextView
+            android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/btn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -81,16 +84,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/whiteBodyColor"
-        android:paddingStart="@dimen/_20sdp"
+        android:paddingStart="@dimen/_16sdp"
         android:paddingTop="@dimen/_8sdp"
-        android:paddingEnd="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_16sdp"
         android:paddingBottom="@dimen/_8sdp">
 
         <TextView
+            android:textSize="@dimen/sp16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thay đổi số điện thoại"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black" />
 
         <ImageButton
@@ -103,11 +106,12 @@
             android:src="@drawable/ic_navigate_next" />
 
         <TextView
+            android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/btn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="012345678"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_marginTop="@dimen/_2sdp"
@@ -116,16 +120,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/whiteBodyColor"
-        android:paddingStart="@dimen/_20sdp"
+        android:paddingStart="@dimen/_16sdp"
         android:paddingTop="@dimen/_8sdp"
-        android:paddingEnd="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_16sdp"
         android:paddingBottom="@dimen/_8sdp">
 
         <TextView
+            android:textSize="@dimen/sp16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thay đổi e-mail"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black" />
 
         <ImageButton
@@ -138,11 +142,13 @@
             android:src="@drawable/ic_navigate_next" />
 
         <TextView
+            android:layout_centerVertical="true"
+            android:autoSizeTextType="uniform"
             android:layout_toStartOf="@+id/btn4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="admin@gmail.com"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_marginTop="@dimen/_2sdp"
@@ -151,16 +157,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/whiteBodyColor"
-        android:paddingStart="@dimen/_20sdp"
+        android:paddingStart="@dimen/_16sdp"
         android:paddingTop="@dimen/_8sdp"
-        android:paddingEnd="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_16sdp"
         android:paddingBottom="@dimen/_8sdp">
 
         <TextView
+            android:textSize="@dimen/sp16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Giới tính"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black" />
 
         <ImageButton
@@ -173,11 +179,13 @@
             android:src="@drawable/ic_navigate_next" />
 
         <TextView
+            android:layout_centerVertical="true"
+            android:autoSizeTextType="uniform"
             android:layout_toStartOf="@+id/btn5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Không được thiết lập"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_marginTop="@dimen/_2sdp"
@@ -186,16 +194,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/whiteBodyColor"
-        android:paddingStart="@dimen/_20sdp"
+        android:paddingStart="@dimen/_16sdp"
         android:paddingTop="@dimen/_8sdp"
-        android:paddingEnd="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_16sdp"
         android:paddingBottom="@dimen/_8sdp">
 
         <TextView
+            android:textSize="@dimen/sp16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngày sinh"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black" />
 
         <ImageButton
@@ -208,11 +216,13 @@
             android:src="@drawable/ic_navigate_next" />
 
         <TextView
+            android:layout_centerVertical="true"
+            android:autoSizeTextType="uniform"
             android:layout_toStartOf="@+id/btn6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Không được thiết lập"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_marginTop="@dimen/_8sdp"
@@ -221,16 +231,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/whiteBodyColor"
-        android:paddingStart="@dimen/_20sdp"
+        android:paddingStart="@dimen/_16sdp"
         android:paddingTop="@dimen/_8sdp"
-        android:paddingEnd="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_16sdp"
         android:paddingBottom="@dimen/_8sdp">
 
         <TextView
+            android:textSize="@dimen/sp16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tài khoản ngân hàng"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/black" />
 
         <ImageButton
@@ -243,10 +253,11 @@
             android:src="@drawable/ic_navigate_next" />
 
         <TextView
+            android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/btn7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
     </RelativeLayout>
 </RelativeLayout>

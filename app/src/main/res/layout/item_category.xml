@@ -7,16 +7,16 @@
     android:clickable="true"
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
+    android:layout_margin="@dimen/dp4"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     tools:ignore="UnusedAttribute">
 
-    <com.hidero.test.customview.MaskedCardView
+    <com.hidero.test.ui.customviews.MaskedCardView
         android:id="@+id/cvBook"
-        android:layout_width="@dimen/_70sdp"
+        android:layout_width="@dimen/dp80"
         android:layout_height="wrap_content"
-        app:cardElevation="@dimen/_2sdp"
-        android:layout_margin="@dimen/_2sdp"
-        android:paddingVertical="@dimen/_8sdp"
+        app:cardElevation="@dimen/dp1"
+        android:paddingVertical="@dimen/dp8"
         app:cardPreventCornerOverlap="false"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.Card">
 
@@ -35,6 +35,7 @@
                 android:src="@drawable/ic_no_image" />
 
             <TextView
+                android:textSize="@dimen/sp14"
                 android:id="@+id/tvNameProduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,8 +44,7 @@
                 android:gravity="center"
                 android:paddingHorizontal="@dimen/_4sdp"
                 android:text="@string/app_name"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/black" />
         </LinearLayout>
-    </com.hidero.test.customview.MaskedCardView>
+    </com.hidero.test.ui.customviews.MaskedCardView>
 </RelativeLayout>

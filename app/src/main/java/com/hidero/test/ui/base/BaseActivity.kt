@@ -1,4 +1,4 @@
-package com.hidero.test.base
+package com.hidero.test.ui.base
 
 import android.content.BroadcastReceiver
 import android.content.Context

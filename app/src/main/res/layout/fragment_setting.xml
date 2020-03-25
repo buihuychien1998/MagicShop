@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#20808080"
+    android:background="@color/bg_color"
     tools:context=".ui.fragments.SettingFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -16,10 +16,7 @@
 
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:padding="@dimen/dp16"
+            style="@style/CustomImageButton"
             android:src="@drawable/ic_arrow_back" />
 
         <TextView
@@ -28,12 +25,13 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/btnBack"
             android:text="@string/title_setting"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp20" />
     </RelativeLayout>
 
     <Button
         android:id="@+id/btnInfoAccount"
+        style="@style/BorderBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolBar"
@@ -46,11 +44,12 @@
         android:paddingBottom="@dimen/_8sdp"
         android:text="Thông tin tài khoản"
         android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/dp16" />
 
     <Button
         android:id="@+id/btnAddress"
+        style="@style/BorderBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnInfoAccount"
@@ -63,8 +62,8 @@
         android:paddingBottom="@dimen/_8sdp"
         android:text="Sổ địa chỉ"
         android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sp16" />
 
     <LinearLayout
         android:id="@+id/btnMessage"
@@ -84,14 +83,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tin nhắn"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp16" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gửi cho tôi các thông báo và khuyến mại đặc biệt."
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textSize="@dimen/sp14" />
     </LinearLayout>
 
     <RelativeLayout
@@ -129,14 +128,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Quốc gia"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/sp16" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vietnam hiện tại là quốc gia của bạn."
-                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+                android:textSize="@dimen/sp14" />
         </LinearLayout>
 
     </RelativeLayout>
@@ -159,14 +158,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ngôn ngữ - Language"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp16" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tiếng Việt"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+            android:textSize="@dimen/sp14" />
     </LinearLayout>
 
     <Button
@@ -183,11 +182,12 @@
         android:paddingBottom="@dimen/_8sdp"
         android:text="Chính sách"
         android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sp16" />
 
     <Button
         android:id="@+id/btnHelp"
+        style="@style/BorderBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnPolicy"
@@ -200,11 +200,12 @@
         android:paddingBottom="@dimen/_8sdp"
         android:text="Trợ giúp"
         android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/sp16" />
 
     <Button
         android:id="@+id/btnLogout"
+        style="@style/BorderBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btnHelp"
@@ -215,14 +216,15 @@
         android:paddingBottom="@dimen/_8sdp"
         android:text="Đăng xuất"
         android:textAllCaps="false"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@android:color/holo_red_dark" />
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@dimen/sp16" />
 
     <TextView
-        android:padding="@dimen/_8sdp"
-        android:layout_centerHorizontal="true"
-        android:text="Version: 1.0.0"
-        android:layout_alignParentBottom="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="@dimen/_8sdp"
+        android:text="Version: 1.0.0"
+        android:textSize="@dimen/sp14" />
 </RelativeLayout>

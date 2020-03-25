@@ -35,4 +35,67 @@
     <string name="flash_sale">Flash Sale</string>
     <string name="xem_th_m"><![CDATA[Xem thêm >]]></string>
     <string name="da_nh_ri_ng_cho_ba_n">Dành riêng cho bạn</string>
+    <string name="vi_em">Ví eM</string>
+    <string name="th_ng_tin_ta_i_khoa_n">Thông tin tài khoản</string>
+    <string name="name">Name</string>
+    <string name="ng_nh_p_ng_ky">Đăng nhập / Đăng ký</string>
+    <string name="ho_va_t_n">Họ và tên</string>
+    <string name="s_i_n_thoa_i">Số điện thoại</string>
+    <string name="m_t_kh_u">Mật khẩu</string>
+    <string name="y_la_nb_c_u_ti_n_ncu_a_ba_n_nv_i_chu_ng_t_i">Đây là\nbước đầu tiên\ncủa bạn\nvới chúng tôi!</string>
+    <string name="ng_nh_p">Đăng nhập</string>
+    <string name="ng_nh_p_b_ng_ta_i_khoa_n_kha_c">Đăng nhập bằng tài khoản khác?</string>
+    <string name="ng_ky_b_ng_ta_i_khoa_n_kha_c">Đăng ký bằng tài khoản khác?</string>
+    <string name="qu_n_m_t_kh_u">Quên mật khẩu?</string>
+    <string name="ba_n_ch_a_co_ta_i_khoa_n_nvu_t_sang_pha_i_ng_ky">Bạn chưa có tài khoản?\nVuốt sang phải để đăng ký.</string>
+    <string name="ba_n_a_co_ta_i_khoa_n_nvu_t_sang_tra_i_ng_nh_p">Bạn đã có tài khoản?\nVuốt sang trái để đăng nhập.</string>
+    <string name="ng_ky">Đăng ký</string>
+    <string name="ti_m_ki_m">Tìm kiếm</string>
+    <string name="no_image">No Image</string>
+    <string name="t_ha_ng">Đặt hàng</string>
+    <string name="nh_n_va_o_mu_c_ma_gia_m_gia_cu_i_trang_h_ng_mi_n_phi_v_n_chuy_n_ba_n_nhe">Nhấn vào mục Mã giảm giá ở cuối trang để hưởng miễn phí vận chuyển bạn nhé</string>
+    <string name="cho_n_t_t_ca">Chọn tất cả</string>
+    <string name="g_i_y_h_m_nay">Gợi ý hôm nay</string>
+    <string name="mua_ha_ng">Mua hàng</string>
+    <string name="ki_m_tra">Kiểm tra</string>
+    <string name="chi_nh_s_a">Chỉnh sửa</string>
+    <string name="giao_ha_ng_t_i">Giao hàng tới</string>
+    <string name="_0123456789">0123456789</string>
+    <string name="your_address">Your address</string>
+    <string name="nh_p_ma_gia_m_gia">Nhập mã giảm giá</string>
+    <string name="a_p_du_ng">Áp dụng</string>
+    <string name="d_da_ng_l_y_ha_ng_v_i_ca_c_i_m_l_y_ha_ng_sau">Dễ dàng lấy hàng với các điểm lấy hàng sau.</string>
+    <string name="_1_suggested_collection_point_s_nearby">1 suggested collection point(s) nearby</string>
+    <string name="tu_y_cho_n_giao_ha_ng">Tùy chọn giao hàng</string>
+    <string name="giao_ha_ng_nhanh">Giao hàng nhanh</string>
+    <string name="giao_ha_ng_ti_u_chu_n">Giao hàng tiêu chuẩn</string>
+    <string name="tu_y_cho_n_thanh_toa_n">Tùy chọn thanh toán</string>
+    <string name="thanh_toa_n_qua_the">Thanh toán qua thẻ</string>
+    <string name="th_ng_tin_xu_t_ho_a_n">Thông tin xuất hóa đơn</string>
+    <string name="tr_giu_p">Trợ giúp?</string>
+    <string name="a_bao_g_m_ca_vat_n_u_co">Đã bao gồm cả VAT(nếu có)</string>
+    <string name="thanh_toa_n">Thanh toán</string>
+    <string name="t_ng_c_ng">Tổng cộng: </string>
+    <string name="s_l_ng">Số lượng:</string>
+    <string name="vi_momo">Ví MoMo</string>
+    <string name="thanh_toa_n_khi_nh_n_ha_ng">Thanh toán khi nhận hàng</string>
+    <string name="tra_go_p">Trả góp</string>
+    <string name="th_m_va_o_gio_ha_ng">Thêm vào giỏ hàng</string>
+    <string name="lake_discription">
+        Lake Tahoe is a large freshwater lake in the Sierra Nevada of the United States. At a surface
+        elevation of 6,225 ft (1,897 m), it straddles the border between California and Nevada, west
+        of Carson City. Lake Tahoe is the largest alpine lake in North America. Its depth is
+        1,645 ft (501 m), making it the second deepest in the United States after Crater Lake
+        (1,945 ft (593 m)). Additionally, Lake Tahoe is the sixth largest lake by volume in the
+        United States at 122,160,280 acre·ft (150,682,490 dam3), behind the five Great Lakes.
+
+The lake was formed about 2 million years ago and is a part of the Lake Tahoe Basin with the modern
+        lake being shaped during the ice ages. It is known for the clarity of its water and the
+        panorama of surrounding mountains on all sides. The area surrounding the lake is also
+        referred to as Lake Tahoe, or simply Tahoe. More than 75 percent of the lakes watershed is
+        national forest land, comprising the Lake Tahoe Basin Management Unit of the United States
+        Forest Service.
+    </string>
+    <string name="t_n_ng_nh_p">Tên đăng nhập</string>
+    <string name="i_a_chi">Địa chỉ</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.hidero.test.data;
+package com.hidero.test.data.valueobject;
 
 public class SliderItem {
 

@@ -22,6 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:forceHasOverlappingRendering="true"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView"
         android:background="?android:attr/windowBackground"
         android:foreground="?attr/selectableItemBackground"
         app:itemIconTint="@drawable/bottom_navigation_colors"

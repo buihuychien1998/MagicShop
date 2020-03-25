@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.hidero.test.customview
+package com.hidero.test.ui.customviews
 
 import android.annotation.SuppressLint
 import android.content.Context

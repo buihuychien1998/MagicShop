@@ -24,20 +24,17 @@
             app:contentInsetStart="0dp">
 
             <ImageButton
+                style="@style/CustomImageButton"
                 android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:padding="@dimen/dp16"
                 android:src="@drawable/ic_arrow_back" />
 
             <TextView
+                android:textSize="@dimen/sp20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/btnBack"
-                android:text="Thông tin tài khoản"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="@string/th_ng_tin_ta_i_khoa_n"
                 android:textColor="@android:color/black" />
         </androidx.appcompat.widget.Toolbar>
 

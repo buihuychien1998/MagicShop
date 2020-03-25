@@ -32,13 +32,15 @@
                     style="@style/viewParent.headerText.NoMode"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:text="Already \nhave an \nAccount?" />
+                    android:gravity="center"
+                    android:text="@string/y_la_nb_c_u_ti_n_ncu_a_ba_n_nv_i_chu_ng_t_i" />
 
-                <ImageView
+                <com.flaviofaria.kenburnsview.KenBurnsView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
+                    android:scaleType="fitCenter"
                     android:src="@drawable/ic_register_hero" />
             </RelativeLayout>
 
@@ -48,7 +50,7 @@
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/edtEmail"
                     style="@style/modifiedEditText"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
@@ -58,13 +60,13 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputPassword"
                 style="@style/parent"
-                app:passwordToggleEnabled="true"
-                android:layout_marginTop="@dimen/loginViewsMargin">
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                app:passwordToggleEnabled="true">
 
-                <EditText
-                    android:id="@+id/editTextPassword"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtPassWord"
                     style="@style/modifiedEditText"
-                    android:hint="@string/password"
+                    android:hint="@string/m_t_kh_u"
                     android:inputType="textPassword"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -73,8 +75,8 @@
                 style="@style/viewParent"
                 android:layout_gravity="end"
                 android:layout_marginTop="10dp"
-                android:text="Forgot Password?"
-                android:textColor="@color/primaryTextColor"
+                android:text="@string/qu_n_m_t_kh_u"
+                android:textColor="@color/black"
                 android:textSize="@dimen/newsMoreTextSize" />x
 
             <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
@@ -82,7 +84,7 @@
                 style="@style/loginButton"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:text="Login"
+                android:text="@string/ng_nh_p"
                 app:initialCornerAngle="27dp"
                 app:spinning_bar_color="#FFF"
                 app:spinning_bar_padding="6dp"
@@ -91,11 +93,13 @@
             <TextView
                 style="@style/parent"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:text="New user? Register Now"
+                android:gravity="center"
+                android:text="@string/ba_n_ch_a_co_ta_i_khoa_n_nvu_t_sang_pha_i_ng_ky"
                 android:textAlignment="center"
-                android:textColor="@color/themeColor"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textColor="#f20"
+                android:textSize="@dimen/sp14"
+                android:textStyle="italic"
+                />
 
 
             <LinearLayout
@@ -113,12 +117,12 @@
 
                 <TextView
                     style="@style/viewParent.headerText.NoMode"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
-                    android:text="Use other Methods"
+                    android:text="@string/ng_nh_p_b_ng_ta_i_khoa_n_kha_c"
                     android:textAlignment="center"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/sp12" />
 
                 <View
                     android:layout_width="0dp"

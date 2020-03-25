@@ -1,17 +1,13 @@
 package com.hidero.test.ui.activities
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
 import com.hidero.test.R
-import com.hidero.test.base.BaseActivity
+import com.hidero.test.ui.base.BaseActivity
 import com.hidero.test.ui.dialogs.InternetDialog
-import com.hidero.test.util.showToast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), BaseActivity.OnNetworkConnectedListener {
@@ -37,6 +33,7 @@ class MainActivity : BaseActivity(), BaseActivity.OnNetworkConnectedListener {
             setupBottomNavigationBar()
         } // Else, need to wait for onRestoreInstanceState
         setOnNetworkConnectedListener(this)
+
     }
 
     private val currentNavController: NavController by lazy {
@@ -56,9 +53,19 @@ class MainActivity : BaseActivity(), BaseActivity.OnNetworkConnectedListener {
      */
     private fun setupBottomNavigationBar() {
         NavigationUI.setupWithNavController(bottomNav, currentNavController)
+
     }
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController.navigateUp()
+    }
+
+    fun visibilityBottomNav(visible: Boolean){
+        if (visible){
+            bottomNav.visibility = View.VISIBLE
+        }
+        else{
+            bottomNav.visibility = View.GONE
+        }
     }
 
 }

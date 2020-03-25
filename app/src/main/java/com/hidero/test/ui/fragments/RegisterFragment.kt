@@ -30,6 +30,8 @@ class RegisterFragment : Fragment() {
         changeStatusBarColor()
     }
 
+
+
     private fun changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val window = activity?.window
@@ -37,7 +39,7 @@ class RegisterFragment : Fragment() {
             //            window.setStatusBarColor(Color.TRANSPARENT)
             window?.statusBarColor = ContextCompat.getColor(
                 context!!.applicationContext,
-                R.color.register_bk_color
+                android.R.color.transparent
             )
         }
     }
