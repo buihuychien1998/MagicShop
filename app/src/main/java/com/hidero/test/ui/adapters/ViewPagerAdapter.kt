@@ -4,6 +4,8 @@ import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.hidero.test.ui.fragments.ChatsFragment
+import com.hidero.test.ui.fragments.UsersFragment
 
 class ViewPagerAdapter(manager: FragmentManager) :
     FragmentPagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -29,7 +31,7 @@ class ViewPagerAdapter(manager: FragmentManager) :
     }
 
     init {
-        fragments = ArrayList()
-        titles = ArrayList()
+        fragments = arrayListOf(ChatsFragment(), UsersFragment())
+        titles = arrayListOf("Tin nhắn", "Người dùng")
     }
 }

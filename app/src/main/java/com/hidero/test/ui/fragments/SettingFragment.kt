@@ -16,7 +16,7 @@ class SettingFragment : BaseFragment() {
         return R.layout.fragment_setting
     }
 
-    override fun initView(view: View) {
+    override fun initViews(view: View) {
         btnBack.setOnClickListener {
             findNavController().navigateUp()
         }

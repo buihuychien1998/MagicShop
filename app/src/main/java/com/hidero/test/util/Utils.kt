@@ -2,22 +2,18 @@ package com.hidero.test.util
 
 import android.app.Activity
 import android.content.Context
-import android.net.ConnectivityManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.hidero.test.R
-import dmax.dialog.SpotsDialog
 
 
 fun Context.showToast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-fun Context.getInternetStatus(): Boolean {
-    val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val activeNetwork = cm.activeNetworkInfo
-    return activeNetwork != null && activeNetwork.isConnectedOrConnecting
-}
+
 
 fun ImageView.loadUrl(view: View, url: String) {
     Glide.with(view)
@@ -51,14 +47,16 @@ fun Activity.showKeyBoard() {
     }
 }
 
-fun Context.showDialog(message: String) {
-    val dialog = SpotsDialog.Builder()
-        .setContext(this)
-        .setMessage(message)
-        .setCancelable(true)
-        .build()
-        .apply {
-            show()
-        }
+//fun Context.showDialog(message: String) {
+//    val dialog = SpotsDialog.Builder()
+//        .setContext(this)
+//        .setMessage(message)
+//        .setCancelable(true)
+//        .build()
+//        .apply {
+//            show()
+//        }
+//
+//}
 
-}
+fun Context.getBitmap(drawableId: Int): Bitmap? = BitmapFactory.decodeResource(resources, drawableId)

@@ -18,7 +18,7 @@ class ProfileFragment : BaseFragment() {
         return R.layout.fragment_profile
     }
 
-    override fun initView(view: View) {
+    override fun initViews(view: View) {
         setHasOptionsMenu(true)
         toolBar.inflateMenu(R.menu.profile_menu)
         toolBar.setOnMenuItemClickListener {

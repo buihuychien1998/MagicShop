@@ -7,31 +7,35 @@ import com.google.gson.annotations.SerializedName
 
 class Account private constructor() {
 
-    companion object{
+    companion object {
         private var account: Account? = null
+        fun getInstance() =  account ?: Account()
 
-        fun getInstance(): Account {
-            if (account == null){
-                account =
-                    Account()
-            }
-            return account!!
-        }
     }
 
-    constructor(username: String?, password: String?): this(){
+    constructor(username: String?, password: String?) : this() {
         this.username = username
         this.password = password
     }
 
-    constructor(username: String?, password: String?, role: Int?, fullname: String?, address: String?, phone: String, email: String?) : this() {
+    constructor(
+        username: String?,
+        password: String?,
+        role: Int?,
+        name: String?,
+        address: String?,
+        phone: String,
+        email: String?,
+        photoUrl: String?
+    ) : this() {
         this.username = username
         this.password = password
         this.role = role
-        this.fullname = fullname
+        this.name = name
         this.address = address
         this.phone = phone
         this.email = email
+        this.photoUrl = photoUrl
     }
 
     @SerializedName("username")
@@ -39,36 +43,35 @@ class Account private constructor() {
     internal var username: String? = null
     @SerializedName("password")
     @Expose
-    internal var password: String? =null
+    internal var password: String? = null
     @SerializedName("role")
     @Expose
     internal var role: Int? = null
-    @SerializedName("fullname")
+    @SerializedName("name")
     @Expose
-    internal var fullname: String? =null
+    internal var name: String? = null
     @SerializedName("address")
     @Expose
-    internal var address: String? =null
+    internal var address: String? = null
     @SerializedName("phone")
     @Expose
-    internal var phone: String? =null
+    internal var phone: String? = null
     @SerializedName("email")
     @Expose
-    var email: String? =null
+    var email: String? = null
+    @SerializedName("photoUrl")
+    @Expose
+    var photoUrl: String? = null
 
     fun isValidData(): Int {
-        return if (TextUtils.isEmpty(username))
-            0
-        else if (TextUtils.isEmpty(password))
-            1
-        else if (!Patterns.PHONE.matcher(phone).matches())
-            2
-        else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
-            3
-        else if (password!!.length < 8)
-            4
-        else
-            -1
+        return when{
+            (TextUtils.isEmpty(username))-> 0
+            (TextUtils.isEmpty(password)) -> 1
+            (!Patterns.PHONE.matcher(phone as CharSequence).matches()) -> 2
+            (!Patterns.EMAIL_ADDRESS.matcher(email as CharSequence).matches()) -> 3
+            (password!!.length < 8) -> 4
+            else -> -1
+        }
     }
 
 }

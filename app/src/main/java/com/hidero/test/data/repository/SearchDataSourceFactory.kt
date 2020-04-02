@@ -6,16 +6,17 @@ import com.hidero.test.data.api.APIService
 import com.hidero.test.data.valueobject.Book
 import io.reactivex.disposables.CompositeDisposable
 
-class BookDataSourceFactory(
+class SearchDataSourceFactory(
     private val apiService: APIService,
-    private val compositeDisposable: CompositeDisposable
+    private val compositeDisposable: CompositeDisposable,
+    private val keyword: String
 ) : DataSource.Factory<Int, Book>() {
 
-    val booksLiveDataSource = MutableLiveData<BookDataSource>()
+    val booksLiveDataSource = MutableLiveData<SearchDataSource>()
 
     override fun create(): DataSource<Int, Book> {
-        val bookDataSource = BookDataSource(apiService, compositeDisposable)
-        booksLiveDataSource.postValue(bookDataSource)
-        return bookDataSource
+        val searchDataSource = SearchDataSource(apiService, compositeDisposable, keyword)
+        booksLiveDataSource.postValue(searchDataSource)
+        return searchDataSource
     }
 }

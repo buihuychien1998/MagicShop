@@ -117,10 +117,10 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:layout_marginHorizontal="@dimen/dp8"
                     android:id="@+id/tvCustomerName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp8"
                     android:layout_marginTop="@dimen/dp8"
                     android:text="@string/app_name"
                     android:textColor="@color/black"
@@ -143,10 +143,10 @@
                     app:layout_constraintTop_toBottomOf="@id/tvEdit" />
 
                 <TextView
-                    android:layout_marginHorizontal="@dimen/dp8"
                     android:id="@+id/tvCustomerAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dp8"
                     android:layout_marginTop="@dimen/dp8"
                     android:lineSpacingMultiplier="1.2"
                     android:text="@string/your_address"
@@ -224,7 +224,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/tr_giu_p"
-                    android:textColor="@color/green"
+                    android:textColor="@color/blue"
                     android:textSize="@dimen/sp14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -279,7 +279,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:text="@string/tr_giu_p"
-                    android:textColor="@color/green"
+                    android:textColor="@color/blue"
                     android:textSize="@dimen/sp14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/v3" />
@@ -305,6 +305,7 @@
                         android:buttonTint="@color/colorMain"
                         android:checked="false"
                         android:text="@string/thanh_toa_n_qua_the" />
+
                     <RadioButton
                         android:id="@+id/rbMomo"
                         android:layout_width="match_parent"
@@ -312,6 +313,7 @@
                         android:buttonTint="@color/colorMain"
                         android:checked="false"
                         android:text="@string/vi_momo" />
+
                     <RadioButton
                         android:id="@+id/rb"
                         android:layout_width="match_parent"
@@ -352,67 +354,66 @@
     </ScrollView>
 
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rlOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnOrder"
+            android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
-            android:layout_toStartOf="@id/btnOrder"
-            android:orientation="horizontal">
+            android:layout_toStartOf="@id/btnOrder">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="bottom|end"
+                android:text="@string/t_ng_c_ng"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintEnd_toStartOf="@id/tvTotal"
+                app:layout_constraintHeight_percent="0.5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="bottom|end"
+                android:text="@string/zero"
+                android:textColor="#f20"
+                android:textSize="@dimen/sp16"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.5"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:gravity="bottom|end"
-                    android:text="@string/t_ng_c_ng"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp14"
-                    app:layout_constraintEnd_toStartOf="@id/tvTotal"
-                    app:layout_constraintHeight_percent="0.5"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:gravity="bottom|end"
-                    android:text="@string/zero"
-                    android:textColor="#f20"
-                    android:textSize="@dimen/sp16"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.5"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:gravity="top|end"
-                    android:text="@string/a_bao_g_m_ca_vat_n_u_co"
-                    android:textColor="@color/colorTextDefault"
-                    android:textSize="@dimen/sp12"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHeight_percent="0.5"
-                    app:layout_constraintStart_toStartOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+                android:layout_height="0dp"
+                android:gravity="top|end"
+                android:text="@string/a_bao_g_m_ca_vat_n_u_co"
+                android:textColor="@color/colorTextDefault"
+                android:textSize="@dimen/sp12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/btnOrder"
             style="@style/BorderBackground"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/dp8"
             android:layout_marginEnd="@dimen/dp8"
             android:background="@drawable/button_drawable"
@@ -424,5 +425,5 @@
             android:textAllCaps="false"
             android:textColor="@color/white" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

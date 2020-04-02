@@ -20,9 +20,8 @@ class CheckoutFragment : BaseFragment() {
         Handler()
     }
 
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_checkout
-    }
+    override fun getLayoutId() = R.layout.fragment_checkout
+
 
     private val runnable: Runnable = run {
         Runnable {
@@ -42,12 +41,10 @@ class CheckoutFragment : BaseFragment() {
             handler.postDelayed(runnable, SPLASH_TIME_OUT)
         }
 
-
-
     }
 
 
-    override fun initView(view: View) {
+    override fun initViews(view: View) {
         btnBack.setOnClickListener {
             findNavController().navigateUp()
         }

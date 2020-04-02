@@ -1,4 +1,4 @@
-package com.hidero.test.data.reponsitory
+package com.hidero.test.data.repository
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
@@ -6,6 +6,7 @@ import com.hidero.test.data.api.APIService
 import com.hidero.test.data.valueobject.Book
 import com.hidero.test.data.valueobject.NetworkState
 import com.hidero.test.util.FIRST_PAGE
+import com.hidero.test.util.pageSize
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -28,7 +29,7 @@ class BookDataSource(
     ) {
         updateState(NetworkState.LOADING)
         compositeDisposable.add(
-            apiService.getBook(page)
+            apiService.getBook(page, pageSize)
                 .subscribe(
                     { response ->
                         updateState(NetworkState.LOADED)
@@ -49,14 +50,19 @@ class BookDataSource(
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Book>) {
         updateState(NetworkState.LOADING)
         compositeDisposable.add(
-            apiService.getBook(params.key)
+            apiService.getBook(params.key, pageSize)
                 .subscribe(
                     { response ->
-                        updateState(NetworkState.LOADED)
-                        callback.onResult(
-                            response,
-                            params.key + 1
-                        )
+                        if (response.size == 0){
+                            updateState(NetworkState.ENDOFLIST)
+                        }else{
+                            updateState(NetworkState.LOADED)
+                            callback.onResult(
+                                response,
+                                params.key + 1
+                            )
+                        }
+
                     },
                     {
                         updateState(NetworkState.ERROR)

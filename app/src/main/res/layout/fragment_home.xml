@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,15 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.HomeFragment">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolBar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_150sdp"
-            android:background="@color/gradient_background" />
+            android:background="@color/gradient_background"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.hanks.htextview.rainbow.RainbowTextView
             android:id="@+id/tvTitle"
@@ -24,7 +24,8 @@
             android:gravity="center"
             android:text="@string/magic"
             android:textSize="@dimen/sp20"
-            app:colorSpace="@dimen/_100sdp" />
+            app:colorSpace="@dimen/_100sdp"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnSearch"
@@ -42,7 +43,8 @@
             android:textAllCaps="false"
             android:textColor="@color/colorButtonDefault"
             android:textSize="@dimen/sp14"
-            android:textStyle="normal" />
+            android:textStyle="normal"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/slider_layout"
@@ -50,7 +52,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/btnSearch"
             android:layout_margin="@dimen/_8sdp"
-            app:cardCornerRadius="@dimen/_8sdp">
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@id/btnSearch">
 
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/sliderView"
@@ -78,17 +81,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/slider_layout"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/slider_layout"
             app:spanCount="5"
             tools:listitem="@layout/item_category" />
 
-        <RelativeLayout
-            android:layout_marginTop="@dimen/dp4"
-            android:layout_marginBottom="@dimen/dp4"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rlFlashSale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rvCategory">
+            android:layout_below="@id/rvCategory"
+            android:layout_marginTop="@dimen/dp4"
+            app:layout_constraintTop_toBottomOf="@id/rvCategory">
 
             <TextView
                 android:id="@+id/tvFlashSale"
@@ -98,7 +103,11 @@
                 android:fontFamily="@font/squaresharpsitalic"
                 android:text="@string/flash_sale"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/tvMoreFS"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvMoreFS"
@@ -112,45 +121,84 @@
                 android:text="@string/xem_th_m"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="@dimen/sp12"
-                android:textStyle="italic" />
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFlashSale"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvFlashSale"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/tvFlashSale"
                 tools:listitem="@layout/item_product" />
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <Button
-            android:background="@android:color/transparent"
             android:id="@+id/tvProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rlFlashSale"
-            android:paddingStart="@dimen/dp8"
-            android:paddingEnd="@dimen/dp8"
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_8sdp"
+            android:background="@android:color/transparent"
             android:gravity="start|center_vertical"
+            android:minHeight="@dimen/dp0"
+            android:paddingStart="@dimen/dp8"
+            android:paddingEnd="@dimen/dp8"
             android:text="@string/g_i_y_h_m_nay"
             android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp16"
             android:textStyle="bold"
-            android:textSize="@dimen/sp16" />
+            app:layout_constraintTop_toBottomOf="@id/rlFlashSale" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvProduct"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvProduct"
-            android:layout_alignParentEnd="true"
             android:layout_marginTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3"
-            tools:listitem="@layout/item_product" />
-    </RelativeLayout>
+            app:layout_constraintTop_toBottomOf="@id/tvProduct">
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nsvProduct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvProduct"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.core.widget.NestedScrollView>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/colorMain"
+                android:indeterminateTintMode="src_atop"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/nsvProduct" />
+
+            <TextView
+                android:id="@+id/txt_error"
+                style="@style/BorderBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/error_tap_to_retry"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@id/progress_bar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

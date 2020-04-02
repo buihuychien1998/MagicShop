@@ -2,6 +2,8 @@
   <dictionary name="DELL">
     <words>
       <w>coroutine</w>
+      <w>coroutines</w>
+      <w>gson</w>
     </words>
   </dictionary>
 </component>

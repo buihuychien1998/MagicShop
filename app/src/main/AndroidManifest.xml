@@ -17,13 +17,12 @@
         android:roundIcon="@drawable/paw"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="AllowBackup">
-        <activity
-            android:name=".ui.activities.AccountActivity"
-            android:launchMode="standard" />
+        android:usesCleartextTraffic="true"
+        tools:ignore="AllowBackup"
+        tools:targetApi="m">
         <activity
             android:name=".ui.activities.SplashActivity"
-            android:launchMode="standard">
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,8 +31,10 @@
         </activity>
         <activity
             android:name=".ui.activities.MainActivity"
-            android:launchMode="standard" />
-
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".ui.activities.AuthenticationActivity"
+            android:launchMode="standard"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

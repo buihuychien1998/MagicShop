@@ -1,4 +1,4 @@
-package com.hidero.test.data.reponsitory
+package com.hidero.test.data.repository
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource

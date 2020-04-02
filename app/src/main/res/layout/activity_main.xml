@@ -6,27 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.MainActivity">
 
-    <fragment
-        android:id="@+id/nav_host_fragment"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_container"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/bottomNav"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph"
         tools:ignore="FragmentTagUsage" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:forceHasOverlappingRendering="true"
-        app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
-        app:itemTextAppearanceInactive="@style/BottomNavigationView"
         android:background="?android:attr/windowBackground"
         android:foreground="?attr/selectableItemBackground"
         app:itemIconTint="@drawable/bottom_navigation_colors"
+        app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
+        app:itemTextAppearanceInactive="@style/BottomNavigationView"
         app:itemTextColor="@drawable/bottom_navigation_colors"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_navigation_menu" />

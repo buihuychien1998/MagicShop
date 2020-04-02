@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp4"
+    android:background="@android:color/white"
     android:clickable="true"
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
-    android:background="@android:color/white"
-    android:layout_margin="@dimen/dp4"
     android:foreground="?attr/selectableItemBackgroundBorderless"
     tools:ignore="UnusedAttribute">
 
@@ -16,55 +16,63 @@
         android:id="@+id/cvBook"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
-        app:cardElevation="@dimen/_2sdp"
         app:cardCornerRadius="@dimen/dp8"
+        app:cardElevation="@dimen/_2sdp"
         app:cardPreventCornerOverlap="false"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.Card">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/productThubnail"
+                android:id="@+id/ivProduct"
                 android:layout_width="200dp"
                 android:layout_height="170dp"
-                android:src="@drawable/ic_no_image" />
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_no_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/productThubnail"
-                android:textColor="@color/frutorial_title"
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/dp8"
                 android:maxLines="1"
                 android:text="@string/name"
+                android:textColor="@color/frutorial_title"
                 android:textSize="@dimen/sp14"
-                />
+                app:layout_constraintTop_toBottomOf="@id/ivProduct" />
 
 
             <RatingBar
                 android:id="@+id/rb"
-                android:numStars="5"
                 style="@style/CustomRatingBar"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="@dimen/dp8"
+                android:layout_marginTop="@dimen/dp4"
+                android:numStars="5"
+                android:rating="3.4"
                 android:stepSize="0.1"
-                android:rating="3.4" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
             <TextView
+                android:id="@+id/tvCost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp4"
+                android:layout_marginEnd="@dimen/dp8"
                 android:text="$15.30"
-                android:layout_below="@id/rb"
-                android:textSize="12sp"
-                android:textStyle="bold"
                 android:textColor="#f20"
-                android:layout_marginEnd="5dp"
-                android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
+                android:textSize="@dimen/sp12"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rb" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.hidero.test.ui.customviews.MaskedCardView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

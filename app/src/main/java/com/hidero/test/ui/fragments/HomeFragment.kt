@@ -4,11 +4,22 @@ package com.hidero.test.ui.fragments
 import android.graphics.Color
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.hidero.test.R
+import com.hidero.test.data.valueobject.Book
+import com.hidero.test.data.valueobject.NetworkState
+import com.hidero.test.ui.adapters.BookPagedListAdapter
 import com.hidero.test.ui.adapters.SliderAdapterExample
 import com.hidero.test.ui.base.BaseFragment
-import com.hidero.test.data.valueobject.SliderItem
+import com.hidero.test.ui.viewmodels.HomeViewModel
+import com.hidero.test.ui.viewmodels.SharedViewModel
+import com.hidero.test.util.SPAN_COUNT
+import com.hidero.test.util.renewItems
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -20,15 +31,73 @@ import kotlinx.android.synthetic.main.fragment_home.*
  */
 class HomeFragment : BaseFragment() {
     private lateinit var adapter: SliderAdapterExample
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_home
+
+    private lateinit var viewModel: HomeViewModel
+
+    private val shareViewModel: SharedViewModel by activityViewModels()
+    private lateinit var bookAdapter: BookPagedListAdapter
+
+    override fun getLayoutId() = R.layout.fragment_home
+
+    override fun initViews(view: View) {
+        setUpSlider()
+        btnSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+        }
+        viewModel = create()
+        subscribeUi()
+        initAdapter()
+
     }
 
-    override fun initView(view: View) {
+
+    private fun initAdapter() {
+        bookAdapter = BookPagedListAdapter { viewModel.retry() }
+
+        bookAdapter.onItemClickListener = object : BookPagedListAdapter.OnItemClickListener {
+            override fun onItemClick(book: Book, position: Int) {
+                shareViewModel.select(book)
+                findNavController().navigate(R.id.action_homeFragment_to_detailProductFragment)
+            }
+        }
+        val gridLayoutManager = GridLayoutManager(context, SPAN_COUNT)
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                val viewType = bookAdapter.getItemViewType(position)
+                return if (viewType == bookAdapter.DATA_VIEW_TYPE) 1    // DATA_VIEW_TYPE will occupy 1 out of 3 span
+                else 3                                              // NETWORK_VIEW_TYPE will occupy all 3 span
+            }
+        }
+        with(rvProduct) {
+            adapter = bookAdapter
+            layoutManager = gridLayoutManager
+        }
+
+        txt_error.setOnClickListener { viewModel.retry() }
+
+    }
+
+    private fun subscribeUi() {
+        viewModel.bookList.observe(viewLifecycleOwner, Observer {
+            bookAdapter.submitList(it)
+        })
+
+        viewModel.networkState.observe(viewLifecycleOwner, Observer { state ->
+            progress_bar.visibility =
+                if (viewModel.listIsEmpty() && state == NetworkState.LOADING) View.VISIBLE else View.GONE
+            txt_error.visibility =
+                if (viewModel.listIsEmpty() && state == NetworkState.ERROR) View.VISIBLE else View.GONE
+            if (!viewModel.listIsEmpty()) {
+                bookAdapter.setNetworkState(state)
+            }
+        })
+    }
+
+    private fun setUpSlider() {
         adapter =
             SliderAdapterExample(this@HomeFragment.context)
         sliderView.sliderAdapter = adapter
-        renewItems(null)
+        renewItems(adapter)
         sliderView.apply {
             setIndicatorAnimation(IndicatorAnimations.FILL) //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
             setSliderTransformAnimation(SliderAnimations.CUBEINROTATIONTRANSFORMATION)
@@ -39,54 +108,19 @@ class HomeFragment : BaseFragment() {
             isAutoCycle = true
             startAutoCycle()
         }
-        btnSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
-        }
-
     }
 
 
-    private fun renewItems(view: View?) {
-        val sliderItemList = ArrayList<SliderItem>()
-        //dummy data
-        for (i in 0..4) {
-            val sliderItem = SliderItem()
 
-            if (i % 5 == 0) {
-                sliderItem.imageUrl =
-                    "https://dongho24h.com/upload/1/articles/l_770674346_Untitled-7.jpg"
-            } else if (i % 5 == 1) {
-                sliderItem.imageUrl =
-                    "https://canthoplus.com/wp-content/uploads/2018/12/giay-ha-anh-can-tho-banner.jpg"
-            } else if (i % 5 == 2) {
-                sliderItem.imageUrl =
-                    "https://khuyenmaiviet.vn/wp-content/uploads/2019/11/76793129_2285972111511566_282390569248882688_o.jpg"
-            } else if (i % 5 == 3) {
-                sliderItem.imageUrl =
-                    "https://hoaanhdao.vn/2019_img/files/san-pham/640x340-mobile%20(1).png"
-            } else {
-                sliderItem.imageUrl =
-                    "https://img.kam.vn/images/414x0/ed264b973dda4ee5b852f77e93f724b1/dong-ho-duy-anh-dong-ho-nhat-sale-off-15.jpg"
+    private fun create(): HomeViewModel {
+        return ViewModelProvider(viewModelStore, object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                @Suppress("UNCHECKED_CAST")
+                return HomeViewModel() as T
             }
-//            sliderItem.description = "Slider Item Added Manually"
-            sliderItem.description = sliderItem.imageUrl
-            sliderItemList.add(sliderItem)
-        }
-        adapter.renewItems(sliderItemList)
+        })[HomeViewModel::class.java]
     }
-
-    fun removeLastItem(view: View) {
-        if (adapter.count - 1 >= 0)
-            adapter.deleteItem(adapter.count - 1)
-    }
-
-    fun addNewItem(view: View) {
-        val sliderItem = SliderItem()
-        sliderItem.imageUrl =
-            "https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-        sliderItem.description = sliderItem.imageUrl
-        adapter.addItem(sliderItem)
-    }
-
 
 }
+
+

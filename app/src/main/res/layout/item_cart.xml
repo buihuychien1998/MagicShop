@@ -1,160 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/dp8"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:background="@color/white">
 
     <com.hidero.test.ui.customviews.MaskedCardView
         android:id="@+id/cvBook"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardElevation="@dimen/_1sdp"
         app:cardPreventCornerOverlap="false"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.Card">
-        <RelativeLayout
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:id="@+id/lnlHeader"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
                 <CheckBox
-                    android:button="@drawable/custom_checkbox"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:button="@drawable/custom_checkbox" />
+
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/dp8"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp14"
                     android:gravity="center_vertical"
                     android:text="@string/da_nh_ri_ng_cho_ba_n"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp14" />
             </LinearLayout>
+
             <View
-                android:background="#80D6D6D6"
-                android:layout_below="@id/lnlHeader"
                 android:id="@+id/vHeader"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp1"/>
-            <RelativeLayout
-                android:layout_below="@id/vHeader"
+                android:layout_height="@dimen/dp1"
+                android:background="#80D6D6D6"
+                app:layout_constraintTop_toBottomOf="@id/lnlHeader" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/rlProduct"
+                android:layout_marginStart="@dimen/dp16"
+                android:layout_marginEnd="@dimen/dp16"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/vHeader">
 
                 <ImageView
+                    android:contentDescription="@string/app_name"
                     android:id="@+id/ivProduct"
                     android:layout_width="@dimen/dp80"
                     android:layout_height="@dimen/dp120"
-                    android:layout_marginEnd="@dimen/dp16"
-                    android:src="@drawable/ic_no_image" />
+                    android:layout_marginStart="@dimen/dp16"
+                    android:src="@drawable/ic_no_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvNameProduct"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dp8"
-                    android:layout_marginTop="@dimen/dp16"
-                    android:layout_toEndOf="@id/ivProduct"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginStart="@dimen/dp16"
                     android:ellipsize="end"
                     android:gravity="start"
                     android:maxLines="2"
                     android:text="@string/app_name"
                     android:textColor="@android:color/black"
-                    android:textSize="@dimen/sp16" />
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivProduct"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvCost"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvNameProduct"
-                    android:layout_toEndOf="@id/ivProduct"
+                    android:layout_marginStart="@dimen/dp16"
                     android:gravity="start"
-                    android:paddingStart="@dimen/dp8"
-                    android:paddingEnd="@dimen/_8sdp"
                     android:text="@string/zero"
                     android:textColor="#f20"
-                    android:textSize="@dimen/sp16"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/sp12"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivProduct"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameProduct" />
 
-                <RelativeLayout
-                    android:layout_marginTop="@dimen/dp16"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvCost"
-                    android:layout_toEndOf="@id/ivProduct">
+                    android:layout_marginStart="@dimen/dp16"
+                    android:layout_marginTop="@dimen/dp16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivProduct"
+                    app:layout_constraintTop_toBottomOf="@id/tvCost">
 
                     <ImageButton
-                        android:minHeight="@dimen/dp0"
-                        android:minWidth="@dimen/dp0"
                         android:id="@+id/btnMinus"
                         style="@style/BorderBackground"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:background="@drawable/bg_plus_minus"
+                        android:contentDescription="@string/app_name"
+                        android:minWidth="@dimen/dp0"
+                        android:minHeight="@dimen/dp0"
                         android:padding="@dimen/dp8"
-                        android:src="@drawable/ic_minus" />
+                        android:src="@drawable/ic_minus"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:background="@drawable/bg_plus_minus"
                         android:id="@+id/tvQuantity"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/dp32"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/btnMinus"
+                        android:background="@drawable/bg_plus_minus"
                         android:gravity="center"
                         android:paddingStart="@dimen/dp20"
                         android:paddingEnd="@dimen/dp20"
                         android:text="@string/zero"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/sp16" />
+                        android:textSize="@dimen/sp16"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/btnMinus"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
-                        android:minHeight="@dimen/dp0"
-                        android:minWidth="@dimen/dp0"
                         android:id="@+id/btnPlus"
                         style="@style/BorderBackground"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toEndOf="@id/tvQuantity"
                         android:background="@drawable/bg_plus_minus"
+                        android:contentDescription="@string/app_name"
+                        android:minWidth="@dimen/dp0"
+                        android:minHeight="@dimen/dp0"
                         android:padding="@dimen/dp8"
-                        android:src="@drawable/ic_plus" />
-                </RelativeLayout>
-            </RelativeLayout>
-            <View
-                android:background="#80D6D6D6"
-                android:id="@+id/vFooter"
-                android:layout_below="@id/rlProduct"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp1"/>
-            <LinearLayout
-                android:layout_below="@id/vFooter"
-                android:padding="@dimen/dp8"
-                android:orientation="horizontal"
-                android:id="@+id/lnlFree"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:src="@drawable/ic_free_delivery_small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                        android:src="@drawable/ic_plus"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvQuantity"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:textSize="@dimen/sp14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp8"
-                    android:fontFamily="@font/quicksand_light"
-                    android:text="Miễn phí vận chuyển"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-        </RelativeLayout>
+            <View
+                android:id="@+id/vFooter"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp1"
+                android:background="#80D6D6D6"
+                app:layout_constraintTop_toBottomOf="@id/rlProduct" />
+
+
+            <TextView
+                android:id="@+id/tvFreeShip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp8"
+                android:drawableStart="@drawable/ic_free_delivery_small"
+                android:fontFamily="@font/quicksand_light"
+                android:text="@string/mi_n_phi_v_n_chuy_n"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintTop_toBottomOf="@id/vFooter" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.hidero.test.ui.customviews.MaskedCardView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

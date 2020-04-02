@@ -7,17 +7,16 @@ import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.hidero.test.R
 import com.hidero.test.ui.activities.MainActivity
 
 
 abstract class BaseFragment : Fragment() {
-    private var mActivity: BaseActivity? = null
-    private lateinit var mView: View
+    private var baseActivity: BaseActivity? = null
+    private lateinit var layout: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mActivity = activity as BaseActivity
+        baseActivity = activity as BaseActivity
     }
 
     @Nullable
@@ -26,29 +25,24 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mView = inflater.inflate(getLayoutId(), container, false)
-        return mView
+        layout = inflater.inflate(getLayoutId(), container, false)
+        return layout
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView(mView)
-        if (findNavController().currentDestination?.id == R.id.detailProductFragment ||
-            findNavController().currentDestination?.id == R.id.searchFragment ||
-            findNavController().currentDestination?.id == R.id.settingFragment ||
-            findNavController().currentDestination?.id == R.id.profileFragment ||
-            findNavController().currentDestination?.id == R.id.checkoutFragment
-        ) {
-            (mActivity as MainActivity).visibilityBottomNav(false)
+        initViews(view)
+        if (findNavController().currentDestination?.id != findNavController().graph.startDestination) {
+            (baseActivity as MainActivity).visibilityBottomNav(false)
         } else {
-            (mActivity as MainActivity).visibilityBottomNav(true)
+            (baseActivity as MainActivity).visibilityBottomNav(true)
         }
 
     }
 
     override fun onDestroyView() {
-        if (mView.parent != null) {
-            (mView.parent as ViewGroup).removeView(mView)
+        if (layout.parent != null) {
+            (layout.parent as ViewGroup).removeView(layout)
         }
         super.onDestroyView()
     }
@@ -65,6 +59,7 @@ abstract class BaseFragment : Fragment() {
      *
      * @param view
      */
-    abstract fun initView(view: View)
+    abstract fun initViews(view: View)
+
 
 }

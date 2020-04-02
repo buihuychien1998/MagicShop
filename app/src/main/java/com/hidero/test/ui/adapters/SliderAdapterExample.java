@@ -63,15 +63,12 @@ public class SliderAdapterExample extends
 //                .fitCenter()
 //                .into(viewHolder.imageViewBackground);
         UtilsKt.loadUrl(viewHolder.imageViewBackground, viewHolder.itemView, sliderItem.getImageUrl());
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlphaAnimation animation = new AlphaAnimation(0.2f, 1.0f);
-                animation.setDuration(500);
-                v.setAlpha(1f);
-                v.startAnimation(animation);
-                UtilsKt.showToast(context, "This is item in position " + position);
-            }
+        viewHolder.itemView.setOnClickListener(v -> {
+            AlphaAnimation animation = new AlphaAnimation(0.2f, 1.0f);
+            animation.setDuration(500);
+            v.setAlpha(1f);
+            v.startAnimation(animation);
+            UtilsKt.showToast(context, "This is item in position " + position);
         });
     }
 
@@ -81,7 +78,7 @@ public class SliderAdapterExample extends
         return mSliderItems == null ? 0: mSliderItems.size();
     }
 
-    class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
+    public class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
 
         View itemView;
         ImageView imageViewBackground;

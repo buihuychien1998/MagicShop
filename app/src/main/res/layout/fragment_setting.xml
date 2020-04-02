@@ -8,26 +8,30 @@
     tools:context=".ui.fragments.SettingFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@android:color/white">
 
         <ImageButton
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/btnBack"
             style="@style/CustomImageButton"
             android:src="@drawable/ic_arrow_back" />
 
         <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/btnBack"
             android:text="@string/title_setting"
             android:textColor="@android:color/black"
             android:textSize="@dimen/sp20" />
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btnInfoAccount"
@@ -93,7 +97,7 @@
             android:textSize="@dimen/sp14" />
     </LinearLayout>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btnCountry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,6 +112,9 @@
         android:textAllCaps="false">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/ivCountry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -120,8 +127,9 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/ivCountry"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivCountry"
             android:orientation="vertical">
 
             <TextView
@@ -138,7 +146,7 @@
                 android:textSize="@dimen/sp14" />
         </LinearLayout>
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/btnLanguage"
@@ -216,7 +224,7 @@
         android:paddingBottom="@dimen/_8sdp"
         android:text="Đăng xuất"
         android:textAllCaps="false"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@color/green"
         android:textSize="@dimen/sp16" />
 
     <TextView

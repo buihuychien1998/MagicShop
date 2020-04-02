@@ -20,17 +20,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="@dimen/dp16">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     style="@style/viewParent.headerText.NoMode"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@id/ivRegister"
                     android:gravity="center"
                     android:text="@string/y_la_nb_c_u_ti_n_ncu_a_ba_n_nv_i_chu_ng_t_i"
                     android:textColor="@color/whiteTextColor" />
@@ -39,11 +36,9 @@
                     android:id="@+id/ivRegister"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_login_hero" />
-            </RelativeLayout>
+            </LinearLayout>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -59,12 +54,12 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputUserName"
+                        android:id="@+id/tilUsername"
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtUserName"
+                            android:id="@+id/edtUsername"
                             style="@style/modifiedEditText"
                             android:hint="@string/t_n_ng_nh_p"
                             android:inputType="textPersonName"
@@ -72,20 +67,20 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputName"
+                        android:id="@+id/tilName"
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtFullName"
+                            android:id="@+id/edtName"
                             style="@style/modifiedEditText"
                             android:hint="@string/ho_va_t_n"
-                            android:inputType="textPersonName"
+                            android:inputType="text"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputEmail"
+                        android:id="@+id/tilEmail"
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
 
@@ -98,7 +93,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputAddress"
+                        android:id="@+id/tilAddress"
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
 
@@ -106,17 +101,17 @@
                             android:id="@+id/edtAddress"
                             style="@style/modifiedEditText"
                             android:hint="@string/i_a_chi"
-                            android:inputType="textPassword"
+                            android:inputType="text"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputMobile"
+                        android:id="@+id/tilPhone"
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtPhoneNumber"
+                            android:id="@+id/edtPhone"
                             style="@style/modifiedEditText"
                             android:hint="@string/s_i_n_thoa_i"
                             android:inputType="phone"
@@ -124,7 +119,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputPassword"
+                        android:id="@+id/tilPassword"
                         style="@style/parent"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         app:passwordToggleEnabled="true">
@@ -139,7 +134,7 @@
 
 
                     <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
-                        android:id="@+id/cirRegisterButton"
+                        android:id="@+id/btnRegister"
                         style="@style/loginButton"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/loginViewsMargin"
@@ -203,12 +198,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_facebook" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp12"
+                    android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_google_plus" />
             </LinearLayout>
 
@@ -231,5 +228,6 @@
         android:layout_marginEnd="11dp"
         android:layout_marginBottom="30dp"
         android:adjustViewBounds="false"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/ic_back_img" />
 </RelativeLayout>

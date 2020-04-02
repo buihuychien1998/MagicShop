@@ -7,10 +7,10 @@ import java.io.Serializable
 class Author: Serializable{
     @SerializedName("idAuthor")
     @Expose
-    val idAuthor: String? = null
+    val authorId: String? = null
     @SerializedName("nameAuthor")
     @Expose
-    val nameAuthor: String? = null
+    val authorName: String? = null
 
 
 }

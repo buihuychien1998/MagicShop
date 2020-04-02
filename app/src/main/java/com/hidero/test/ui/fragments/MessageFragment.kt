@@ -13,17 +13,15 @@ import kotlinx.android.synthetic.main.fragment_message.*
  */
 class MessageFragment : BaseFragment() {
     private val viewPagerAdapter by lazy {
-        ViewPagerAdapter(activity!!.supportFragmentManager)
+        ViewPagerAdapter(requireActivity().supportFragmentManager)
     }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_message
     }
 
-    override fun initView(view: View) {
+    override fun initViews(view: View) {
         setHasOptionsMenu(true)
-        viewPagerAdapter.addFragment(ChatsFragment(), "Tin nhắn")
-        viewPagerAdapter.addFragment(UsersFragment(), "Người dùng")
         viewPager.adapter = viewPagerAdapter
         tabLayout.setupWithViewPager(viewPager)
     }

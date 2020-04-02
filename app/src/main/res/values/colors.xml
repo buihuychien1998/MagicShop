@@ -40,6 +40,7 @@
     <color name="theme_primary">#B6B6B6</color>
     <color name="red">#f20</color>
     <color name="green">#05EA11</color>
+    <color name="blue">#0000FF</color>
 
 
 </resources>

@@ -10,30 +10,23 @@ import com.hidero.test.data.valueobject.NetworkState
 import com.hidero.test.util.baseUrl
 import io.reactivex.disposables.CompositeDisposable
 
-class HomeFragmentViewModel : ViewModel() {
+class HomeViewModel : ViewModel() {
     private val apiService by lazy {
         APIUtil.getData(baseUrl)
     }
-    private val bookRepository: BookRepository by lazy {
-        BookRepository(apiService)
-    }
-    private val compositeDisposable by lazy { CompositeDisposable() }
-
+    private val compositeDisposable = CompositeDisposable()
+    private val repository = BookRepository(apiService)
     val bookList: LiveData<PagedList<Book>> by lazy {
-        bookRepository.fetchLiveBookPagedList(compositeDisposable)
+        repository.fetchBook(compositeDisposable)
     }
-
     val networkState: LiveData<NetworkState> by lazy {
-        bookRepository.getNetworkState()
+        repository.getNetworkState()
     }
 
-    fun retry() {
-        bookRepository.retry()
-    }
+    fun retry() = repository.retry()
 
-    fun listIsEmpty(): Boolean {
-        return bookList.value?.isEmpty() ?: true
-    }
+
+    fun listIsEmpty() = repository.listIsEmpty()
 
     override fun onCleared() {
         super.onCleared()

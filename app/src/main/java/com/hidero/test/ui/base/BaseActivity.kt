@@ -8,40 +8,41 @@ import android.net.wifi.WifiManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.hidero.test.util.ACTION_NETWORK_CHANGE
-import com.hidero.test.util.getInternetStatus
+import com.hidero.test.util.SUPPLICANT_CONNECTION_CHANGE_ACTION
+import com.hidero.test.util.isNetworkAvailable
 
 abstract class BaseActivity : AppCompatActivity() {
 
     var isNetworkState: Boolean = false
-
-    abstract fun getLayoutID(): Int
+    abstract fun getLayoutId(): Int
     abstract fun initViews(savedInstanceState: Bundle?)
 
     //Listener lắng nghe sự thay đổi trạng thái connect internet
     private var onNetworkConnectedListener: OnNetworkConnectedListener? = null
+
     fun setOnNetworkConnectedListener(onNetworkConnectedListener: OnNetworkConnectedListener) {
         this.onNetworkConnectedListener = onNetworkConnectedListener
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        isNetworkState = this.getInternetStatus()
-        registerBroadcastReciver()
-        setContentView(getLayoutID())
+        isNetworkState = this.isNetworkAvailable()
+        registerBroadcastReceiver()
+        setContentView(getLayoutId())
         initViews(savedInstanceState)
     }
 
     override fun onResume() {
         super.onResume()
-        isNetworkState = this.getInternetStatus()
+        isNetworkState = this.isNetworkAvailable()
     }
 
 
     //Đăng ký broadcast lắng nghe sự kiện thay đổi network
-    private fun registerBroadcastReciver() {
+    private fun registerBroadcastReceiver() {
         val intentFilter = IntentFilter()
         intentFilter.addAction("service.to.activity.transfer")
-        intentFilter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION)
+        intentFilter.addAction(SUPPLICANT_CONNECTION_CHANGE_ACTION)
         intentFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION)
         intentFilter.addAction(ACTION_NETWORK_CHANGE)
         registerReceiver(receiver, intentFilter)
@@ -53,7 +54,7 @@ abstract class BaseActivity : AppCompatActivity() {
             if (action != null) {
                 when (action) {
                     ACTION_NETWORK_CHANGE -> {
-                        isNetworkState = this@BaseActivity.getInternetStatus()
+                        isNetworkState = this@BaseActivity.isNetworkAvailable()
                         if (isNetworkState) {
                             onNetworkConnectedListener.let {
                                 it?.onNetworkConnected()
@@ -75,8 +76,9 @@ abstract class BaseActivity : AppCompatActivity() {
         unregisterReceiver(receiver)
     }
 
-    interface OnNetworkConnectedListener{
+    interface OnNetworkConnectedListener {
         fun onNetworkConnected()
         fun onNetworkDisconnected()
     }
+
 }

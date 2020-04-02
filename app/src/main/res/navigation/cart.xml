@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/cart">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cart"
+    app:startDestination="@id/cartFragment">
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.hidero.test.ui.fragments.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cartFragment_to_checkoutFragment"
+            app:destination="@id/checkoutFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"/>
+    </fragment>
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.hidero.test.ui.fragments.CheckoutFragment"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout" />
 </navigation>

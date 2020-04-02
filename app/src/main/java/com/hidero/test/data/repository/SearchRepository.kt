@@ -11,9 +11,14 @@ import com.hidero.test.util.pageSize
 import io.reactivex.disposables.CompositeDisposable
 
 
-class BookRepository(private val apiService: APIService) {
+class SearchRepository(
+    private val apiService: APIService,
+    private val compositeDisposable: CompositeDisposable
+) {
     private lateinit var bookPagedList: LiveData<PagedList<Book>>
-    private lateinit var bookDataSourceFactory: BookDataSourceFactory
+    private var keyword = ""
+
+    private lateinit var bookDataSourceFactory: SearchDataSourceFactory
     private val config by lazy {
         PagedList.Config.Builder()
             .setEnablePlaceholders(false)
@@ -21,19 +26,22 @@ class BookRepository(private val apiService: APIService) {
             .build()
     }
 
-    fun fetchLiveBookPagedList(compositeDisposable: CompositeDisposable): LiveData<PagedList<Book>> {
-        bookDataSourceFactory = BookDataSourceFactory(apiService, compositeDisposable)
+    private fun fetchLiveBookPagedList(): LiveData<PagedList<Book>> {
+        bookDataSourceFactory = SearchDataSourceFactory(apiService, compositeDisposable, keyword)
         bookPagedList = LivePagedListBuilder(bookDataSourceFactory, config).build()
         return bookPagedList
     }
 
-    fun getNetworkState(): LiveData<NetworkState> = Transformations.switchMap<BookDataSource,
-            NetworkState>(bookDataSourceFactory.booksLiveDataSource, BookDataSource::networkState)
+    fun getNetworkState(): LiveData<NetworkState> = Transformations.switchMap<SearchDataSource,
+            NetworkState>(bookDataSourceFactory.booksLiveDataSource, SearchDataSource::networkState)
 
 
     fun retry() {
         bookDataSourceFactory.booksLiveDataSource.value?.retry()
     }
 
-
+    fun search(text: String):  LiveData<PagedList<Book>>{
+        keyword = text
+        return fetchLiveBookPagedList()
+    }
 }

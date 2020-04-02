@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -12,6 +12,8 @@
     tools:ignore="UnusedAttribute">
 
     <com.hidero.test.ui.customviews.MaskedCardView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:id="@+id/cvBook"
         android:layout_width="@dimen/dp80"
         android:layout_height="wrap_content"
@@ -47,4 +49,4 @@
                 android:textColor="@color/black" />
         </LinearLayout>
     </com.hidero.test.ui.customviews.MaskedCardView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

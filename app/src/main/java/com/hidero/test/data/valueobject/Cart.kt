@@ -1,27 +1,27 @@
-package com.hidero.book.model
+package com.hidero.test.data.valueobject
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class Cart {
-    @SerializedName("idCart")
+    @SerializedName("cartId")
     @Expose
-    var idCart: Int? = null
-    @SerializedName("idBook")
+    var cartId: Int? = null
+    @SerializedName("bookId")
     @Expose
-    var idBook: Int? = null
-    @SerializedName("nameBook")
+    var bookId: Int? = null
+    @SerializedName("bookName")
     @Expose
-    var nameBook: String? = null
+    var bookName: String? = null
     @SerializedName("quantity")
     @Expose
     var quantity: Int? = null
     @SerializedName("cost")
     @Expose
     var cost: Int? = null
-    @SerializedName("imageBook")
+    @SerializedName("bookImage")
     @Expose
-    var imageBook: String? = null
+    var bookImage: String? = null
     @SerializedName("status")
     @Expose
     var status: String? = null

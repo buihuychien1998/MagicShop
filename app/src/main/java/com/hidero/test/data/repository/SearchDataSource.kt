@@ -13,9 +13,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Action
 import io.reactivex.schedulers.Schedulers
 
-class BookDataSource(
+class SearchDataSource(
     private val apiService: APIService,
-    private val compositeDisposable: CompositeDisposable
+    private val compositeDisposable: CompositeDisposable,
+    private val keyword: String
 ) : PageKeyedDataSource<Int, Book>() {
 
     private var page = FIRST_PAGE
@@ -29,7 +30,7 @@ class BookDataSource(
     ) {
         updateState(NetworkState.LOADING)
         compositeDisposable.add(
-            apiService.getBook(page, pageSize)
+            apiService.search(keyword, page, pageSize)
                 .subscribe(
                     { response ->
                         updateState(NetworkState.LOADED)
@@ -45,17 +46,19 @@ class BookDataSource(
                     }
                 )
         )
+
+
     }
 
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Book>) {
         updateState(NetworkState.LOADING)
         compositeDisposable.add(
-            apiService.getBook(params.key, pageSize)
+            apiService.search(keyword, params.key, pageSize)
                 .subscribe(
                     { response ->
-                        if (response.size == 0){
+                        if (response.size == 0) {
                             updateState(NetworkState.ENDOFLIST)
-                        }else{
+                        } else {
                             updateState(NetworkState.LOADED)
                             callback.onResult(
                                 response,

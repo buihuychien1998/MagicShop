@@ -26,41 +26,52 @@
             app:contentInsetStart="0dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageButton
                     android:id="@+id/btnBack"
                     style="@style/CustomImageButton"
-                    android:src="@drawable/ic_arrow_back" />
+                    android:src="@drawable/ic_arrow_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <AutoCompleteTextView
                     android:id="@+id/actvSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toStartOf="@id/btnSearch"
-                    android:layout_toEndOf="@id/btnBack"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="@dimen/dp8"
                     android:background="@android:color/transparent"
                     android:hint="@string/search_here"
                     android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="@dimen/sp16" />
+                    android:textSize="@dimen/sp16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/btnSearch"
+                    app:layout_constraintStart_toEndOf="@id/btnBack"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/btnSearch"
                     style="@style/BorderLessBackground"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="@dimen/dp16"
-                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp8"
+                    android:minWidth="@dimen/dp0"
+                    android:minHeight="@dimen/dp0"
+                    android:padding="@dimen/dp8"
                     android:text="@string/ti_m_ki_m"
                     android:textAllCaps="false"
                     android:textColor="@color/colorMain"
-                    android:textSize="@dimen/sp14" />
-            </RelativeLayout>
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/actvSearch"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 

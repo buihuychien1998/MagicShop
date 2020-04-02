@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/account">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account"
+    app:startDestination="@id/accountFragment">
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.hidero.test.ui.fragments.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_accountFragment_to_settingFragment"
+            app:destination="@id/settingFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"/>
+    </fragment>
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.hidero.test.ui.fragments.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting">
+        <action
+            android:id="@+id/action_settingFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.hidero.test.ui.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit"/>
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.hidero.test.ui.fragments.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
 </navigation>

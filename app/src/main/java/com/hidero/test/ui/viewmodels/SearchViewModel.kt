@@ -12,7 +12,7 @@ import com.hidero.test.data.valueobject.NetworkState
 import com.hidero.test.util.baseUrl
 import io.reactivex.disposables.CompositeDisposable
 
-class SearchFragmentViewModel : ViewModel() {
+class SearchViewModel : ViewModel() {
     val keyword = MutableLiveData<String>()
     private val apiService by lazy {
         APIUtil.getData(baseUrl)

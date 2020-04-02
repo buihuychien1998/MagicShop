@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <ImageView
+        android:contentDescription="@string/app_name"
         android:id="@+id/iv_auto_image_slider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +16,7 @@
 
 
     <ImageView
+        android:contentDescription="@string/app_name"
         android:id="@+id/iv_gif_container"
         android:layout_width="80dp"
         android:layout_height="80dp"
