@@ -1,6 +1,7 @@
 package com.hidero.test.data.repository
 
 import com.hidero.test.data.api.APIService
+import com.hidero.test.data.valueobject.Account
 import io.reactivex.disposables.CompositeDisposable
 
 class UserRepository(apiService: APIService, compositeDisposable: CompositeDisposable) {
@@ -12,10 +13,9 @@ class UserRepository(apiService: APIService, compositeDisposable: CompositeDispo
             }.downloadedAccountResponse
         }
 
-    val register = { username: String,
-                     password: String, name: String, address: String, phone: String, email: String ->
+    val register = { account: Account ->
         userDataSource.apply {
-            register(username, password, name, address, phone, email)
+            register(account)
         }.downloadedRegisterResponse
     }
 

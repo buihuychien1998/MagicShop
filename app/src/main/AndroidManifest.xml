@@ -32,9 +32,6 @@
         <activity
             android:name=".ui.activities.MainActivity"
             android:launchMode="singleTop" />
-        <activity
-            android:name=".ui.activities.AuthenticationActivity"
-            android:launchMode="standard"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

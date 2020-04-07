@@ -1,178 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp8"
-    android:background="@color/white">
+    xmlns:bind="http://schemas.android.com/tools">
 
-    <com.hidero.test.ui.customviews.MaskedCardView
-        android:id="@+id/cvBook"
-        android:layout_width="0dp"
+    <data>
+
+        <variable
+            name="data"
+            type="com.hidero.test.data.valueobject.Cart" />
+
+        <variable
+            name="handlers"
+            type="com.hidero.test.ui.adapters.CartAdapter.CartViewHolder" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="@dimen/_1sdp"
-        app:cardPreventCornerOverlap="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="@dimen/dp8"
+        android:background="@color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <com.hidero.test.ui.customviews.MaskedCardView
+            android:id="@+id/cvBook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/_1sdp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:id="@+id/lnlHeader"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:button="@drawable/custom_checkbox" />
+                android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/lnlHeader"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/dp8"
                     android:gravity="center_vertical"
-                    android:text="@string/da_nh_ri_ng_cho_ba_n"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp14" />
-            </LinearLayout>
-
-            <View
-                android:id="@+id/vHeader"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp1"
-                android:background="#80D6D6D6"
-                app:layout_constraintTop_toBottomOf="@id/lnlHeader" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/rlProduct"
-                android:layout_marginStart="@dimen/dp16"
-                android:layout_marginEnd="@dimen/dp16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/vHeader">
-
-                <ImageView
-                    android:contentDescription="@string/app_name"
-                    android:id="@+id/ivProduct"
-                    android:layout_width="@dimen/dp80"
-                    android:layout_height="@dimen/dp120"
-                    android:layout_marginStart="@dimen/dp16"
-                    android:src="@drawable/ic_no_image"
+                    android:text="@string/cho_n_xo_a"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/sp14"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tvNameProduct"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp8"
-                    android:layout_marginStart="@dimen/dp16"
-                    android:ellipsize="end"
-                    android:gravity="start"
-                    android:maxLines="2"
-                    android:text="@string/app_name"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/sp14"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ivProduct"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvCost"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp16"
-                    android:gravity="start"
-                    android:text="@string/zero"
-                    android:textColor="#f20"
-                    android:textSize="@dimen/sp12"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ivProduct"
-                    app:layout_constraintTop_toBottomOf="@id/tvNameProduct" />
+                <View
+                    android:id="@+id/vHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp1"
+                    android:background="#80D6D6D6"
+                    app:layout_constraintTop_toBottomOf="@id/lnlHeader" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rlProduct"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp16"
-                    android:layout_marginTop="@dimen/dp16"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ivProduct"
-                    app:layout_constraintTop_toBottomOf="@id/tvCost">
+                    android:layout_marginEnd="@dimen/dp16"
+                    app:layout_constraintTop_toBottomOf="@id/vHeader">
 
-                    <ImageButton
-                        android:id="@+id/btnMinus"
-                        style="@style/BorderBackground"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/bg_plus_minus"
+                    <ImageView
+                        android:id="@+id/ivProduct"
+                        android:layout_width="@dimen/dp80"
+                        android:layout_height="@dimen/dp120"
+                        android:layout_marginStart="@dimen/dp16"
                         android:contentDescription="@string/app_name"
-                        android:minWidth="@dimen/dp0"
-                        android:minHeight="@dimen/dp0"
-                        android:padding="@dimen/dp8"
-                        android:src="@drawable/ic_minus"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        imageUrl="@{data.bookImage}" />
 
                     <TextView
-                        android:id="@+id/tvQuantity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/dp32"
-                        android:background="@drawable/bg_plus_minus"
-                        android:gravity="center"
-                        android:paddingStart="@dimen/dp20"
-                        android:paddingEnd="@dimen/dp20"
-                        android:text="@string/zero"
+                        android:id="@+id/tvNameProduct"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:layout_marginTop="@dimen/dp8"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:maxLines="2"
+                        android:text="@{data.bookName}"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/sp16"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/btnMinus"
+                        android:textSize="@dimen/sp14"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivProduct"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageButton
-                        android:id="@+id/btnPlus"
-                        style="@style/BorderBackground"
+                    <org.fabiomsr.moneytextview.MoneyTextView
+                        android:id="@+id/tvCost"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_plus_minus"
-                        android:contentDescription="@string/app_name"
-                        android:minWidth="@dimen/dp0"
-                        android:minHeight="@dimen/dp0"
-                        android:padding="@dimen/dp8"
-                        android:src="@drawable/ic_plus"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tvQuantity"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginStart="@dimen/dp16"
+                        android:layout_marginTop="@dimen/dp4"
+                        app:amount="@{data.cost}"
+                        app:baseTextColor="@color/red"
+                        app:baseTextSize="@dimen/sp12"
+                        app:format="###,###,###"
+                        app:gravity="left"
+                        app:layout_constraintStart_toEndOf="@id/ivProduct"
+                        app:layout_constraintTop_toBottomOf="@id/tvNameProduct"
+                        app:symbol="đ" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp16"
+                        android:layout_marginTop="@dimen/dp8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivProduct"
+                        app:layout_constraintTop_toBottomOf="@id/tvCost">
+
+                        <ImageButton
+                            android:id="@+id/btnMinus"
+                            style="@style/BorderBackground"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_plus_minus"
+                            android:enabled="@{data.quantity>1}"
+                            android:contentDescription="@string/app_name"
+                            android:minWidth="@dimen/dp0"
+                            android:minHeight="@dimen/dp0"
+                            android:onClick="@{(v)->handlers.onClick(v, data)}"
+                            android:padding="@dimen/dp8"
+                            android:src="@drawable/ic_minus"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvQuantity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp32"
+                            android:background="@drawable/bg_plus_minus"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dp32"
+                            android:paddingEnd="@dimen/dp32"
+                            android:text="@{String.valueOf(data.quantity)}"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/sp16"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/btnMinus"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/btnPlus"
+                            style="@style/BorderBackground"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_plus_minus"
+                            android:enabled="@{data.quantity&lt;data.maxq}"
+                            android:contentDescription="@string/app_name"
+                            android:minWidth="@dimen/dp0"
+                            android:minHeight="@dimen/dp0"
+                            android:onClick="@{(v)->handlers.onClick(v, data)}"
+                            android:padding="@dimen/dp8"
+                            android:src="@drawable/ic_plus"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tvQuantity"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/vFooter"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp1"
-                android:background="#80D6D6D6"
-                app:layout_constraintTop_toBottomOf="@id/rlProduct" />
-
-
-            <TextView
-                android:id="@+id/tvFreeShip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp8"
-                android:drawableStart="@drawable/ic_free_delivery_small"
-                android:fontFamily="@font/quicksand_light"
-                android:text="@string/mi_n_phi_v_n_chuy_n"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp14"
-                app:layout_constraintTop_toBottomOf="@id/vFooter" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.hidero.test.ui.customviews.MaskedCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.hidero.test.ui.customviews.MaskedCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -11,29 +11,30 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hidero.test.R
-import com.hidero.test.data.valueobject.Book
 import com.hidero.test.data.valueobject.NetworkState
+import com.hidero.test.databinding.FragmentHomeBinding
 import com.hidero.test.ui.adapters.BookPagedListAdapter
 import com.hidero.test.ui.adapters.SliderAdapterExample
 import com.hidero.test.ui.base.BaseFragment
+import com.hidero.test.ui.viewmodels.EventObserver
 import com.hidero.test.ui.viewmodels.HomeViewModel
 import com.hidero.test.ui.viewmodels.SharedViewModel
+import com.hidero.test.util.DELAY_LOAD
 import com.hidero.test.util.SPAN_COUNT
 import com.hidero.test.util.renewItems
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.*
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private lateinit var adapter: SliderAdapterExample
-
     private lateinit var viewModel: HomeViewModel
-
     private val shareViewModel: SharedViewModel by activityViewModels()
     private lateinit var bookAdapter: BookPagedListAdapter
 
@@ -41,10 +42,8 @@ class HomeFragment : BaseFragment() {
 
     override fun initViews(view: View) {
         setUpSlider()
-        btnSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
-        }
         viewModel = create()
+        binding.handlers = viewModel
         subscribeUi()
         initAdapter()
 
@@ -52,53 +51,80 @@ class HomeFragment : BaseFragment() {
 
 
     private fun initAdapter() {
-        bookAdapter = BookPagedListAdapter { viewModel.retry() }
-
-        bookAdapter.onItemClickListener = object : BookPagedListAdapter.OnItemClickListener {
-            override fun onItemClick(book: Book, position: Int) {
-                shareViewModel.select(book)
-                findNavController().navigate(R.id.action_homeFragment_to_detailProductFragment)
+        bookAdapter = BookPagedListAdapter { viewModel.retry() }.apply {
+            onItemClickListener = object : BookPagedListAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int) {
+                    shareViewModel.select(getItemPosition(position))
+                    findNavController().navigate(R.id.action_homeFragment_to_detailProductFragment)
+                }
             }
+
+
         }
-        val gridLayoutManager = GridLayoutManager(context, SPAN_COUNT)
-        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                val viewType = bookAdapter.getItemViewType(position)
-                return if (viewType == bookAdapter.DATA_VIEW_TYPE) 1    // DATA_VIEW_TYPE will occupy 1 out of 3 span
-                else 3                                              // NETWORK_VIEW_TYPE will occupy all 3 span
+        val gridLayoutManager = GridLayoutManager(context, SPAN_COUNT).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    val viewType = bookAdapter.getItemViewType(position)
+                    return if (viewType == bookAdapter.DATA_VIEW_TYPE) 1    // DATA_VIEW_TYPE will occupy 1 out of 3 span
+                    else 3                                              // NETWORK_VIEW_TYPE will occupy all 3 span
+                }
             }
         }
         with(rvProduct) {
             adapter = bookAdapter
             layoutManager = gridLayoutManager
         }
+    }
 
-        txt_error.setOnClickListener { viewModel.retry() }
+
+    private fun subscribeUi() {
+        viewModel.run {
+            bookList.observe(viewLifecycleOwner, Observer {
+//                val dialog = requireContext().showDialog("Loading...")
+                Timer().schedule(object : TimerTask() {
+                    override fun run() { // this code will be executed after 2 seconds
+                        requireActivity().runOnUiThread(Runnable {
+                            // Stuff that updates the UI
+//                            dialog.dismiss()
+                            bookAdapter.submitList(it)
+                        })
+                    }
+                }, DELAY_LOAD)
+
+            })
+            networkState.observe(viewLifecycleOwner, Observer { state ->
+                binding.apply {
+                    progressBar.visibility =
+                        if (listIsEmpty() && state == NetworkState.LOADING) View.VISIBLE else View.GONE
+                    tvError.visibility =
+                        if (listIsEmpty() && state == NetworkState.ERROR) View.VISIBLE else View.GONE
+                }
+                if (!listIsEmpty()) {
+                    bookAdapter.setNetworkState(state)
+                }
+            })
+
+            navigateTo.observe(viewLifecycleOwner, EventObserver { view ->
+                handleEvents(view.id)
+            })
+        }
 
     }
 
-    private fun subscribeUi() {
-        viewModel.bookList.observe(viewLifecycleOwner, Observer {
-            bookAdapter.submitList(it)
-        })
-
-        viewModel.networkState.observe(viewLifecycleOwner, Observer { state ->
-            progress_bar.visibility =
-                if (viewModel.listIsEmpty() && state == NetworkState.LOADING) View.VISIBLE else View.GONE
-            txt_error.visibility =
-                if (viewModel.listIsEmpty() && state == NetworkState.ERROR) View.VISIBLE else View.GONE
-            if (!viewModel.listIsEmpty()) {
-                bookAdapter.setNetworkState(state)
+    private fun handleEvents(id: Int) {
+        when (id) {
+            R.id.btnSearch -> {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
             }
-        })
+        }
     }
 
     private fun setUpSlider() {
         adapter =
-            SliderAdapterExample(this@HomeFragment.context)
-        sliderView.sliderAdapter = adapter
+            SliderAdapterExample(requireContext())
+        binding.sliderView.sliderAdapter = adapter
         renewItems(adapter)
-        sliderView.apply {
+        binding.sliderView.apply {
             setIndicatorAnimation(IndicatorAnimations.FILL) //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
             setSliderTransformAnimation(SliderAnimations.CUBEINROTATIONTRANSFORMATION)
             autoCycleDirection = SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH
@@ -109,7 +135,6 @@ class HomeFragment : BaseFragment() {
             startAutoCycle()
         }
     }
-
 
 
     private fun create(): HomeViewModel {

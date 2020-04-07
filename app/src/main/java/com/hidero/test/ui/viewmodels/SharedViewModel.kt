@@ -7,7 +7,7 @@ import com.hidero.test.data.valueobject.Book
 class SharedViewModel : ViewModel() {
     val selected = MutableLiveData<Book>()
 
-    fun select(book: Book) {
+    fun select(book: Book?) {
         selected.value = book
     }
 }

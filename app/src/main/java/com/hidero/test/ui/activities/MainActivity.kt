@@ -4,15 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.hidero.test.R
+import com.hidero.test.databinding.ActivityMainBinding
 import com.hidero.test.ui.base.BaseActivity
 import com.hidero.test.ui.dialogs.InternetDialog
 import com.hidero.test.util.setupWithNavController
-import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity(), BaseActivity.OnNetworkConnectedListener {
+class MainActivity : BaseActivity<ActivityMainBinding>(), BaseActivity.OnNetworkConnectedListener {
     private var currentNavController: LiveData<NavController>? = null
     private val internetDialog by lazy {
         InternetDialog(this)
@@ -56,19 +55,24 @@ class MainActivity : BaseActivity(), BaseActivity.OnNetworkConnectedListener {
      */
     private fun setupBottomNavigationBar() {
 //        NavigationUI.setupWithNavController(bottomNav, currentNavController)
-        val navGraphIds = listOf(R.navigation.home, R.navigation.news, R.navigation.message, R.navigation.cart, R.navigation.account)
+        val navGraphIds = listOf(
+            R.navigation.home,
+            R.navigation.news,
+            R.navigation.message,
+            R.navigation.cart,
+            R.navigation.account
+        )
         // Setup the bottom navigation view with a list of navigation graphs
-        val controller = bottomNav.setupWithNavController(
+        val controller = binding.bottomNav.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
             intent = intent
         )
-
         // Whenever the selected controller changes, setup the action bar.
-        controller.observe(this, Observer { _ ->
-//            setupActionBarWithNavController(navController)
-        })
+//        controller.observe(this, Observer { _ ->
+        //            setupActionBarWithNavController(navController)
+//        })
         currentNavController = controller
 
     }
@@ -80,9 +84,9 @@ class MainActivity : BaseActivity(), BaseActivity.OnNetworkConnectedListener {
 
     fun visibilityBottomNav(visible: Boolean) {
         if (visible) {
-            bottomNav.visibility = View.VISIBLE
+            binding.bottomNav.visibility = View.VISIBLE
         } else {
-            bottomNav.visibility = View.GONE
+            binding.bottomNav.visibility = View.GONE
         }
     }
 

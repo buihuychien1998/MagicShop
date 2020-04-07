@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1039710428859",
+    "firebase_url": "https://magicshop-ff4e3.firebaseio.com",
+    "project_id": "magicshop-ff4e3",
+    "storage_bucket": "magicshop-ff4e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039710428859:android:b0e06bcbe89919f4cc939e",
+        "android_client_info": {
+          "package_name": "com.hidero.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039710428859-9hocp0rr8jb51esng3lccgk0rmv8i1pf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hidero.test",
+            "certificate_hash": "bc2dd8100ce79728aaff260785734e64259c882a"
+          }
+        },
+        {
+          "client_id": "1039710428859-khilqfrs8hovng53cvcecarjfts2fmkh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB62QEuP-AGkkjaKyq4upzYKjla8geGSW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039710428859-khilqfrs8hovng53cvcecarjfts2fmkh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,26 +3,45 @@ package com.hidero.test.ui.fragments
 
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hidero.test.R
+import com.hidero.test.databinding.FragmentSettingBinding
 import com.hidero.test.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_setting.*
+import com.hidero.test.ui.viewmodels.EventObserver
+import com.hidero.test.ui.viewmodels.SettingViewModel
+import com.hidero.test.util.CURRENT_USER
+import com.hidero.test.util.SharedPrefs
 
 /**
  * A simple [Fragment] subclass.
  */
-class SettingFragment : BaseFragment() {
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_setting
-    }
+class SettingFragment : BaseFragment<FragmentSettingBinding>() {
+    override fun getLayoutId() = R.layout.fragment_setting
+    private lateinit var viewModel: SettingViewModel
 
     override fun initViews(view: View) {
-        btnBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
+        viewModel = ViewModelProvider(this)[SettingViewModel::class.java]
+        binding.handlers = viewModel
+        viewModel.navigateTo.observe(viewLifecycleOwner, EventObserver {
+            handleEvent(it)
+        })
+    }
 
-        btnInfoAccount.setOnClickListener {
-            findNavController().navigate(R.id.action_settingFragment_to_profileFragment)
+    private fun handleEvent(view: View) {
+        when (view.id) {
+            R.id.btnBack -> {
+                findNavController().navigateUp()
+            }
+            R.id.btnInfoAccount -> {
+                findNavController().navigate(SettingFragmentDirections.actionSettingFragmentToProfileFragment())
+            }
+
+            R.id.btnLogout -> {
+                SharedPrefs.instance.put(CURRENT_USER, null)
+                viewModel.refreshAccount()
+                findNavController().navigateUp()
+            }
         }
 
     }

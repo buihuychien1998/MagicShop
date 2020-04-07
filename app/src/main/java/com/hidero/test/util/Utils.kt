@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Handler
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.hidero.test.R
+import dmax.dialog.SpotsDialog
 
 
 fun Context.showToast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
@@ -47,16 +49,25 @@ fun Activity.showKeyBoard() {
     }
 }
 
-//fun Context.showDialog(message: String) {
-//    val dialog = SpotsDialog.Builder()
-//        .setContext(this)
-//        .setMessage(message)
-//        .setCancelable(true)
-//        .build()
-//        .apply {
-//            show()
-//        }
-//
-//}
+fun Context.showDialog(message: String) =
+    SpotsDialog.Builder()
+        .setContext(this)
+        .setMessage(message)
+        .setCancelable(true)
+        .build()
 
-fun Context.getBitmap(drawableId: Int): Bitmap? = BitmapFactory.decodeResource(resources, drawableId)
+
+
+fun delayFunction(function: () -> Unit, delay: Long) {
+    Handler().postDelayed(function, delay)
+}
+
+fun Context.getBitmap(drawableId: Int): Bitmap? =
+    BitmapFactory.decodeResource(resources, drawableId)
+
+fun View.disableClickTemporarily(){
+    isClickable = false
+    postDelayed({
+        isClickable = true
+    },1000)
+}

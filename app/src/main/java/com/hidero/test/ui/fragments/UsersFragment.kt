@@ -1,23 +1,20 @@
 package com.hidero.test.ui.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.hidero.test.R
+import com.hidero.test.databinding.FragmentUsersBinding
+import com.hidero.test.ui.base.BaseFragment
 
 /**
  * A simple [Fragment] subclass.
  */
-class UsersFragment : Fragment() {
+class UsersFragment : BaseFragment<FragmentUsersBinding>() {
+    override fun getLayoutId() = R.layout.fragment_users
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_users, container, false)
+    override fun initViews(view: View) {
+
     }
+
 
 }

@@ -49,29 +49,25 @@ class UserDataSource(
         }
     }
 
-    fun register(
-        username: String,
-        password: String,
-        name: String,
-        address: String,
-        phone: String,
-        email: String
-    ) {
+    fun register(account: Account) {
         _networkState.postValue(NetworkState.LOADING)
         try {
             compositeDisposable.add(
-                apiService.register(username, password, USER_ROLE, name, address, phone, email)
-                    .subscribeOn(Schedulers.io())
-                    .subscribe(
-                        { response ->
-                            _downloadedRegisterResponse.postValue(response)
-                            _networkState.postValue(NetworkState.LOADED)
-                        },
-                        {
-                            _networkState.postValue(NetworkState.ERROR)
-                        }
+                account.run {
+                    apiService.register(username, password, USER_ROLE, name, address, phone, email)
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(
+                            { response ->
+                                _downloadedRegisterResponse.postValue(response)
+                                _networkState.postValue(NetworkState.LOADED)
+                            },
+                            {
+                                _networkState.postValue(NetworkState.ERROR)
+                            }
 
-                    )
+                        )
+                }
+
             )
 
         } catch (e: Exception) {

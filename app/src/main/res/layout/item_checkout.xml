@@ -1,94 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp8"
-    android:background="@color/white">
-
-    <com.hidero.test.ui.customviews.MaskedCardView
-        android:id="@+id/cvBook"
-        android:layout_width="0dp"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="data"
+            type="com.hidero.test.data.valueobject.Cart" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="@dimen/_1sdp"
-        app:cardPreventCornerOverlap="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.Card">
+        android:layout_marginTop="@dimen/dp8"
+        android:background="@color/white">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/rlProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <com.hidero.test.ui.customviews.MaskedCardView
+            android:id="@+id/cvBook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/_1sdp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.MaterialComponents.Card">
 
-            <ImageView
-                android:id="@+id/ivProduct"
-                android:layout_width="@dimen/dp80"
-                android:layout_height="@dimen/dp120"
-                android:layout_marginEnd="@dimen/dp16"
-                android:src="@drawable/ic_no_image"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rlProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvNameProduct"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp8"
-                android:layout_marginTop="@dimen/dp16"
-                android:ellipsize="end"
-                android:gravity="start"
-                android:maxLines="2"
-                android:text="@string/app_name"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/sp16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ivProduct"
-                app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:contentDescription="@string/app_name"
+                    android:id="@+id/ivProduct"
+                    android:layout_width="@dimen/dp80"
+                    android:layout_height="@dimen/dp120"
+                    android:layout_marginEnd="@dimen/dp16"
+                    imageUrl="@{data.bookImage}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvCost"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="start"
-                android:paddingStart="@dimen/dp8"
-                android:paddingEnd="@dimen/_8sdp"
-                android:text="@string/zero"
-                android:textColor="#f20"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ivProduct"
-                app:layout_constraintTop_toBottomOf="@id/tvNameProduct" />
+                <TextView
+                    android:id="@+id/tvNameProduct"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:ellipsize="end"
+                    android:gravity="start"
+                    android:maxLines="2"
+                    android:text="@{data.bookName}"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivProduct"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp16"
-                android:paddingStart="@dimen/dp8"
-                android:paddingEnd="@dimen/dp4"
-                android:text="@string/s_l_ng"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp14"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/ivProduct"
-                app:layout_constraintTop_toBottomOf="@id/tvCost" />
+                <org.fabiomsr.moneytextview.MoneyTextView
+                    android:id="@+id/tvCost"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_marginEnd="@dimen/dp8"
+                    app:format="###,###,###"
+                    app:symbol="đ"
+                    app:gravity="left"
+                    app:amount="@{data.cost}"
+                    app:baseTextColor="@color/red"
+                    app:baseTextSize="@dimen/sp14"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivProduct"
+                    app:layout_constraintTop_toBottomOf="@id/tvNameProduct" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvCost"
-                android:layout_marginTop="@dimen/dp16"
-                android:layout_toEndOf="@id/tv1"
-                android:text="@string/zero"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv1"
-                app:layout_constraintTop_toBottomOf="@id/tvCost" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.hidero.test.ui.customviews.MaskedCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvQuantity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:layout_marginEnd="@dimen/dp4"
+                    android:text="@{@string/s_l_ng(data.quantity)}"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp14"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivProduct"
+                    app:layout_constraintTop_toBottomOf="@id/tvCost" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.hidero.test.ui.customviews.MaskedCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -4,13 +4,12 @@ import android.text.TextUtils
 import android.util.Patterns
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 class Account private constructor() {
-
+    private object Holder { val INSTANCE = Account() }
     companion object {
-        private var account: Account? = null
-        fun getInstance() =  account ?: Account()
-
+        val instance: Account by lazy { Holder.INSTANCE }
     }
 
     constructor(username: String?, password: String?) : this() {
@@ -40,28 +39,37 @@ class Account private constructor() {
 
     @SerializedName("username")
     @Expose
-    internal var username: String? = null
+    var username: String? = null
     @SerializedName("password")
     @Expose
-    internal var password: String? = null
+    var password: String? = null
     @SerializedName("role")
     @Expose
-    internal var role: Int? = null
+    var role: Int? = null
     @SerializedName("name")
     @Expose
-    internal var name: String? = null
+    var name: String? = null
     @SerializedName("address")
     @Expose
-    internal var address: String? = null
+    var address: String? = null
     @SerializedName("phone")
     @Expose
-    internal var phone: String? = null
+    var phone: String? = null
     @SerializedName("email")
     @Expose
     var email: String? = null
     @SerializedName("photoUrl")
     @Expose
     var photoUrl: String? = null
+    @SerializedName("gender")
+    @Expose
+    var gender: String? = null
+    @SerializedName("dob")
+    @Expose
+    var dob: Date? = null
+    @SerializedName("bankAcc")
+    @Expose
+    var bankAcc: String? = null
 
     fun isValidData(): Int {
         return when{
@@ -69,7 +77,7 @@ class Account private constructor() {
             (TextUtils.isEmpty(password)) -> 1
             (!Patterns.PHONE.matcher(phone as CharSequence).matches()) -> 2
             (!Patterns.EMAIL_ADDRESS.matcher(email as CharSequence).matches()) -> 3
-            (password!!.length < 8) -> 4
+            (password!!.length < 3) -> 4
             else -> -1
         }
     }

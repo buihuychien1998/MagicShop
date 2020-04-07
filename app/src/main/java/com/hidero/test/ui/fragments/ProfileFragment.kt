@@ -4,31 +4,44 @@ package com.hidero.test.ui.fragments
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hidero.test.R
+import com.hidero.test.databinding.FragmentProfileBinding
 import com.hidero.test.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_profile.*
+import com.hidero.test.ui.viewmodels.EventObserver
+import com.hidero.test.ui.viewmodels.SettingViewModel
 
 /**
  * A simple [Fragment] subclass.
  */
-class ProfileFragment : BaseFragment() {
-
-    override fun getLayoutId(): Int {
-        return R.layout.fragment_profile
-    }
+class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
+    private lateinit var viewModel: SettingViewModel
+    override fun getLayoutId() = R.layout.fragment_profile
 
     override fun initViews(view: View) {
         setHasOptionsMenu(true)
-        toolBar.inflateMenu(R.menu.profile_menu)
-        toolBar.setOnMenuItemClickListener {
+        viewModel = ViewModelProvider(this)[SettingViewModel::class.java]
+        binding.handlers = viewModel
+        binding.toolBar.inflateMenu(R.menu.profile_menu)
+        binding.toolBar.setOnMenuItemClickListener {
             onOptionsItemSelected(it)
         }
-        btnBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
+        viewModel.navigateTo.observe(viewLifecycleOwner, EventObserver{
+            handleEvent(it)
+        })
+
     }
 
+    private fun handleEvent(view: View) {
+        when (view.id) {
+            R.id.btnBack -> {
+                findNavController().navigateUp()
+            }
+
+        }
+
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

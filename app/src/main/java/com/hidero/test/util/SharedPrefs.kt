@@ -12,7 +12,7 @@ class SharedPrefs private constructor() {
     }
 
     @Suppress("UNCHECKED_CAST")
-    operator fun <T> get(key: String, anonymousClass: Class<T>): T {
+    operator fun <T> get(key: String, anonymousClass: Class<T>): T? {
         return when (anonymousClass) {
             String::class.java -> mSharedPreferences.getString(key, "") as T
             Boolean::class.java -> java.lang.Boolean.valueOf(
@@ -27,12 +27,12 @@ class SharedPrefs private constructor() {
             else -> App.self()?.gSon?.fromJson(
                 mSharedPreferences.getString(key, ""),
                 anonymousClass
-            )!!
+            )
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    operator fun <T> get(key: String, anonymousClass: Class<T>, defaultValue: T): T {
+    operator fun <T> get(key: String, anonymousClass: Class<T>, defaultValue: T): T? {
         return when (anonymousClass) {
             String::class.java -> mSharedPreferences.getString(key, defaultValue as String) as T
             Boolean::class.java -> java.lang.Boolean.valueOf(
@@ -62,7 +62,7 @@ class SharedPrefs private constructor() {
             else -> App.self()?.gSon?.fromJson(
                 mSharedPreferences.getString(key, ""),
                 anonymousClass
-            )!!
+            )
         }
     }
 

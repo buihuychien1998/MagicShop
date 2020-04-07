@@ -1,15 +1,18 @@
 package com.hidero.test.ui.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.hidero.test.data.api.APIUtil
 import com.hidero.test.data.repository.CartRepository
 import com.hidero.test.data.valueobject.Cart
+import com.hidero.test.ui.base.BaseViewModel
+import com.hidero.test.util.DELAY_LOAD
 import com.hidero.test.util.baseUrl
 import kotlinx.coroutines.*
+import timber.log.Timber
 import kotlin.coroutines.CoroutineContext
 
-class CartViewModel: ViewModel() {
+class CartViewModel : BaseViewModel() {
     private val apiService by lazy {
         APIUtil.getCoroutineData(baseUrl)
     }
@@ -20,18 +23,95 @@ class CartViewModel: ViewModel() {
 
     private val scope = CoroutineScope(coroutineContext)
 
-    private val repository : CartRepository = CartRepository(apiService)
+    private val repository: CartRepository = CartRepository(apiService)
+    private val _total = MutableLiveData<Float>()
+    val total: LiveData<Float>
+        get() = _total
+    private val _quantity = MutableLiveData<String>()
+    val quantity: LiveData<String>
+        get() = _quantity
     val cart = MutableLiveData<MutableList<Cart>>()
-    fun fetchCart(username: String){
-
+    val insertResponse = MutableLiveData<String>()
+    fun fetchCart(username: String?) {
         scope.launch {
-            try{
-                val cartList = repository.getCart(username)
-                cart.postValue(cartList)
-            }catch (ex: Exception){
+            try {
+                if (username != null){
+                    delay(DELAY_LOAD)
+                    val cart = repository.getCart(username)
+                    updateTotal(cart)
+                    this@CartViewModel.cart.postValue(cart)
+                }else{
+                    updateTotal(null)
+                    cart.postValue(null)
+                }
+
+            } catch (ex: Exception) {
 
             }
         }
+    }
+
+
+    fun insertCart(username: String?, bookId: Int?, quantity: Int?, cost: Int?) {
+        scope.launch {
+            try {
+                val data = repository.insertCart(username, bookId, quantity, cost)
+                updateTotal(cart.value)
+                insertResponse.postValue(data)
+            } catch (ex: Exception) {
+            }
+        }
+
+    }
+
+    fun deleteCart(username: String?, bookId: Int?) {
+        scope.launch {
+            try {
+                repository.deleteCart(username, bookId)
+                val cart = repository.getCart(username)
+                updateTotal(cart)
+                this@CartViewModel.cart.postValue(cart)
+            } catch (ex: Exception) {
+                Timber.e(ex)
+            }
+        }
+
+    }
+
+    fun deleteAllCart(username: String?) {
+        scope.launch {
+            try {
+                repository.deleteAllCart(username)
+                cart.postValue(null)
+                updateTotal(null)
+            } catch (ex: Exception) {
+
+            }
+        }
+
+    }
+
+    fun updateCart(username: String?, bookId: Int?, quantity: Int?, cost: Int?) {
+        scope.launch {
+            try {
+                repository.updateCart(username, bookId, quantity, cost)
+                updateTotal(cart.value)
+            } catch (ex: Exception) {
+                Timber.e(ex)
+            }
+        }
+
+    }
+
+    private fun updateTotal(cart: MutableList<Cart>?) {
+        var tmp = 0F
+        var q = 0
+        cart?.forEach {
+            it.quantity?.let { q1 -> q += q1 }
+            tmp += it.quantity?.let { q -> it.cost?.times(q) } ?: 0
+        }
+        _total.postValue(tmp)
+        _quantity.postValue("$q")
     }
 
     private fun cancelAllRequests() = coroutineContext.cancel()

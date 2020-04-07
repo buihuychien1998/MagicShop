@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
@@ -8,38 +7,38 @@
     android:orientation="vertical">
 
     <ImageView
-        android:contentDescription="@string/app_name"
         android:id="@+id/iv_auto_image_slider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/app_name"
         android:scaleType="fitXY" />
 
 
     <ImageView
-        android:contentDescription="@string/app_name"
         android:id="@+id/iv_gif_container"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="bottom|start"
-        android:layout_margin="50dp" />
+        android:layout_margin="50dp"
+        android:contentDescription="@string/app_name" />
 
 
     <FrameLayout
         android:id="@+id/fl_shadow_container"
-        android:background="@drawable/bg_overlay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_overlay">
 
         <TextView
-            android:maxLines="1"
-            android:autoLink="web"
-            android:ellipsize="end"
             android:id="@+id/tv_auto_image_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="25dp"
+            android:autoLink="web"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:padding="6dp"
             android:textColor="#FFF"
             android:textSize="@dimen/sp14" />

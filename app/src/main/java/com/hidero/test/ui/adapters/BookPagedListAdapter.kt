@@ -4,17 +4,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.hidero.test.R
 import com.hidero.test.data.valueobject.Book
 import com.hidero.test.data.valueobject.NetworkState
-import kotlinx.android.synthetic.main.item_network_state.view.*
-import kotlinx.android.synthetic.main.item_product.view.*
+import com.hidero.test.databinding.ItemNetworkStateBinding
+import com.hidero.test.databinding.ItemProductBinding
 
 
 class BookPagedListAdapter(private val retry: () -> Unit) :
@@ -29,8 +27,12 @@ class BookPagedListAdapter(private val retry: () -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == DATA_VIEW_TYPE) {
             BookItemViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_product, parent, false)
+                DataBindingUtil.inflate(
+                    LayoutInflater.from(parent.context),
+                    R.layout.item_product,
+                    parent,
+                    false
+                )
             )
         } else {
             NetworkStateItemViewHolder.create(retry, parent)
@@ -66,66 +68,62 @@ class BookPagedListAdapter(private val retry: () -> Unit) :
 
     }
 
-    inner class BookItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class BookItemViewHolder(private val binding: ItemProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(book: Book?) {
-            itemView.tvTitle.text = book?.bookName
-            itemView.tvCost.text = "${book?.cost}"
-            Glide.with(itemView.context)
-                .load(book?.bookImage)
-                .apply(
-                    RequestOptions().fitCenter()
-                        .placeholder(
-                            ContextCompat.getDrawable(
-                                itemView.context,
-                                R.drawable.ic_no_image
-                            )
-                        )
-                        .error(ContextCompat.getDrawable(itemView.context, R.drawable.ic_error))
-                )
-                .into(itemView.ivProduct)
-
-            itemView.setOnClickListener {
-                if (onItemClickListener != null) {
-                    book?.let { book -> onItemClickListener?.onItemClick(book, adapterPosition) }
-                }
-            }
+            binding.data = book
+            binding.handlers = this
         }
+
+        fun handleEvent() {
+            onItemClickListener?.onItemClick(adapterPosition)
+        }
+
     }
 
+    fun getItemPosition(position: Int): Book? {
+        return super.getItem(position)
+    }
 
-    class NetworkStateItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class NetworkStateItemViewHolder(private val binding: ItemNetworkStateBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(networkState: NetworkState?) {
             if (networkState != null && networkState == NetworkState.LOADING) {
-                itemView.progress_bar_item.visibility = VISIBLE
+                binding.progressBar.visibility = VISIBLE
             } else {
-                itemView.progress_bar_item.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
             }
             if (networkState != null && networkState == NetworkState.ERROR) {
-                itemView.error_msg_item.visibility = VISIBLE
-                itemView.error_msg_item.text = networkState.msg
+                binding.tvError.visibility = VISIBLE
+                binding.tvError.text = networkState.msg
             } else if (networkState != null && networkState == NetworkState.ENDOFLIST) {
-                itemView.error_msg_item.visibility = VISIBLE
-                itemView.error_msg_item.text = networkState.msg
+                binding.tvError.visibility = VISIBLE
+                binding.tvError.text = networkState.msg
             } else {
-                itemView.error_msg_item.visibility = View.GONE
+                binding.tvError.visibility = View.GONE
             }
         }
 
         companion object {
             fun create(retry: () -> Unit, parent: ViewGroup): NetworkStateItemViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_network_state, parent, false)
-                view.error_msg_item.setOnClickListener { retry() }
-                return NetworkStateItemViewHolder(view)
+                val binding =
+                    DataBindingUtil.inflate<ItemNetworkStateBinding>(
+                        LayoutInflater.from(parent.context),
+                        R.layout.item_network_state,
+                        parent,
+                        false
+                    )
+                binding.tvError.setOnClickListener { retry() }
+                return NetworkStateItemViewHolder(binding)
             }
         }
     }
 
     fun setNetworkState(newNetworkState: NetworkState) {
-        val previousState = this.networkState
+        val previousState = networkState
         val hadExtraRow = hasExtraRow()
-        this.networkState = newNetworkState
+        networkState = newNetworkState
         val hasExtraRow = hasExtraRow()
         if (hadExtraRow != hasExtraRow) {
             if (hadExtraRow) {                             //hadExtraRow is true and hasExtraRow false
@@ -139,6 +137,6 @@ class BookPagedListAdapter(private val retry: () -> Unit) :
     }
 
     interface OnItemClickListener {
-        fun onItemClick(book: Book, position: Int)
+        fun onItemClick(position: Int)
     }
 }

@@ -5,18 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hidero.test.ui.activities.MainActivity
 
 
-abstract class BaseFragment : Fragment() {
-    private var baseActivity: BaseActivity? = null
-    private lateinit var layout: View
+abstract class BaseFragment<DB: ViewDataBinding> : Fragment() {
+    lateinit var binding: DB
+    private var baseActivity: BaseActivity<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        baseActivity = activity as BaseActivity
+        baseActivity = activity as BaseActivity<*>
     }
 
     @Nullable
@@ -25,12 +27,15 @@ abstract class BaseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        layout = inflater.inflate(getLayoutId(), container, false)
-        return layout
+        binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Specify the fragment view as the lifecycle owner of the binding.
+        // This is used so that the binding can observe LiveData updates
+        binding.lifecycleOwner = viewLifecycleOwner
         initViews(view)
         if (findNavController().currentDestination?.id != findNavController().graph.startDestination) {
             (baseActivity as MainActivity).visibilityBottomNav(false)
@@ -38,13 +43,6 @@ abstract class BaseFragment : Fragment() {
             (baseActivity as MainActivity).visibilityBottomNav(true)
         }
 
-    }
-
-    override fun onDestroyView() {
-        if (layout.parent != null) {
-            (layout.parent as ViewGroup).removeView(layout)
-        }
-        super.onDestroyView()
     }
 
     /**

@@ -3,14 +3,14 @@ package com.hidero.test.ui.adapters
 import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import com.hidero.test.ui.fragments.ChatsFragment
 import com.hidero.test.ui.fragments.UsersFragment
 
 class ViewPagerAdapter(manager: FragmentManager) :
-    FragmentPagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-    private val fragments: ArrayList<Fragment>
-    private val titles: ArrayList<String>
+    FragmentStatePagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    private val fragments: ArrayList<Fragment> = arrayListOf(ChatsFragment(), UsersFragment())
+    private val titles: ArrayList<String> = arrayListOf("Tin nhắn", "Người dùng")
     override fun getItem(position: Int): Fragment {
         return fragments[position]
     }
@@ -30,8 +30,4 @@ class ViewPagerAdapter(manager: FragmentManager) :
         return titles[position]
     }
 
-    init {
-        fragments = arrayListOf(ChatsFragment(), UsersFragment())
-        titles = arrayListOf("Tin nhắn", "Người dùng")
-    }
 }

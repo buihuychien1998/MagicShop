@@ -30,7 +30,7 @@
     <string name="please_check_your_connection_status_and_try_again">Please check your connection status and try again</string>
     <string name="no_internet">No Internet</string>
     <string name="magic">Magic</string>
-    <string name="search_here">Search here...</string>
+    <string name="search_here">Tìm kiếm&#8230;</string>
     <string name="flash_sale">Flash Sale</string>
     <string name="xem_th_m"><![CDATA[Xem thêm >]]></string>
     <string name="da_nh_ri_ng_cho_ba_n">Dành riêng cho bạn</string>
@@ -75,7 +75,7 @@
     <string name="a_bao_g_m_ca_vat_n_u_co">Đã bao gồm cả VAT(nếu có)</string>
     <string name="thanh_toa_n">Thanh toán</string>
     <string name="t_ng_c_ng">Tổng cộng: </string>
-    <string name="s_l_ng">Số lượng:</string>
+    <string name="s_l_ng">Số lượng: %d</string>
     <string name="vi_momo">Ví MoMo</string>
     <string name="thanh_toa_n_khi_nh_n_ha_ng">Thanh toán khi nhận hàng</string>
     <string name="tra_go_p">Trả góp</string>
@@ -103,4 +103,29 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <string name="error_tap_to_retry">ERROR!! Tap to retry.</string>
     <string name="close">Close</string>
     <string name="mi_n_phi_v_n_chuy_n">Miễn phí vận chuyển</string>
+    <string name="gi_i_thi_u_sa_ch">Giới thiệu sách</string>
+    <string name="cho_n_xo_a">Vuốt để xóa</string>
+    <string name="version_1_0_0">Version: 1.0.0</string>
+    <string name="ng_xu_t">Đăng xuất</string>
+    <string name="qu_c_gia">Quốc gia</string>
+    <string name="t_kh_ng_c_tra_v_i_ly_do_34_kh_ng_v_a_y_34">\t Không được trả với lý do \"Không vừa ý\"</string>
+    <string name="vnd">%.0f đ</string>
+    <string name="ma_gia_m_gia">Mã giảm giá</string>
+    <string name="kh_ng">Không</string>
+    <string name="gio_ha_ng_cu_a_ba_n">Giỏ hàng của bạn</string>
+    <string name="th_ng_ba_o">Thông báo</string>
+    <string name="xem_t_t_ca">Xem tất cả</string>
+    <string name="u2713_c_d_ch_v_b_c_s_ch_plastic_cao_c_p_cho_s_ch_n_y">✓ Có dịch vụ bọc sách plastic cao cấp cho sách này</string>
+    <string name="di_ch_vu">Dịch vụ</string>
+    <string name="a_nh_gia_38_nh_n_xe_t"><![CDATA[Đánh giá & Nhận xét]]></string>
+    <string name="y_u_thi_ch_ncu_a_t_i">Yêu thích\ncủa tôi</string>
+    <string name="thay_i_s_i_n_thoa_i">Thay đổi số điện thoại</string>
+    <string name="g_i_cho_t_i_ca_c_th_ng_ba_o_va_khuy_n_ma_i_c_bi_t">Gửi cho tôi các thông báo và khuyến mại đặc biệt.</string>
+    <string name="tin_nh_n">Tin nhắn</string>
+    <string name="vietnam_hi_n_ta_i_la_qu_c_gia_cu_a_ba_n">Vietnam hiện tại là quốc gia của bạn.</string>
+    <string name="ti_ng_vi_t">Tiếng Việt</string>
+    <string name="ng_n_ng_language">Ngôn ngữ - Language</string>
+    <string name="kh_ng_c_thi_t_l_p">Không được thiết lập</string>
+    <string name="nga_y_sinh">Ngày sinh</string>
+    <string name="ta_i_khoa_n_ng_n_ha_ng">Tài khoản ngân hàng</string>
 </resources>

@@ -1,28 +1,24 @@
 package com.hidero.test.ui.fragments
 
 
-import android.app.Activity
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.hidero.test.R
 import com.hidero.test.data.valueobject.NetworkState
+import com.hidero.test.databinding.FragmentLoginBinding
+import com.hidero.test.ui.base.BaseFragment
 import com.hidero.test.ui.viewmodels.UserViewModel
-import com.hidero.test.util.isNotEmpty
-import com.hidero.test.util.morphAndRevert
-import com.hidero.test.util.showToast
-import kotlinx.android.synthetic.main.fragment_login.*
+import com.hidero.test.util.*
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private val viewModel by lazy {
         ViewModelProvider(this, object : ViewModelProvider.Factory {
@@ -33,49 +29,42 @@ class LoginFragment : Fragment() {
         })[UserViewModel::class.java]
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
+    override fun getLayoutId() = R.layout.fragment_login
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViews(view)
-    }
-
-    fun initViews(view: View) {
-        btnLogin.run {
+    override fun initViews(view: View) {
+        binding.btnLogin.run {
             setOnClickListener {
-                if (isNotEmpty(tilUsername) && isNotEmpty(tilPassword)) {
-                    val username = edtUsername.text.toString()
-                    val password = edtPassword.text.toString()
-                    viewModel.user = viewModel.fetchUser(username, password)
-                    viewModel.user?.observe(viewLifecycleOwner, Observer {
-
-                    })
-                    viewModel.networkState.observe(viewLifecycleOwner, Observer {
-                        when (it) {
-                            NetworkState.ERROR -> {
-                                morphAndRevert(requireContext())
-                                requireContext().showToast("Thông tin tài khoản hoặc mật khẩu không chính xác!")
+                if (isNotEmpty(binding.tilUsername) && isNotEmpty(binding.tilPassword)) {
+                    val username = binding.edtUsername.text.toString()
+                    val password = binding.edtPassword.text.toString()
+                    viewModel.run {
+                        user = viewModel.fetchUser(username, password)
+                        user?.observe(viewLifecycleOwner, Observer {
+                            SharedPrefs.instance.put(CURRENT_USER, it)
+                            refreshAccount()
+                        })
+                        networkState.observe(viewLifecycleOwner, Observer {
+                            when (it) {
+                                NetworkState.ERROR -> {
+                                    morphAndRevert(requireContext())
+                                    requireContext().showToast("Thông tin tài khoản hoặc mật khẩu không chính xác!")
+                                }
+                                NetworkState.LOADED -> {
+                                    morphAndRevert(requireContext())
+//                                    val returnIntent = requireActivity().intent
+//                                    returnIntent.putExtra("result", user?.value?.username)
+//                                    requireActivity().setResult(Activity.RESULT_OK, returnIntent)
+//                                    requireActivity().finish()
+                                    requireContext().showToast("Đăng nhập thành công.")
+                                    findNavController().navigateUp()
+                                }
+                                NetworkState.LOADING -> {
+                                    startAnimation()
+                                }
                             }
-                            NetworkState.LOADED -> {
-                                morphAndRevert(requireContext())
-                                val returnIntent = requireActivity().intent
-                                returnIntent.putExtra("result", "result")
-                                requireActivity().setResult(Activity.RESULT_OK, returnIntent)
-                                requireActivity().finish()
-                            }
-                            NetworkState.LOADING -> {
-                                startAnimation()
-                            }
-                        }
-                    })
+                        })
+                    }
                 }
-
             }
         }
     }

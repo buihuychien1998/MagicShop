@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hidero.test.R
-import com.hidero.test.data.valueobject.Book
+import com.hidero.test.databinding.FragmentSearchBinding
 import com.hidero.test.ui.adapters.BookPagedListAdapter
 import com.hidero.test.ui.base.BaseFragment
 import com.hidero.test.ui.viewmodels.SearchViewModel
@@ -28,14 +28,15 @@ import kotlinx.android.synthetic.main.fragment_search.*
 /**
  * A simple [Fragment] subclass.
  */
-class SearchFragment : BaseFragment() {
+class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private val viewModel by lazy {
         create()
     }
+
     private lateinit var bookAdapter: BookPagedListAdapter
     private val shareViewModel: SharedViewModel by activityViewModels()
-    override fun getLayoutId() = R.layout.fragment_search
 
+    override fun getLayoutId() = R.layout.fragment_search
 
     override fun initViews(view: View) {
         initAdapter()
@@ -44,10 +45,10 @@ class SearchFragment : BaseFragment() {
                 requireContext(), R.layout.item_suggestion, R.id.tvSuggestion,
                 resources.getStringArray(R.array.query_suggestions)
             )
-        actvSearch.apply {
+        binding.actvSearch.apply {
             requestFocus()
-            activity?.showKeyBoard()
-            threshold = 1
+            requireActivity().showKeyBoard()
+            threshold = 0
             setAdapter(adapter)
             setOnTouchListener { _, motionEvent ->
                 if (motionEvent.action == MotionEvent.ACTION_UP && compoundDrawables[DRAWABLE_END] != null) {
@@ -72,13 +73,8 @@ class SearchFragment : BaseFragment() {
                     }
                 }
 
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                }
-
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             })
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -88,32 +84,47 @@ class SearchFragment : BaseFragment() {
                 false
             }
 
-
         }
-
-        btnBack.setOnClickListener {
-            findNavController().navigateUp()
+        binding.handlers = this
+        if (viewModel.currentPos.value != null) {
+            subscribeUi()
+            (binding.rvSearch.layoutManager as GridLayoutManager).scrollToPositionWithOffset(
+                viewModel.currentPos.value!!,
+                0
+            )
+            viewModel.currentPos.value = null
         }
+    }
 
-        btnSearch.setOnClickListener {
-            performSearch(actvSearch.text.toString())
+    fun bindingEvent(view: View) {
+        when (view.id) {
+            R.id.btnBack -> {
+                findNavController().navigateUp()
+            }
+            R.id.btnSearch -> {
+                performSearch(actvSearch.text.toString())
+            }
         }
-
 
     }
 
-    private fun initAdapter() {
-        bookAdapter = BookPagedListAdapter { viewModel.retry() }
-        bookAdapter.onItemClickListener = object : BookPagedListAdapter.OnItemClickListener {
-            override fun onItemClick(book: Book, position: Int) {
-//                val bundle = bundleOf("bookId" to book?.bookId)
-                shareViewModel.select(book)
-                findNavController().navigate(R.id.action_searchFragment_to_detailProductFragment)
-            }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.currentPos.value =
+            (binding.rvSearch.layoutManager as GridLayoutManager).findFirstCompletelyVisibleItemPosition()
+    }
 
+    private fun initAdapter() {
+        bookAdapter = BookPagedListAdapter { viewModel.retry() }.apply {
+            onItemClickListener = object : BookPagedListAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int) {
+                    shareViewModel.select(getItemPosition(position))
+                    findNavController().navigate(R.id.action_searchFragment_to_detailProductFragment)
+                }
+
+            }
         }
         val gridLayoutManager = GridLayoutManager(context, SPAN_COUNT).apply {
-            stackFromEnd = false
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     val viewType = bookAdapter.getItemViewType(position)
@@ -122,25 +133,26 @@ class SearchFragment : BaseFragment() {
                 }
             }
         }
+        gridLayoutManager.onSaveInstanceState()
         with(rvSearch) {
             layoutManager = gridLayoutManager
-            setHasFixedSize(true)
             adapter = bookAdapter
         }
-
-        viewModel.bookList.observe(viewLifecycleOwner, Observer {
-            bookAdapter.submitList(it)
-        })
-
-
     }
 
-    private fun initNetworkState() {
-        viewModel.networkState.observe(viewLifecycleOwner, Observer { state ->
-            if (!viewModel.listIsEmpty()) {
-                bookAdapter.setNetworkState(state)
-            }
-        })
+
+    private fun subscribeUi() {
+        viewModel.run {
+            bookList.observe(this@SearchFragment, Observer {
+                bookAdapter.submitList(it)
+            })
+
+            networkState.observe(this@SearchFragment, Observer { state ->
+                if (!listIsEmpty()) {
+                    bookAdapter.setNetworkState(state)
+                }
+            })
+        }
     }
 
     private fun performSearch(input: String) {
@@ -148,11 +160,14 @@ class SearchFragment : BaseFragment() {
             requireContext().showToast(resources.getString(R.string.empty_actv))
         } else {
             viewModel.keyword.value = input
-            initNetworkState()
+            subscribeUi()
+            binding.rvSearch.scrollToPosition(0)
+            binding.rvSearch.smoothScrollToPosition(0)
             actvSearch.clearFocus()
-            activity?.hideKeyBoard()
+            requireActivity().hideKeyBoard()
         }
     }
+
 
     private fun create(): SearchViewModel {
         return ViewModelProvider(this, object : ViewModelProvider.Factory {
