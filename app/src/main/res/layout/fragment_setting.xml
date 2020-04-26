@@ -16,33 +16,39 @@
         android:layout_height="match_parent"
         android:background="@color/bg_color">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/toolBar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abl"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:background="@android:color/white"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:id="@+id/btnBack"
-                style="@style/CustomImageButton"
-                android:contentDescription="@string/app_name"
-                android:onClick="@{(v)->handlers.navigateTo(v)}"
-                android:src="@drawable/ic_arrow_back"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:padding="0dp"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_setting"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/sp20"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/btnBack"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    style="@style/CustomImageButton"
+                    android:contentDescription="@string/app_name"
+                    android:onClick="@{(v)->handlers.navigateTo(v)}"
+                    android:src="@drawable/ic_arrow_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_setting"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/sp20" />
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <Button
             android:id="@+id/btnInfoAccount"
@@ -62,7 +68,7 @@
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="@dimen/sp16"
-            app:layout_constraintTop_toBottomOf="@+id/toolBar" />
+            app:layout_constraintTop_toBottomOf="@+id/abl" />
 
         <Button
             android:id="@+id/btnAddress"

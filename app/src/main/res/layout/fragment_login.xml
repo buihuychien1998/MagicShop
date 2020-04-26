@@ -70,7 +70,12 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    style="@style/viewParent"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:id="@+id/tvForgotPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/BorderBackground"
                     android:layout_gravity="end"
                     android:layout_marginTop="10dp"
                     android:text="@string/qu_n_m_t_kh_u"
@@ -87,16 +92,6 @@
                     app:spinning_bar_color="#FFF"
                     app:spinning_bar_padding="6dp"
                     app:spinning_bar_width="4dp" />
-
-                <TextView
-                    style="@style/parent"
-                    android:layout_marginTop="@dimen/loginViewsMargin"
-                    android:gravity="center"
-                    android:text="@string/ba_n_ch_a_co_ta_i_khoa_n_nvu_t_sang_pha_i_ng_ky"
-                    android:textAlignment="center"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/sp14"
-                    android:textStyle="italic" />
 
 
                 <LinearLayout
@@ -135,15 +130,15 @@
                     android:layout_marginTop="20dp"
                     android:gravity="center">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageButton
+                        android:id="@+id/btnFacebookSI"
+                        style="@style/CustomImageButton"
                         android:contentDescription="@string/app_name"
                         android:src="@drawable/ic_facebook" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageButton
+                        android:id="@+id/btnGoogleSI"
+                        style="@style/CustomImageButton"
                         android:layout_marginStart="10dp"
                         android:contentDescription="@string/app_name"
                         android:src="@drawable/ic_google_plus" />
@@ -160,14 +155,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="11dp"
-            android:layout_marginBottom="30dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_add_img"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

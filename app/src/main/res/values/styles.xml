@@ -90,7 +90,7 @@
     </style>
 
     <style name="SelectableItemTheme">
-        <item name="colorControlHighlight">@color/background_press</item>
+        <item name="colorControlHighlight">@color/background_press_2</item>
     </style>
 
     <style name="BorderBackground">
@@ -124,8 +124,7 @@
     </style>
 
     <style name="CustomImageButton" parent="BorderLessBackground">
-        <item name="android:layout_margin">@dimen/dp8</item>
-        <item name="android:padding">@dimen/dp8</item>
+        <item name="android:layout_margin">@dimen/dp16</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:contentDescription">@string/no_image</item>

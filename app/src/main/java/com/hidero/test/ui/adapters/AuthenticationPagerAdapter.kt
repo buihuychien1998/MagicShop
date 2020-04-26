@@ -7,15 +7,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 class AuthenticationPagerAdapter(fm: FragmentManager) :
     FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     private val fragmentList: ArrayList<Fragment> = ArrayList()
-    override fun getItem(i: Int): Fragment {
-        return fragmentList[i]
-    }
+    override fun getItem(i: Int) = fragmentList[i]
 
-    override fun getCount(): Int {
-        return fragmentList.size
-    }
+    override fun getCount() = fragmentList.size
 
-    fun addFragment(fragment: Fragment) {
+    val addFragment = { fragment: Fragment ->
         fragmentList.add(fragment)
     }
 }

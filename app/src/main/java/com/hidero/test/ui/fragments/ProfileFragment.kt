@@ -38,6 +38,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             R.id.btnBack -> {
                 findNavController().navigateUp()
             }
+            R.id.rl2->{
+                findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToChangePasswordFragment())
+            }
 
         }
 

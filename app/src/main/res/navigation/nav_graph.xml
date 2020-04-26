@@ -22,8 +22,8 @@
 <!--            app:destination="@id/detailProductFragment" />-->
 <!--    </fragment>-->
 <!--    <fragment-->
-<!--        android:id="@+id/newsFragment"-->
-<!--        android:name="com.hidero.test.ui.fragments.NewsFragment"-->
+<!--        android:id="@+id/notificationFragmentFragment"-->
+<!--        android:name="com.hidero.test.ui.fragments.NotificationFragmentFragment"-->
 <!--        android:label="fragment_news"-->
 <!--        tools:layout="@layout/fragment_news" />-->
 <!--    <fragment-->
@@ -42,7 +42,7 @@
 <!--    </fragment>-->
 <!--    <fragment-->
 <!--        android:id="@+id/accountFragment"-->
-<!--        android:name="com.hidero.test.ui.fragments.AccountFragment"-->
+<!--        android:name="com.hidero.test.ui.fragments.IndividualFragmentent"-->
 <!--        android:label="fragment_account"-->
 <!--        tools:layout="@layout/fragment_account">-->
 <!--        <action-->

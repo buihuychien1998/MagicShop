@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.fragments.DetailProductFragment">
 
@@ -42,12 +41,12 @@
 
                     <ImageView
                         android:id="@+id/imageSlider"
+                        imageUrl="@{data.bookImage}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/app_name"
                         android:transitionName="@{data.bookName}"
-                        app:layout_collapseMode="parallax"
-                        imageUrl="@{data.bookImage}" />
+                        app:layout_collapseMode="parallax" />
 
 
                     <androidx.appcompat.widget.Toolbar
@@ -84,6 +83,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginEnd="@dimen/dp8"
                                 android:clickable="true"
+                                android:descendantFocusability="blocksDescendants"
                                 android:focusable="true"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -136,7 +136,19 @@
                         android:text="@{data.bookName}"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp16"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/name" />
+
+                    <TextView
+                        android:id="@+id/tvAuthor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp8"
+                        android:text="@{@string/tac_gia(data.author)}"
+                        android:textColor="@color/design_default_color_secondary"
+                        android:textSize="@dimen/sp14"
+                        app:layout_constraintTop_toBottomOf="@id/tvNameProduct"
+                        tools:text="@string/name" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/rlRating"
@@ -144,7 +156,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp4"
                         android:paddingHorizontal="@dimen/dp8"
-                        app:layout_constraintTop_toBottomOf="@id/tvNameProduct">
+                        app:layout_constraintTop_toBottomOf="@id/tvAuthor">
 
                         <RatingBar
                             android:id="@+id/myRatingBar"
@@ -189,29 +201,33 @@
                         android:paddingHorizontal="@dimen/dp8"
                         app:layout_constraintTop_toBottomOf="@id/rlRating">
 
-                        <TextView
+                        <org.fabiomsr.moneytextview.MoneyTextView
                             android:id="@+id/tvCost"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{@string/vnd(Float.valueOf(data.cost))}"
-                            android:textColor="@android:color/holo_red_dark"
-                            android:textSize="@dimen/sp14"
+                            app:amount="@{data.cost}"
+                            app:baseTextColor="@android:color/holo_red_dark"
+                            app:baseTextSize="@dimen/sp14"
+                            app:format="###,###,###"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:symbol="đ" />
 
-                        <TextView
+                        <org.fabiomsr.moneytextview.MoneyTextView
                             android:id="@+id/tvOldCost"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dp8"
                             android:background="@drawable/strikethrough_layerlist"
-                            android:text="$70.00"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/sp14"
+                            app:amount="@{data.cost}"
+                            app:baseTextColor="@android:color/black"
+                            app:baseTextSize="@dimen/sp14"
+                            app:format="###,###,###"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tvCost"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:symbol="đ" />
 
                         <ImageButton
                             android:id="@+id/btnFavorite"
@@ -369,7 +385,6 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-
                             android:id="@+id/tvSpecification"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -379,7 +394,8 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tvContent" />
+                            app:layout_constraintTop_toBottomOf="@id/tvContent"
+                            tools:text="@string/fui_button_text_save" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
@@ -402,12 +418,11 @@
                         app:layout_constraintTop_toBottomOf="@id/v3">
 
                         <TextView
-                            android:textSize="@dimen/sp16"
                             android:id="@+id/tvComment"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/a_nh_gia_38_nh_n_xe_t"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:textSize="@dimen/sp16"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -483,7 +498,8 @@
             style="@style/BorderBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/design_default_color_primary_dark"
+            android:layout_margin="@dimen/dp16"
+            android:background="@drawable/rounded_corners_red"
             android:fontFamily="sans-serif"
             android:onClick="@{(v)->handlers.navigateTo(v)}"
             android:text="@string/th_m_va_o_gio_ha_ng"

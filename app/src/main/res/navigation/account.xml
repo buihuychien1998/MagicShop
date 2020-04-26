@@ -6,9 +6,9 @@
     app:startDestination="@id/accountFragment">
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.hidero.test.ui.fragments.AccountFragment"
+        android:name="com.hidero.test.ui.fragments.IndividualFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account">
+        tools:layout="@layout/fragment_individual">
         <action
             android:id="@+id/action_accountFragment_to_settingFragment"
             app:destination="@id/settingFragment"
@@ -59,5 +59,14 @@
         android:id="@+id/authenticationFragment"
         android:name="com.hidero.test.ui.fragments.AuthenticationFragment"
         android:label="fragment_authentication"
-        tools:layout="@layout/fragment_authentication" />
+        tools:layout="@layout/fragment_authentication" >
+        <action
+            android:id="@+id/action_authenticationFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.hidero.test.ui.fragments.ResetPasswordFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
 </navigation>

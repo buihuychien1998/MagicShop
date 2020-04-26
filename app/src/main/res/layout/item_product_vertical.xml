@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="handlers"
+            type="com.hidero.test.ui.adapters.CategoryPagedListAdapter.BookItemViewHolder" />
+
+        <variable
+            name="data"
+            type="com.hidero.test.data.valueobject.Book" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:stateListAnimator="@animator/topic_selection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp4"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:onClick="@{()-> handlers.handleEvent()}"
+        tools:ignore="UnusedAttribute">
+
+        <com.hidero.test.ui.customviews.MaskedCardView
+            android:id="@+id/cvBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/_2sdp"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivProduct"
+                    imageUrl="@{data.bookImage}"
+                    android:layout_width="@dimen/dp100"
+                    android:layout_height="@dimen/dp100"
+                    android:contentDescription="@string/app_name"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp8"
+                    android:maxLines="1"
+                    android:text="@{data.bookName}"
+                    android:textColor="@color/frutorial_title"
+                    android:textSize="@dimen/sp14"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivProduct"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tvAuthor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginEnd="@dimen/dp8"
+                    android:maxLines="1"
+                    android:text="@{data.author}"
+                    android:textColor="@color/frutorial_title"
+                    android:textSize="@dimen/sp12"
+                    app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                    app:layout_constraintStart_toEndOf="@id/ivProduct"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <RatingBar
+                    android:id="@+id/rb"
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:numStars="5"
+                    android:rating="3.4"
+                    android:stepSize="0.1"
+                    app:layout_constraintStart_toStartOf="@id/tvTitle"
+                    app:layout_constraintTop_toBottomOf="@id/tvAuthor" />
+
+                <org.fabiomsr.moneytextview.MoneyTextView
+                    android:id="@+id/tvCost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_marginEnd="@dimen/dp8"
+                    android:textColor="#f20"
+                    app:amount="@{data.cost}"
+                    app:baseTextSize="@dimen/sp12"
+                    app:format="###,###,###"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rb"
+                    app:symbol="đ" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.hidero.test.ui.customviews.MaskedCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

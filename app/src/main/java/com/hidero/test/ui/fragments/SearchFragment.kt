@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.hidero.test.R
 import com.hidero.test.databinding.FragmentSearchBinding
 import com.hidero.test.ui.adapters.BookPagedListAdapter
+import com.hidero.test.ui.adapters.OnItemClickListener
 import com.hidero.test.ui.base.BaseFragment
 import com.hidero.test.ui.viewmodels.SearchViewModel
 import com.hidero.test.ui.viewmodels.SharedViewModel
@@ -41,14 +42,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     override fun initViews(view: View) {
         initAdapter()
         val adapter =
-            ArrayAdapter<String>(
+            ArrayAdapter(
                 requireContext(), R.layout.item_suggestion, R.id.tvSuggestion,
                 resources.getStringArray(R.array.query_suggestions)
             )
         binding.actvSearch.apply {
             requestFocus()
             requireActivity().showKeyBoard()
-            threshold = 0
+            threshold = 1
             setAdapter(adapter)
             setOnTouchListener { _, motionEvent ->
                 if (motionEvent.action == MotionEvent.ACTION_UP && compoundDrawables[DRAWABLE_END] != null) {
@@ -116,7 +117,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun initAdapter() {
         bookAdapter = BookPagedListAdapter { viewModel.retry() }.apply {
-            onItemClickListener = object : BookPagedListAdapter.OnItemClickListener {
+            onItemClickListener = object : OnItemClickListener {
                 override fun onItemClick(position: Int) {
                     shareViewModel.select(getItemPosition(position))
                     findNavController().navigate(R.id.action_searchFragment_to_detailProductFragment)
@@ -128,15 +129,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     val viewType = bookAdapter.getItemViewType(position)
-                    return if (viewType == bookAdapter.DATA_VIEW_TYPE) 1    // DATA_VIEW_TYPE will occupy 1 out of 3 span
+                    return if (viewType == DATA_VIEW_TYPE) 1    // DATA_VIEW_TYPE will occupy 1 out of 3 span
                     else 3                                              // NETWORK_VIEW_TYPE will occupy all 3 span
                 }
             }
         }
         gridLayoutManager.onSaveInstanceState()
         with(rvSearch) {
+            itemAnimator = SpringAddItemAnimator()
             layoutManager = gridLayoutManager
             adapter = bookAdapter
+            smoothScrollToPositionWithSpeed(bookAdapter.itemCount)
+            addOnScrollListener(
+                OscillatingScrollListener(resources.getDimensionPixelSize(R.dimen.dp16))
+            )
         }
     }
 

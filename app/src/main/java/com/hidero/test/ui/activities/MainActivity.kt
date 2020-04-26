@@ -9,7 +9,9 @@ import com.hidero.test.R
 import com.hidero.test.databinding.ActivityMainBinding
 import com.hidero.test.ui.base.BaseActivity
 import com.hidero.test.ui.dialogs.InternetDialog
+import com.hidero.test.util.hide
 import com.hidero.test.util.setupWithNavController
+import com.hidero.test.util.show
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), BaseActivity.OnNetworkConnectedListener {
     private var currentNavController: LiveData<NavController>? = null
@@ -57,7 +59,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BaseActivity.OnNetwork
 //        NavigationUI.setupWithNavController(bottomNav, currentNavController)
         val navGraphIds = listOf(
             R.navigation.home,
-            R.navigation.news,
+            R.navigation.category,
             R.navigation.message,
             R.navigation.cart,
             R.navigation.account
@@ -84,9 +86,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BaseActivity.OnNetwork
 
     fun visibilityBottomNav(visible: Boolean) {
         if (visible) {
-            binding.bottomNav.visibility = View.VISIBLE
+            binding.bottomNav.show()
         } else {
-            binding.bottomNav.visibility = View.GONE
+            binding.bottomNav.hide()
         }
     }
 

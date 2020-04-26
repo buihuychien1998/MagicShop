@@ -1,4 +1,7 @@
 <resources>
+    <string name="facebook_app_id">216166806484513</string>
+    <string name="fb_login_protocol_scheme">fb216166806484513</string>
+
     <string name="app_name">MagicShop</string>
     <string name="welcome_back">Welcome Back</string>
     <string name="read_it_together">Read it together</string>
@@ -76,6 +79,7 @@
     <string name="thanh_toa_n">Thanh toán</string>
     <string name="t_ng_c_ng">Tổng cộng: </string>
     <string name="s_l_ng">Số lượng: %d</string>
+    <string name="tac_gia">Tác giả: %s</string>
     <string name="vi_momo">Ví MoMo</string>
     <string name="thanh_toa_n_khi_nh_n_ha_ng">Thanh toán khi nhận hàng</string>
     <string name="tra_go_p">Trả góp</string>
@@ -128,4 +132,15 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <string name="kh_ng_c_thi_t_l_p">Không được thiết lập</string>
     <string name="nga_y_sinh">Ngày sinh</string>
     <string name="ta_i_khoa_n_ng_n_ha_ng">Tài khoản ngân hàng</string>
+    <string name="reset">Đặt lại mật khẩu</string>
+    <string name="by_clicking_reset_you_will_receive_an_email_to_reset_you_password">By clicking RESET,\n you will receive an email to reset you password</string>
+    <string name="your_email">Email của bạn</string>
+    <string name="type_a_message">Tin nhắn</string>
+    <string name="seen">Đã xem</string>
+    <string name="delivered">Đang gửi</string>
+    <string name="ta_o_ta_i_khoa_n_tra_i_nghi_m_t_t_ca_ti_nh_n_ng">Tạo tài khoản để trải nghiệm tất cả tính năng.</string>
+    <string name="ca_nh_n">Cá nhân</string>
+    <string name="gio_ha_ng">Giỏ hàng</string>
+    <string name="xem_t_t_ca_n_ha_ng"><![CDATA[Xem tất cả đơn hàng >]]></string>
+    <string name="danh_mu_c">Danh mục</string>
 </resources>

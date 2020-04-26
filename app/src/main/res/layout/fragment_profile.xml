@@ -43,8 +43,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/btnBack"
                     android:text="@string/th_ng_tin_ta_i_khoa_n"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/sp20" />
@@ -103,6 +101,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/rl2"
+                style="@style/BorderBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2sdp"

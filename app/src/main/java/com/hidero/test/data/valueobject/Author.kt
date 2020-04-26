@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 class Author: Serializable{
-    @SerializedName("idAuthor")
+    @SerializedName("authorId")
     @Expose
     val authorId: String? = null
-    @SerializedName("nameAuthor")
+    @SerializedName("authorName")
     @Expose
     val authorName: String? = null
 

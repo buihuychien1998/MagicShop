@@ -3,6 +3,7 @@ package com.hidero.test.ui.fragments
 
 import android.graphics.Color
 import android.view.View
+import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -14,14 +15,13 @@ import com.hidero.test.R
 import com.hidero.test.data.valueobject.NetworkState
 import com.hidero.test.databinding.FragmentHomeBinding
 import com.hidero.test.ui.adapters.BookPagedListAdapter
+import com.hidero.test.ui.adapters.OnItemClickListener
 import com.hidero.test.ui.adapters.SliderAdapterExample
 import com.hidero.test.ui.base.BaseFragment
 import com.hidero.test.ui.viewmodels.EventObserver
 import com.hidero.test.ui.viewmodels.HomeViewModel
 import com.hidero.test.ui.viewmodels.SharedViewModel
-import com.hidero.test.util.DELAY_LOAD
-import com.hidero.test.util.SPAN_COUNT
-import com.hidero.test.util.renewItems
+import com.hidero.test.util.*
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
@@ -52,20 +52,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun initAdapter() {
         bookAdapter = BookPagedListAdapter { viewModel.retry() }.apply {
-            onItemClickListener = object : BookPagedListAdapter.OnItemClickListener {
+            onItemClickListener = object : OnItemClickListener {
                 override fun onItemClick(position: Int) {
                     shareViewModel.select(getItemPosition(position))
                     findNavController().navigate(R.id.action_homeFragment_to_detailProductFragment)
                 }
             }
 
-
         }
         val gridLayoutManager = GridLayoutManager(context, SPAN_COUNT).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     val viewType = bookAdapter.getItemViewType(position)
-                    return if (viewType == bookAdapter.DATA_VIEW_TYPE) 1    // DATA_VIEW_TYPE will occupy 1 out of 3 span
+                    return if (viewType == DATA_VIEW_TYPE) 1    // DATA_VIEW_TYPE will occupy 1 out of 3 span
                     else 3                                              // NETWORK_VIEW_TYPE will occupy all 3 span
                 }
             }
@@ -79,15 +78,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun subscribeUi() {
         viewModel.run {
-            bookList.observe(viewLifecycleOwner, Observer {
-//                val dialog = requireContext().showDialog("Loading...")
+            bookList.observe(viewLifecycleOwner, Observer { data ->
                 Timer().schedule(object : TimerTask() {
                     override fun run() { // this code will be executed after 2 seconds
-                        requireActivity().runOnUiThread(Runnable {
-                            // Stuff that updates the UI
-//                            dialog.dismiss()
-                            bookAdapter.submitList(it)
-                        })
+                        requireActivity().runOnUiThread {
+                            bookAdapter.submitList(data)
+                        }
                     }
                 }, DELAY_LOAD)
 

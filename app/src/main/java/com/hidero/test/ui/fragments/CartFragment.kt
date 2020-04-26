@@ -17,8 +17,7 @@ import com.hidero.test.ui.adapters.CartAdapter
 import com.hidero.test.ui.base.BaseFragment
 import com.hidero.test.ui.viewmodels.CartViewModel
 import com.hidero.test.ui.viewmodels.EventObserver
-import com.hidero.test.util.CURRENT_USER
-import com.hidero.test.util.SharedPrefs
+import com.hidero.test.util.*
 import timber.log.Timber
 
 /**
@@ -33,9 +32,18 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
     override fun initViews(view: View) {
         viewModel = ViewModelProvider(this)[CartViewModel::class.java]
         cartAdapter = CartAdapter(viewModel)
-        binding.rvCart.adapter = cartAdapter
-        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
-        itemTouchHelper.attachToRecyclerView(binding.rvCart)
+        binding.rvCart.apply{
+            itemAnimator = SpringAddItemAnimator()
+            adapter = cartAdapter
+            smoothScrollToPositionWithSpeed(cartAdapter.itemCount)
+            addOnScrollListener(
+                OscillatingScrollListener(resources.getDimensionPixelSize(R.dimen.dp16))
+            )
+            ItemTouchHelper(itemTouchHelperCallback).also {
+                it.attachToRecyclerView(this)
+            }
+        }
+
         binding.handlers = viewModel
         subscribeUi()
     }
@@ -54,7 +62,6 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
         } catch (ex: Exception) {
             Timber.e(ex)
         }
-
 
     }
 

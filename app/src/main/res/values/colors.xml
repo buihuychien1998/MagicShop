@@ -12,6 +12,7 @@
     <color name="colorMain">#EF6C00</color>
     <color name="colorTextDefault">#808080</color>
     <color name="colorButtonDefault">#FFA000</color>
+    <color name="background_press_2">#80FFA000</color>
 
     <color name="bottomNavigationTintColor">#B2B2B2</color>
     <color name="bottomNavigationSelectedColor">#FC4926</color>

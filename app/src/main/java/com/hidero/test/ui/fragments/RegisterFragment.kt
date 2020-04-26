@@ -5,6 +5,8 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.hidero.test.R
 import com.hidero.test.data.valueobject.Account
 import com.hidero.test.data.valueobject.NetworkState
@@ -14,6 +16,7 @@ import com.hidero.test.ui.viewmodels.UserViewModel
 import com.hidero.test.util.*
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
+    private lateinit var mFirebaseAuth: FirebaseAuth
     private val viewModel by lazy {
         ViewModelProvider(this, object : ViewModelProvider.Factory {
             override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -27,6 +30,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun initViews(view: View) {
         requireActivity().changeStatusBarColor()
+        mFirebaseAuth = FirebaseAuth.getInstance()
         binding.apply {
             btnRegister.apply{
                 setOnClickListener {
@@ -41,10 +45,14 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                         val account = Account(username, password, USER_ROLE, name, address, phone, email, null)
                         if(account.isValidData() == -1){
                             viewModel.apply {
-                                result = viewModel.register(account)
-                                result?.observe(viewLifecycleOwner, Observer {
+                                result = viewModel.register(mFirebaseAuth, account)
+                                result?.observeOnce(viewLifecycleOwner, Observer {
                                     if(it == "Success"){
                                         requireContext().showToast("Đăng ký thành công! Giờ bạn có thể làm việc với chúng tôi bằng tài khoản này.")
+                                        login(mFirebaseAuth, email, password)
+                                        SharedPrefs.instance.put(CURRENT_USER, account)
+                                        refreshAccount()
+                                        findNavController().navigateUp()
                                     }else{
                                         requireContext().showToast("Tài khoản không hợp lệ hoặc đã có người sử dụng!")
                                     }

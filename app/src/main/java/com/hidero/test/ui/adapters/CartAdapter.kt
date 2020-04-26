@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hidero.test.R
 import com.hidero.test.data.valueobject.Cart
+import com.hidero.test.data.valueobject.DiffUtilCallBack
 import com.hidero.test.databinding.ItemCartBinding
 import com.hidero.test.ui.viewmodels.CartViewModel
 import com.hidero.test.util.disableClickTemporarily
@@ -18,32 +19,33 @@ class CartAdapter(private val viewModel: CartViewModel) :
     ListAdapter<Cart, RecyclerView.ViewHolder>(DiffUtilCallBack()) {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CartViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        CartViewHolder(
             DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_cart,
-                parent,
-                false
+                LayoutInflater.from(parent.context), R.layout.item_cart,
+                parent, false
             )
         )
-    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         (holder as CartViewHolder).bind(getItem(position))
-    }
 
-    override fun submitList(list: MutableList<Cart>?) {
+
+    override fun submitList(list: MutableList<Cart>?) =
         super.submitList(list?.let { ArrayList(it) })
-    }
+
 
     fun getItemPos(position: Int): Cart? = getItem(position)
 
     inner class CartViewHolder(private val binding: ItemCartBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(cart: Cart) {
-            binding.handlers = this
-            binding.data = cart
+            binding.run {
+                handlers = this@CartViewHolder
+                data = cart
+                executePendingBindings()
+            }
         }
 
         fun onClick(view: View, cart: Cart) {
@@ -73,7 +75,7 @@ class CartAdapter(private val viewModel: CartViewModel) :
         }
     }
 
-    fun removeItem(position: Int){
+    fun removeItem(position: Int) {
         viewModel.apply {
             deleteCart(
                 account.value?.username,
@@ -82,16 +84,5 @@ class CartAdapter(private val viewModel: CartViewModel) :
         }
     }
 
-    class DiffUtilCallBack : DiffUtil.ItemCallback<Cart>() {
-        override fun areItemsTheSame(oldItem: Cart, newItem: Cart): Boolean {
-            return oldItem.cartId == newItem.cartId
-        }
-
-        @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: Cart, newItem: Cart): Boolean {
-            return oldItem == newItem
-        }
-
-    }
 }
 

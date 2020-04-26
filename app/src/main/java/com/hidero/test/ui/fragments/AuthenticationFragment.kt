@@ -25,11 +25,5 @@ class AuthenticationFragment : BaseFragment<FragmentAuthenticationBinding>() {
         binding.viewPager.adapter = pagerAdapter
     }
 
-//     fun onBackPressed() {
-//        super.onBackPressed()
-//        val returnIntent = Intent()
-//        setResult(Activity.RESULT_CANCELED, returnIntent)
-//        finish()
-//    }
 }
 

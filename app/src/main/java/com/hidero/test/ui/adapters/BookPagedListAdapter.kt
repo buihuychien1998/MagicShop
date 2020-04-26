@@ -6,20 +6,19 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hidero.test.R
 import com.hidero.test.data.valueobject.Book
+import com.hidero.test.data.valueobject.BookDiffCallback
 import com.hidero.test.data.valueobject.NetworkState
 import com.hidero.test.databinding.ItemNetworkStateBinding
 import com.hidero.test.databinding.ItemProductBinding
+import com.hidero.test.util.*
 
 
 class BookPagedListAdapter(private val retry: () -> Unit) :
     PagedListAdapter<Book, RecyclerView.ViewHolder>(BookDiffCallback()) {
 
-    val DATA_VIEW_TYPE = 1
-    private val NETWORK_VIEW_TYPE = 2
     private var networkState: NetworkState? = null
 
     var onItemClickListener: OnItemClickListener? = null
@@ -57,23 +56,15 @@ class BookPagedListAdapter(private val retry: () -> Unit) :
         if (hasExtraRow() && position == itemCount - 1) NETWORK_VIEW_TYPE else DATA_VIEW_TYPE
 
 
-    class BookDiffCallback : DiffUtil.ItemCallback<Book>() {
-        override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
-            return oldItem.bookId == newItem.bookId
-        }
-
-        override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
-            return oldItem == newItem
-        }
-
-    }
-
     inner class BookItemViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(book: Book?) {
-            binding.data = book
-            binding.handlers = this
+            binding.run {
+                data = book
+                binding.handlers = this@BookItemViewHolder
+                executePendingBindings()
+            }
         }
 
         fun handleEvent() {
@@ -82,27 +73,31 @@ class BookPagedListAdapter(private val retry: () -> Unit) :
 
     }
 
-    fun getItemPosition(position: Int): Book? {
-        return super.getItem(position)
-    }
+    fun getItemPosition(position: Int) =
+        super.getItem(position)
+
 
     class NetworkStateItemViewHolder(private val binding: ItemNetworkStateBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(networkState: NetworkState?) {
-            if (networkState != null && networkState == NetworkState.LOADING) {
-                binding.progressBar.visibility = VISIBLE
-            } else {
-                binding.progressBar.visibility = View.GONE
+            binding.run {
+                if (networkState != null && networkState == NetworkState.LOADING) {
+                    progressBar.visibility = VISIBLE
+                } else {
+                    progressBar.visibility = View.GONE
+                }
+                if (networkState != null && networkState == NetworkState.ERROR) {
+                    tvError.visibility = VISIBLE
+                    tvError.text = networkState.msg
+                } else if (networkState != null && networkState == NetworkState.ENDOFLIST) {
+                    tvError.visibility = VISIBLE
+                    tvError.text = networkState.msg
+                } else {
+                    tvError.visibility = View.GONE
+                }
+                executePendingBindings()
             }
-            if (networkState != null && networkState == NetworkState.ERROR) {
-                binding.tvError.visibility = VISIBLE
-                binding.tvError.text = networkState.msg
-            } else if (networkState != null && networkState == NetworkState.ENDOFLIST) {
-                binding.tvError.visibility = VISIBLE
-                binding.tvError.text = networkState.msg
-            } else {
-                binding.tvError.visibility = View.GONE
-            }
+
         }
 
         companion object {
@@ -136,7 +131,4 @@ class BookPagedListAdapter(private val retry: () -> Unit) :
         }
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
-    }
 }

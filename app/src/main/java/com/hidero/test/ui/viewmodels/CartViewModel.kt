@@ -2,8 +2,10 @@ package com.hidero.test.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import com.hidero.test.data.api.APIUtil
-import com.hidero.test.data.repository.CartRepository
+import com.hidero.test.data.repository.remote.CoroutineRepository
+import com.hidero.test.data.valueobject.Account
 import com.hidero.test.data.valueobject.Cart
 import com.hidero.test.ui.base.BaseViewModel
 import com.hidero.test.util.DELAY_LOAD
@@ -23,7 +25,8 @@ class CartViewModel : BaseViewModel() {
 
     private val scope = CoroutineScope(coroutineContext)
 
-    private val repository: CartRepository = CartRepository(apiService)
+    private val repository =
+        CoroutineRepository(apiService)
     private val _total = MutableLiveData<Float>()
     val total: LiveData<Float>
         get() = _total
@@ -32,15 +35,16 @@ class CartViewModel : BaseViewModel() {
         get() = _quantity
     val cart = MutableLiveData<MutableList<Cart>>()
     val insertResponse = MutableLiveData<String>()
+    val acc = MutableLiveData<Account?>()
     fun fetchCart(username: String?) {
         scope.launch {
             try {
-                if (username != null){
+                if (username != null) {
                     delay(DELAY_LOAD)
                     val cart = repository.getCart(username)
                     updateTotal(cart)
                     this@CartViewModel.cart.postValue(cart)
-                }else{
+                } else {
                     updateTotal(null)
                     cart.postValue(null)
                 }
@@ -51,6 +55,22 @@ class CartViewModel : BaseViewModel() {
         }
     }
 
+    fun fetchUser(email: String?) {
+        scope.launch {
+            try {
+                acc.postValue(repository.fetchUser(email))
+            } catch (ex: Exception) {
+                Timber.e(ex)
+            }
+        }
+    }
+//
+    val fetchUser = { email: String? ->
+        liveData(Dispatchers.IO) {
+            val acc = repository.fetchUser(email)
+            emit(acc)
+        }
+    }
 
     fun insertCart(username: String?, bookId: Int?, quantity: Int?, cost: Int?) {
         scope.launch {
@@ -120,4 +140,5 @@ class CartViewModel : BaseViewModel() {
         super.onCleared()
         cancelAllRequests()
     }
+
 }

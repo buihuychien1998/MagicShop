@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.hidero.test.R
 import com.hidero.test.databinding.FragmentSettingBinding
 import com.hidero.test.ui.base.BaseFragment
@@ -38,6 +39,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
             }
 
             R.id.btnLogout -> {
+                FirebaseAuth.getInstance().signOut()
                 SharedPrefs.instance.put(CURRENT_USER, null)
                 viewModel.refreshAccount()
                 findNavController().navigateUp()

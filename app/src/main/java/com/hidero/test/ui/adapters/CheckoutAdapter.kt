@@ -1,14 +1,13 @@
 package com.hidero.test.ui.adapters
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hidero.test.R
 import com.hidero.test.data.valueobject.Cart
+import com.hidero.test.data.valueobject.DiffUtilCallBack
 import com.hidero.test.databinding.ItemCheckoutBinding
 
 class CheckoutAdapter : ListAdapter<Cart, RecyclerView.ViewHolder>(DiffUtilCallBack()) {
@@ -23,32 +22,23 @@ class CheckoutAdapter : ListAdapter<Cart, RecyclerView.ViewHolder>(DiffUtilCallB
         )
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
         (holder as CheckoutViewHolder).bind(getItem(position))
-    }
 
-    override fun submitList(list: MutableList<Cart>?) {
+
+    override fun submitList(list: MutableList<Cart>?) =
         super.submitList(list?.let { ArrayList(it) })
-    }
+
 
     class CheckoutViewHolder(private val binding: ItemCheckoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(cart: Cart) {
-            binding.data = cart
+            binding.run {
+                data = cart
+                executePendingBindings()
+            }
         }
 
     }
 
-
-    class DiffUtilCallBack : DiffUtil.ItemCallback<Cart>() {
-        override fun areItemsTheSame(oldItem: Cart, newItem: Cart): Boolean {
-            return oldItem.cartId == newItem.cartId
-        }
-
-        @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: Cart, newItem: Cart): Boolean {
-            return oldItem == newItem
-        }
-
-    }
 }
