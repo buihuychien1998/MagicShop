@@ -5,7 +5,7 @@ import android.view.View
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.mychatapp.notifications.Token
+import com.hidero.test.ui.notifications.Token
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -72,7 +72,7 @@ class ChatsFragment : BaseFragment<FragmentChatsBinding>() {
             if (it.isSuccessful) {
                 try {
                     updateToken(it.result?.token)
-                }catch (ex: Exception){
+                } catch (ex: Exception) {
                     Timber.e(ex)
                 }
             }

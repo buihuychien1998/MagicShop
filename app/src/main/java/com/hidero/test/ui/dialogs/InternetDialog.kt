@@ -19,5 +19,4 @@ class InternetDialog(context: Context): Dialog(context, R.style.df_dialog) {
         show()
     }
 
-
 }

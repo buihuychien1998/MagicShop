@@ -1,13 +1,11 @@
 package com.hidero.test.data.repository.remote
 
-import com.example.mychatapp.notifications.MyResponse
-import com.example.mychatapp.notifications.Sender
 import com.hidero.test.data.api.APIService
 import com.hidero.test.data.valueobject.Account
 import io.reactivex.disposables.CompositeDisposable
-import retrofit2.http.Body
 
-class UserRepository(private val apiService: APIService, compositeDisposable: CompositeDisposable): BaseRepository() {
+class UserRepository(apiService: APIService, compositeDisposable: CompositeDisposable) :
+    BaseRepository() {
     private var userDataSource =
         UserDataSource(
             apiService,
@@ -25,11 +23,6 @@ class UserRepository(private val apiService: APIService, compositeDisposable: Co
             register(account)
         }.downloadedRegisterResponse
     }
-    suspend fun sendNotification(@Body body: Sender?): MyResponse?{
-        return safeApiCall({ apiService.sendNotification(body)}, "Error Fetching")
-    }
-
-
 
     val networkState = userDataSource.networkState
 

@@ -31,10 +31,9 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivProfile"
                     style="@style/BorderLessBackground"
-                    photoUrl="@{handlers.account.photoUrl}"
+                    android:src="@drawable/ic_user_profile"
                     android:layout_width="@dimen/dp32"
                     android:layout_height="@dimen/dp32"
-                    android:layout_centerVertical="true"
                     android:layout_margin="@dimen/dp8"
                     android:clickable="true"
                     android:focusable="true"
@@ -103,6 +102,8 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
+                    android:onClick="@{(v)->handlers.navigateTo(v)}"
+                    android:id="@+id/lnlFavourite"
                     style="@style/BorderBackground"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

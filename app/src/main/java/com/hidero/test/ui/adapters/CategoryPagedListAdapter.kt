@@ -77,9 +77,8 @@ class CategoryPagedListAdapter(private val retry: () -> Unit) :
 
     }
 
-    fun getItemPosition(position: Int): Book? {
-        return super.getItem(position)
-    }
+    fun getItemPosition(position: Int): Book? = super.getItem(position)
+
 
     class NetworkStateItemViewHolder(private val binding: ItemNetworkStateBinding) :
         RecyclerView.ViewHolder(binding.root) {

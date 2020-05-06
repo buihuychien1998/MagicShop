@@ -2,6 +2,7 @@ package com.hidero.test.ui.viewmodels
 
 import com.example.mychatapp.notifications.Sender
 import com.hidero.test.data.api.APIUtil
+import com.hidero.test.data.repository.remote.CoroutineRepository
 import com.hidero.test.ui.base.BaseViewModel
 import com.hidero.test.util.baseUrl
 import com.hidero.test.util.firebaseUrl
@@ -21,10 +22,11 @@ class MessageViewModel: BaseViewModel() {
     private val coroutineContext: CoroutineContext
         get() = parentJob + Dispatchers.Default
     private val scope = CoroutineScope(coroutineContext)
+    val repository = CoroutineRepository(apiService)
     fun sendNotification(body: Sender){
         scope.launch {
             try {
-                apiService.sendNotification(body)
+                repository.sendNotification(body)
             }catch (ex: Exception){
                 Timber.e(ex)
             }

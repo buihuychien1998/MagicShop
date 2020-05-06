@@ -1,4 +1,4 @@
-package com.example.mychatapp.notifications
+package com.hidero.test.ui.notifications
 
 import android.annotation.TargetApi
 import android.app.Notification

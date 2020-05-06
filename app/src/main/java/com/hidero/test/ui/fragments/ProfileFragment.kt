@@ -12,13 +12,13 @@ import com.hidero.test.ui.base.BaseFragment
 import com.hidero.test.ui.viewmodels.EventObserver
 import com.hidero.test.ui.viewmodels.SettingViewModel
 
+
 /**
  * A simple [Fragment] subclass.
  */
 class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private lateinit var viewModel: SettingViewModel
     override fun getLayoutId() = R.layout.fragment_profile
-
     override fun initViews(view: View) {
         setHasOptionsMenu(true)
         viewModel = ViewModelProvider(this)[SettingViewModel::class.java]
@@ -27,7 +27,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         binding.toolBar.setOnMenuItemClickListener {
             onOptionsItemSelected(it)
         }
-        viewModel.navigateTo.observe(viewLifecycleOwner, EventObserver{
+        viewModel.navigateTo.observe(viewLifecycleOwner, EventObserver {
             handleEvent(it)
         })
 
@@ -38,8 +38,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             R.id.btnBack -> {
                 findNavController().navigateUp()
             }
-            R.id.rl2->{
+            R.id.rl2 -> {
                 findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToChangePasswordFragment())
+            }
+            R.id.rl3 -> {
+                val bottomSheetFragment = BottomSheetFragment()
+                bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
             }
 
         }
@@ -52,9 +56,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
             }
             R.id.menu_message -> {
-
-            }
-            R.id.menu_account -> {
 
             }
             R.id.menu_help -> {

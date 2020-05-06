@@ -5,8 +5,6 @@ import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.hidero.test.data.api.APIService
-import com.hidero.test.data.repository.remote.BookDataSource
-import com.hidero.test.data.repository.remote.BookDataSourceFactory
 import com.hidero.test.data.valueobject.Book
 import com.hidero.test.data.valueobject.NetworkState
 import com.hidero.test.util.pageSize
@@ -26,16 +24,18 @@ class BookRepository(
                 compositeDisposable
             )
         val config = PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setPageSize(pageSize)
-                .build()
+            .setEnablePlaceholders(false)
+            .setPageSize(pageSize)
+            .build()
 
         bookPagedList = LivePagedListBuilder(bookDataSourceFactory, config).build()
         return bookPagedList
     }
 
-    fun getNetworkState(): LiveData<NetworkState> = Transformations.switchMap<BookDataSource,
-            NetworkState>(bookDataSourceFactory.booksLiveDataSource, BookDataSource::networkState)
+    fun getNetworkState(): LiveData<NetworkState> = Transformations.switchMap(
+        bookDataSourceFactory.booksLiveDataSource,
+        BookDataSource::networkState
+    )
 
 
     fun retry() =

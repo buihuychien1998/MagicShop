@@ -40,12 +40,12 @@ class NetworkState(val status: Status, val msg: String) {
 
             ERROR = NetworkState(Status.FAILED, "Something went wrong")
 
-            ENDOFLIST = NetworkState(Status.FAILED, "You have reached the end")
+            ENDOFLIST = NetworkState(Status.SUCCESS, "You have reached the end")
         }
 
-        fun error(msg: String) = NetworkState(
-            Status.FAILED,
-            msg
-        )
+//        fun error(msg: String) = NetworkState(
+//            Status.FAILED,
+//            msg
+//        )
     }
 }

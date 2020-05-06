@@ -7,9 +7,6 @@
         android:id="@+id/menu_message"
         android:title="Tin nhắn" />
     <item
-        android:id="@+id/menu_account"
-        android:title="Tài khoản của tôi" />
-    <item
         android:id="@+id/menu_help"
         android:title="Trợ giúp?" />
     <item

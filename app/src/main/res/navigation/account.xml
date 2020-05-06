@@ -3,22 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/account"
-    app:startDestination="@id/accountFragment">
+    app:startDestination="@id/individualFragment">
     <fragment
-        android:id="@+id/accountFragment"
+        android:id="@+id/individualFragment"
         android:name="com.hidero.test.ui.fragments.IndividualFragment"
-        android:label="fragment_account"
+        android:label="fragment_individual"
         tools:layout="@layout/fragment_individual">
         <action
-            android:id="@+id/action_accountFragment_to_settingFragment"
+            android:id="@+id/action_individualFragment_to_settingFragment"
             app:destination="@id/settingFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
         <action
-            android:id="@+id/action_accountFragment_to_authenticationFragment"
+            android:id="@+id/action_individualFragment_to_authenticationFragment"
             app:destination="@id/authenticationFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_individualFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
@@ -69,4 +76,9 @@
         android:name="com.hidero.test.ui.fragments.ResetPasswordFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.hidero.test.ui.fragments.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" />
 </navigation>

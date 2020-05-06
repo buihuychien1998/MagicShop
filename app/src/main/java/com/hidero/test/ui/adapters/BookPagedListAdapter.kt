@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -62,7 +63,7 @@ class BookPagedListAdapter(private val retry: () -> Unit) :
         fun bind(book: Book?) {
             binding.run {
                 data = book
-                binding.handlers = this@BookItemViewHolder
+                handlers = this@BookItemViewHolder
                 executePendingBindings()
             }
         }

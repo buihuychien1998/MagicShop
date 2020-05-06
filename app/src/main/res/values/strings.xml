@@ -26,6 +26,7 @@
     <string name="title_setting">Cài đặt</string>
     <string name="trang_chu">Trang chủ</string>
     <string name="Rate">Rate</string>
+    <string name="wrong_otp">Mã otp không chính xác</string>
     <string name="laz_service">\u2713 7 ngày trả hàng cho nhà bán hàng</string>
     <string name="laz_warning">⚠ Đây là sản phẩm được bán bởi Nhà Bán Hàng bên thứ ba và việc xuất hóa đơn VAT(nếu áp dụng) sẽ được thực hiện bởi nhà bán hàng theo quy định của pháp luật.</string>
     <string name="zero">0</string>
@@ -143,4 +144,20 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <string name="gio_ha_ng">Giỏ hàng</string>
     <string name="xem_t_t_ca_n_ha_ng"><![CDATA[Xem tất cả đơn hàng >]]></string>
     <string name="danh_mu_c">Danh mục</string>
+    <string name="chu_ng_t_i_a_g_i_ma_xa_c_minh_t_i">Chúng tôi đã gửi mã xác minh tới</string>
+    <string name="gu_i_ma_xa_c_th_c">Gủi mã xác thực</string>
+    <string name="danh_sa_ch_y_u_thi_ch">Danh sách yêu thích</string>
+    <string name="book_database">book_database</string>
+    <!-- String plurals and their related prefix / suffix strings -->
+    <string name="watering_needs_prefix" translation_description="Prefix for the text describing how often a plant should be watered. Used in combination with watering_needs_suffix.">Watering needs</string>
+    <string name="thay_i">Thay đổi</string>
+    <plurals name="watering_needs_suffix">
+        <item quantity="one" translation_description="Suffix for the text describing how often a plant should be watered, singular. Used in combination with watering_needs_prefix: 'Watering needs: every day'.">every day</item>
+        <item quantity="other" translation_description="Suffix for the text describing how often a plant should be watered, plural. Used in combination with watering_needs_prefix: 'Watering needs: every 8 days'.">every %d days</item>
+    </plurals>
+
+    <plurals name="watering_next">
+        <item quantity="one" translation_description="Text indicating when the the plant should next be watered, singular. Used in conjunction with last watered date. 'May 24, 2018 - water tomorrow.'.">water tomorrow.</item>
+        <item quantity="other" translation_description="Text indicating when the the plant should next be watered, plural. Used in conjunction with last watered date. 'May 24, 2018 - water in 8 days.'.">water in %d days.</item>
+    </plurals>
 </resources>

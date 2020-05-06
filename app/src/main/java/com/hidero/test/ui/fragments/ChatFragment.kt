@@ -11,9 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mychatapp.notifications.Data
 import com.example.mychatapp.notifications.Sender
-import com.example.mychatapp.notifications.Token
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.firebase.ui.database.SnapshotParser
 import com.google.firebase.auth.FirebaseAuth
@@ -28,6 +26,8 @@ import com.hidero.test.databinding.FragmentChatBinding
 import com.hidero.test.ui.adapters.MessageAdapter
 import com.hidero.test.ui.adapters.WrapContentLinearLayoutManager
 import com.hidero.test.ui.base.BaseFragment
+import com.hidero.test.ui.notifications.Data
+import com.hidero.test.ui.notifications.Token
 import com.hidero.test.ui.viewmodels.EventObserver
 import com.hidero.test.ui.viewmodels.MessageViewModel
 import com.hidero.test.util.*
@@ -51,7 +51,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun initViews(view: View) {
         viewModel = ViewModelProvider(this)[MessageViewModel::class.java]
         binding.handlers = viewModel
-        viewModel.navigateTo.observe(viewLifecycleOwner, EventObserver{
+        viewModel.navigateTo.observe(viewLifecycleOwner, EventObserver {
             handleEvent(it)
         })
         mLinearLayoutManager =
@@ -84,7 +84,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 super.onItemRangeInserted(positionStart, itemCount)
                 val friendlyMessageCount = messageAdapter.itemCount
-                binding.recyclerView.scrollToPosition(friendlyMessageCount-1)
+                binding.recyclerView.scrollToPosition(friendlyMessageCount - 1)
 //                val lastVisiblePosition =
 //                    mLinearLayoutManager?.findLastCompletelyVisibleItemPosition()
 //                if (lastVisiblePosition == -1 ||
@@ -117,11 +117,10 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     }
 
     private fun handleEvent(view: View) {
-        when(view.id){
-            R.id.btnBack->{
-                findNavController().navigateUp()
-            }
-            R.id.btnSend->{
+        when (view.id) {
+            R.id.btnBack -> findNavController().navigateUp()
+
+            R.id.btnSend -> {
                 notify = true
                 val msg: String = binding.edtSend.text.toString()
                 if (!TextUtils.isEmpty(msg)) {
@@ -130,12 +129,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                     requireActivity().showToast("You can't send empty message")
                 }
                 binding.edtSend.setText("")
-                binding.recyclerView.scrollToPosition(messageAdapter.itemCount-1)
             }
-            R.id.btnAddImage->{
-                openImage()
-                binding.recyclerView.scrollToPosition(messageAdapter.itemCount-1)
-            }
+            R.id.btnAddImage -> openImage()
         }
     }
 
@@ -241,7 +236,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                 for (snapshot in dataSnapshot.children) {
                     val chat = snapshot.getValue(FriendlyMessage::class.java)!!
                     if (chat.receiver.equals(myId) && chat.sender.equals(userId) ||
-                        chat.receiver.equals(userId) && chat.sender.equals(myId)) {
+                        chat.receiver.equals(userId) && chat.sender.equals(myId)
+                    ) {
                         tmpList.add(chat)
                     }
 
@@ -334,7 +330,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
                             t.result.toString(),
                             false
                         )
-                        Timber.e("Getting download url was successful. ${t.result.toString()}")
+                        Timber.e("Getting download url was successful. ${t.result}")
                         mFirebaseDatabaseReference.child(CHATS).child(key)
                             .setValue(friendlyMessage)
                         logMessageSent()

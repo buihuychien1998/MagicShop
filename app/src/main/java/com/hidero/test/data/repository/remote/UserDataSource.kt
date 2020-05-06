@@ -9,6 +9,7 @@ import com.hidero.test.data.valueobject.NetworkState
 import com.hidero.test.util.USER_ROLE
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 
 class UserDataSource(
     private val apiService: APIService,
@@ -45,7 +46,7 @@ class UserDataSource(
             )
 
         } catch (e: Exception) {
-            Log.e("LoginDataSource Ex", e.message.toString())
+            Timber.e(e)
         }
     }
 
@@ -71,7 +72,7 @@ class UserDataSource(
             )
 
         } catch (e: Exception) {
-            Log.e("RegisterDataSource Ex", e.message.toString())
+            Timber.e(e)
         }
     }
 }

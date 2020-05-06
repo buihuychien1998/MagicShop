@@ -49,15 +49,19 @@
 
             <Button
                 android:id="@+id/btnFilter"
-                style="?android:attr/borderlessButtonStyle"
+                style="@style/BorderBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="@dimen/dp0"
+                android:minHeight="@dimen/dp0"
+                android:padding="@dimen/dp8"
                 android:layout_margin="8dp"
                 android:text="@string/ti_m_ki_m"
                 android:textAllCaps="false"
                 android:textColor="@color/colorMain"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView

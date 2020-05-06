@@ -1,5 +1,7 @@
 package com.hidero.test.util
-
+const val RESOLVE_HINT = 1
+const val REQ_USER_CONSENT = 1
+const val OTP_LENGTH = 6
 const val CURRENT_USER = "CURRENT_USER"
 const val LAUNCH_AUTHENTICATION_ACTIVITY = 1
 const val USER_ROLE = 3

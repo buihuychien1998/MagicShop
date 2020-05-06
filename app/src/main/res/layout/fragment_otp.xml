@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragments.OtpFragment">
+
+
+    <LinearLayout
+        android:id="@+id/textWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_background"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <ImageView
+            android:id="@+id/topImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp32"
+            android:layout_marginBottom="@dimen/dp12"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_verify" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:text="@string/chu_ng_t_i_a_g_i_ma_xa_c_minh_t_i"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp14" />
+
+        <TextView
+            android:id="@+id/numberText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp16"
+            tools:hint="Enter Number"
+            tools:text="+46123456789" />
+
+        <com.hidero.test.ui.customviews.OtpEditText
+            android:id="@+id/inputCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp12"
+            android:background="@drawable/inputbox_new"
+            android:inputType="numberPassword"
+            android:maxLength="6"
+            android:padding="20dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/sp16" />
+
+        <Button
+            android:id="@+id/btn_send"
+            style="@style/BorderBackground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp12"
+            android:background="@drawable/rounded_corner"
+            android:gravity="center"
+            android:paddingStart="@dimen/dp12"
+            android:paddingEnd="@dimen/dp12"
+            android:text="@string/gu_i_ma_xa_c_th_c"
+            android:textAllCaps="false"
+            android:textColor="#00f" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp12">
+
+            <com.dinuscxj.progressbar.CircleProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="@dimen/dp80"
+                android:layout_height="@dimen/dp80"
+                app:drawBackgroundOutsideProgress="true"
+                app:layout_constraintBottom_toTopOf="@id/fabBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:line_count="30"
+                app:line_width="@dimen/dp8"
+                app:progress_background_color="@color/holo_gray_light"
+                app:progress_end_color="@color/green"
+                app:progress_shader="sweep"
+                app:progress_start_color="@color/purple"
+                app:progress_stroke_cap="round"
+                app:progress_stroke_width="@dimen/dp1"
+                app:progress_text_color="@color/white"
+                app:progress_text_size="@dimen/sp14"
+                app:style="line" />
+
+            <com.rey.material.widget.FloatingActionButton
+                android:id="@+id/fabBack"
+                style="@style/BorderLessBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_backgroundColor="@color/white"
+                app:fab_iconSize="@dimen/dp32"
+                app:fab_iconSrc="@drawable/ic_keyboard_arrow_left"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fabDone"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:rippleColor="@color/background_press_2" />
+
+            <com.rey.material.widget.FloatingActionButton
+                android:id="@+id/fabDone"
+                style="@style/BorderLessBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_backgroundColor="@color/white"
+                app:fab_iconSize="@dimen/dp32"
+                app:fab_iconSrc="@drawable/ic_done"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fabBack"
+                app:rippleColor="@color/background_press_2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+</layout>

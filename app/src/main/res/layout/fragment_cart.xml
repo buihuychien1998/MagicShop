@@ -45,7 +45,7 @@
                 android:layout_alignParentEnd="true"
                 android:contentDescription="@string/app_name"
                 android:onClick="@{(v)->handlers.navigateTo(v)}"
-                android:src="@drawable/ic_twotone_delete"
+                android:src="@drawable/ic_remove_shopping_cart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

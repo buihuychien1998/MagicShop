@@ -44,7 +44,7 @@ class CategoryDataSource(
                         )
                     },
                     {
-                        updateState(NetworkState.error(it.message.toString()))
+                        updateState(NetworkState.ERROR)
                         setRetry(Action { loadInitial(params, callback) })
                     }
                 )
@@ -69,7 +69,7 @@ class CategoryDataSource(
 
                     },
                     {
-                        updateState(NetworkState.error(it.message.toString()))
+                        updateState(NetworkState.ERROR)
                         setRetry(Action { loadAfter(params, callback) })
                     }
                 )

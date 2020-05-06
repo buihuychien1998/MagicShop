@@ -18,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.StorageTask
 import com.hidero.test.R
+import com.hidero.test.data.valueobject.Account
 import com.hidero.test.data.valueobject.User
 import com.hidero.test.databinding.FragmentIndividualBinding
 import com.hidero.test.ui.base.BaseFragment
@@ -56,13 +57,16 @@ class IndividualFragment : BaseFragment<FragmentIndividualBinding>() {
     private fun handleEvent(view: View) {
         when (view.id) {
             R.id.btnSetting -> {
-                findNavController().navigate(IndividualFragmentDirections.actionAccountFragmentToSettingFragment())
+                findNavController().navigate(IndividualFragmentDirections.actionIndividualFragmentToSettingFragment())
             }
             R.id.btnAuthentication -> {
-                findNavController().navigate(IndividualFragmentDirections.actionAccountFragmentToAuthenticationFragment())
+                findNavController().navigate(IndividualFragmentDirections.actionIndividualFragmentToAuthenticationFragment())
             }
             R.id.ivProfile -> {
                 openImage()
+            }
+            R.id.lnlFavourite -> {
+                findNavController().navigate(R.id.action_individualFragment_to_favouriteFragment)
             }
         }
 
@@ -70,28 +74,32 @@ class IndividualFragment : BaseFragment<FragmentIndividualBinding>() {
 
     override fun onResume() {
         super.onResume()
-
-        fuser = FirebaseAuth.getInstance().currentUser?.apply {
-            reference = FirebaseDatabase.getInstance().getReference(USERS).child(uid)
-            reference.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
-                    val user = dataSnapshot.getValue(User::class.java)
-                    if (user != null && context.isAvailable()) {
-                        viewModel.refreshUser(user)
-                        if (user.photoUrl.equals(DEFAULT)) {
-                            binding.ivProfile.setImageResource(R.drawable.ic_user_profile)
-                        } else { //and this
-                            Glide.with(requireContext()).load(user.photoUrl).into(binding.ivProfile)
+        if (SharedPrefs.instance[CURRENT_USER, Account::class.java] != null) {
+            fuser = FirebaseAuth.getInstance().currentUser?.apply {
+                reference = FirebaseDatabase.getInstance().getReference(USERS).child(uid)
+                reference.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
+                        val user = dataSnapshot.getValue(User::class.java)
+                        if (user != null && context.isAvailable()) {
+                            viewModel.refreshUser(user)
+                            if (user.photoUrl.equals(DEFAULT)) {
+                                binding.ivProfile.setImageResource(R.drawable.ic_user_profile)
+                            } else { //and this
+                                Glide.with(requireContext()).load(user.photoUrl)
+                                    .into(binding.ivProfile)
+                            }
+                            viewModel.account.value?.photoUrl = user.photoUrl
                         }
-                        viewModel.account.value?.photoUrl = user.photoUrl
+
                     }
 
-                }
-
-                override fun onCancelled(@NonNull databaseError: DatabaseError) {}
-            })
+                    override fun onCancelled(@NonNull databaseError: DatabaseError) {}
+                })
+            }
         }
+
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

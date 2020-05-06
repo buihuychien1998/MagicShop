@@ -15,6 +15,7 @@ import com.hidero.test.data.valueobject.Account
 import com.hidero.test.databinding.FragmentCartBinding
 import com.hidero.test.ui.adapters.CartAdapter
 import com.hidero.test.ui.base.BaseFragment
+import com.hidero.test.ui.dialogs.LoadingDialog
 import com.hidero.test.ui.viewmodels.CartViewModel
 import com.hidero.test.ui.viewmodels.EventObserver
 import com.hidero.test.util.*
@@ -28,11 +29,11 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
     private lateinit var cartAdapter: CartAdapter
     override fun getLayoutId() = R.layout.fragment_cart
 
-
+    val loadingDialog by lazy { LoadingDialog(requireContext()) }
     override fun initViews(view: View) {
         viewModel = ViewModelProvider(this)[CartViewModel::class.java]
         cartAdapter = CartAdapter(viewModel)
-        binding.rvCart.apply{
+        binding.rvCart.apply {
             itemAnimator = SpringAddItemAnimator()
             adapter = cartAdapter
             smoothScrollToPositionWithSpeed(cartAdapter.itemCount)
@@ -49,11 +50,18 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
     }
 
     private fun subscribeUi() {
+        if (SharedPrefs.instance[CURRENT_USER, Account::class.java] != null && viewModel.cart.value != null) {
+            loadingDialog.show()
+        }
+
         try {
             viewModel.run {
                 fetchCart(SharedPrefs.instance[CURRENT_USER, Account::class.java]?.username)
                 cart.observe(viewLifecycleOwner, Observer {
                     cartAdapter.submitList(it)
+                    if (loadingDialog.isShowing){
+                        loadingDialog.dismiss()
+                    }
                 })
                 navigateTo.observe(viewLifecycleOwner, EventObserver {
                     handleEvent(it)
@@ -88,15 +96,16 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 try {
-                    AlertDialog.Builder(requireContext()).create().apply {
-                        setTitle("?")
+                    AlertDialog.Builder(requireContext(), R.style.CustomDialog).create().apply {
+                        setCancelable(false)
+                        setIcon(R.drawable.ic_delete)
                         setMessage("Bạn muốn xóa sản phẩm này?")
                         setButton(Dialog.BUTTON_POSITIVE, "Có") { _, _ ->
                             run {
                                 cartAdapter.removeItem(viewHolder.adapterPosition)
                             }
                         }
-                        setButton(Dialog.BUTTON_NEGATIVE, "Kó") { _, _ ->
+                        setButton(Dialog.BUTTON_NEGATIVE, "Không") { _, _ ->
                             run {
                                 cartAdapter.notifyItemChanged(viewHolder.adapterPosition)
                                 dismiss()

@@ -119,7 +119,8 @@
                                 style="@style/modifiedEditText"
                                 android:hint="@string/s_i_n_thoa_i"
                                 android:inputType="phone"
-                                android:maxLines="1" />
+                                android:maxLines="1"
+                                android:text="+84"/>
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout

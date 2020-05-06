@@ -127,3 +127,11 @@ fun <T> LiveData<T>.observeOnce(lifecycleOwner: LifecycleOwner, observer: Observ
         }
     })
 }
+
+fun Activity.createShareIntent(value: String?){
+    val sharingIntent = Intent(Intent.ACTION_SEND)
+    sharingIntent.type = "text/plain"
+    sharingIntent.putExtra(Intent.EXTRA_TEXT, value)
+    sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject")
+    startActivity(Intent.createChooser(sharingIntent, "Share using"))
+}

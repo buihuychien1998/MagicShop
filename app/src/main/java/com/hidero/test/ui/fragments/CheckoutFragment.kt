@@ -74,7 +74,9 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>() {
             R.id.btnBack -> {
                 findNavController().navigateUp()
             }
-            R.id.btnCheckout->{}
+            R.id.btnCheckout->{
+                findNavController().navigate(R.id.action_checkoutFragment_to_otpFragment)
+            }
 
 
         }

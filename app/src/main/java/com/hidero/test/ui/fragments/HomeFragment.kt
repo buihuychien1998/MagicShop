@@ -18,6 +18,7 @@ import com.hidero.test.ui.adapters.BookPagedListAdapter
 import com.hidero.test.ui.adapters.OnItemClickListener
 import com.hidero.test.ui.adapters.SliderAdapterExample
 import com.hidero.test.ui.base.BaseFragment
+import com.hidero.test.ui.dialogs.LoadingDialog
 import com.hidero.test.ui.viewmodels.EventObserver
 import com.hidero.test.ui.viewmodels.HomeViewModel
 import com.hidero.test.ui.viewmodels.SharedViewModel
@@ -26,6 +27,7 @@ import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import kotlinx.android.synthetic.main.fragment_home.*
+import timber.log.Timber
 import java.util.*
 
 
@@ -77,12 +79,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
 
     private fun subscribeUi() {
+        val loadingDialog = LoadingDialog(requireContext()).apply {
+            show()
+        }
         viewModel.run {
             bookList.observe(viewLifecycleOwner, Observer { data ->
                 Timer().schedule(object : TimerTask() {
                     override fun run() { // this code will be executed after 2 seconds
                         requireActivity().runOnUiThread {
                             bookAdapter.submitList(data)
+                            loadingDialog.dismiss()
                         }
                     }
                 }, DELAY_LOAD)

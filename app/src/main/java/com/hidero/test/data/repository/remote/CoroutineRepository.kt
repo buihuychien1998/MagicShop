@@ -1,8 +1,13 @@
 package com.hidero.test.data.repository.remote
 
+import com.example.mychatapp.notifications.Sender
 import com.hidero.test.data.api.APIService
-import com.hidero.test.data.repository.remote.BaseRepository
-import com.hidero.test.data.valueobject.*
+import com.hidero.test.data.valueobject.Account
+import com.hidero.test.data.valueobject.Author
+import com.hidero.test.data.valueobject.Cart
+import com.hidero.test.data.valueobject.Genre
+import com.hidero.test.ui.notifications.MyResponse
+import retrofit2.http.Body
 
 class CoroutineRepository(private val apiService: APIService) : BaseRepository() {
     suspend fun getCart(username: String?): MutableList<Cart>? {
@@ -39,8 +44,17 @@ class CoroutineRepository(private val apiService: APIService) : BaseRepository()
         return safeApiCall({ apiService.getGenre() }, "Error Fetching")
     }
 
+    suspend fun updateBill(): String? {
+        return safeApiCall({ apiService.updateBill() }, "Error Fetching")
+    }
+
     suspend fun fetchUser(email: String?): Account? {
         return safeApiCall({ apiService.fetchUser(email) }, "Error Fetching")
     }
+
+    suspend fun sendNotification(@Body body: Sender?): MyResponse? {
+        return safeApiCall({ apiService.sendNotification(body) }, "Error Fetching")
+    }
+
 
 }

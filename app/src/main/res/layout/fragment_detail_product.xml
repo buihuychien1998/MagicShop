@@ -13,6 +13,10 @@
         <variable
             name="handlers"
             type="com.hidero.test.ui.viewmodels.CartViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.hidero.test.ui.viewmodels.FavouriteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +27,7 @@
             android:id="@+id/cdl"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="?attr/colorSurface"
             android:fitsSystemWindows="true"
             app:layout_constraintBottom_toTopOf="@id/btnAddCart"
             app:layout_constraintTop_toTopOf="parent">
@@ -31,17 +36,24 @@
                 android:id="@+id/abl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:fitsSystemWindows="true">
+                android:animateLayoutChanges="true"
+                android:background="?attr/colorSurface"
+                android:fitsSystemWindows="true"
+                android:stateListAnimator="@animator/show_toolbar">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                    app:collapsedTitleGravity="center"
+                    app:contentScrim="?attr/colorSurface"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                    app:statusBarScrim="?attr/colorSurface"
+                    app:toolbarId="@id/toolbar">
 
                     <ImageView
+                        tools:src="@drawable/no_internet_image"
                         android:id="@+id/imageSlider"
-                        imageUrl="@{data.bookImage}"
+                        app:imageFromUrl="@{data.bookImage}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/app_name"
@@ -53,10 +65,10 @@
                         android:id="@+id/toolBar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
+                        android:background="@android:color/transparent"
                         app:contentInsetEnd="@dimen/dp0"
                         app:contentInsetStart="@dimen/dp0"
-                        app:layout_collapseMode="pin"
-                        app:layout_scrollFlags="scroll|enterAlways">
+                        app:layout_collapseMode="pin">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -121,6 +133,7 @@
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clipToPadding="false"
                 android:paddingBottom="?attr/actionBarSize"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -233,7 +246,8 @@
                             android:id="@+id/btnFavorite"
                             style="@style/CustomImageButton"
                             android:contentDescription="@string/app_name"
-                            android:src="@drawable/ic_favorite"
+                            android:onClick="@{(v)->viewModel.navigateTo(v)}"
+                            android:src="@drawable/ic_playlist_add"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/btnShare"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -242,6 +256,7 @@
                             android:id="@+id/btnShare"
                             style="@style/CustomImageButton"
                             android:contentDescription="@string/app_name"
+                            android:onClick="@{(v)->viewModel.navigateTo(v)}"
                             android:src="@drawable/ic_share"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"

@@ -32,28 +32,39 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         requireActivity().changeStatusBarColor()
         mFirebaseAuth = FirebaseAuth.getInstance()
         binding.apply {
-            btnRegister.apply{
+            btnRegister.apply {
                 setOnClickListener {
                     if (isNotEmpty(tilUsername) && isNotEmpty(tilName) && isNotEmpty(tilEmail)
-                        && isNotEmpty(tilAddress) && isNotEmpty(tilPhone) && isNotEmpty(tilPassword) ) {
+                        && isNotEmpty(tilAddress) && isNotEmpty(tilPhone) && isNotEmpty(tilPassword)
+                    ) {
                         val username = edtUsername.text.toString()
                         val password = edtPassword.text.toString()
                         val name = edtName.text.toString()
                         val address = edtAddress.text.toString()
                         val phone = edtPhone.text.toString()
                         val email = edtEmail.text.toString()
-                        val account = Account(username, password, USER_ROLE, name, address, phone, email, null)
-                        if(account.isValidData() == -1){
+                        val account = Account(
+                            username,
+                            password,
+                            USER_ROLE,
+                            name,
+                            address,
+                            phone,
+                            email,
+                            null
+                        )
+                        if (account.isValidData() == -1) {
                             viewModel.apply {
                                 result = viewModel.register(mFirebaseAuth, account)
                                 result?.observeOnce(viewLifecycleOwner, Observer {
-                                    if(it == "Success"){
+                                    if (it == "Success") {
                                         requireContext().showToast("Đăng ký thành công! Giờ bạn có thể làm việc với chúng tôi bằng tài khoản này.")
+                                        clearEditText()
                                         login(mFirebaseAuth, email, password)
                                         SharedPrefs.instance.put(CURRENT_USER, account)
                                         refreshAccount()
                                         findNavController().navigateUp()
-                                    }else{
+                                    } else {
                                         requireContext().showToast("Tài khoản không hợp lệ hoặc đã có người sử dụng!")
                                     }
                                 })
@@ -71,13 +82,24 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                                     }
                                 })
                             }
-                        }else{
+                        } else {
                             requireContext().showToast("Tài khoản không hợp lệ hoặc đã có người sử dụng!")
                         }
 
                     }
                 }
             }
+        }
+    }
+
+    fun clearEditText() {
+        binding.apply {
+            edtUsername.setText("")
+            edtEmail.setText("")
+            edtName.setText("")
+            edtPassword.setText("")
+            edtPhone.setText("")
+            edtAddress.setText("")
         }
     }
 

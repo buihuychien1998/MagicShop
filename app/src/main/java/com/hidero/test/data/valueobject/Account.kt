@@ -2,6 +2,7 @@ package com.hidero.test.data.valueobject
 
 import android.text.TextUtils
 import android.util.Patterns
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.*
@@ -39,6 +40,7 @@ class Account private constructor() {
 
     @SerializedName("username")
     @Expose
+    @PrimaryKey
     var username: String? = null
     @SerializedName("password")
     @Expose

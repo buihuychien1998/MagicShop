@@ -2,6 +2,7 @@ package com.hidero.test
 
 import android.app.Application
 import com.google.gson.Gson
+import com.hidero.test.ui.AppSignatureHelper
 import timber.log.Timber
 
 
@@ -14,6 +15,8 @@ class App : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        val appSignature = AppSignatureHelper(this)
+        appSignature.appSignatures
     }
 
     companion object {

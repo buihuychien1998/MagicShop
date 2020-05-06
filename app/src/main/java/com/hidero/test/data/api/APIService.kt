@@ -1,6 +1,6 @@
 package com.hidero.test.data.api
 
-import com.example.mychatapp.notifications.MyResponse
+import com.hidero.test.ui.notifications.MyResponse
 import com.example.mychatapp.notifications.Sender
 import com.hidero.test.data.valueobject.*
 import io.reactivex.Observable
@@ -93,6 +93,9 @@ interface APIService {
         , @Query("page") page: Int,
         @Query("pageSize") pageSize: Int
     ): Observable<MutableList<Book>>
+
+    @GET("updateBill.php")
+    suspend fun updateBill(): Response<String>
 
     @POST("fcm/send")
     suspend fun sendNotification(@Body body: Sender?): Response<MyResponse>
