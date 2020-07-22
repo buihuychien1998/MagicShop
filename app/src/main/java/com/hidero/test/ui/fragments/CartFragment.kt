@@ -40,9 +40,8 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
             addOnScrollListener(
                 OscillatingScrollListener(resources.getDimensionPixelSize(R.dimen.dp16))
             )
-            ItemTouchHelper(itemTouchHelperCallback).also {
-                it.attachToRecyclerView(this)
-            }
+            ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(binding.rvCart)
+
         }
 
         binding.handlers = viewModel

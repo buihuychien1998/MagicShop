@@ -309,6 +309,7 @@
                             android:text="@string/thanh_toa_n_khi_nh_n_ha_ng" />
 
                         <RadioButton
+                            android:enabled="false"
                             android:id="@+id/rbCard"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -317,6 +318,7 @@
                             android:text="@string/thanh_toa_n_qua_the" />
 
                         <RadioButton
+                            android:enabled="false"
                             android:id="@+id/rbMomo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -325,6 +327,7 @@
                             android:text="@string/vi_momo" />
 
                         <RadioButton
+                            android:enabled="false"
                             android:id="@+id/rb"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

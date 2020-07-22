@@ -1,47 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="query_suggestions">
-        <item>A very long suggestion that would span multiple lines.</item>
-        <item>Android</item>
-        <item>iOS</item>
-        <item>SCALA</item>
-        <item>Ruby</item>
-        <item>JavaScript</item>
-        <item>C#</item>
-        <item>Python</item>
-        <item>C</item>
-        <item>C++</item>
-        <item>PHP</item>
-        <item>Go</item>
-        <item>Perl</item>
-        <item>Bash</item>
-        <item>Lua</item>
-        <item>R</item>
-        <item>TCL</item>
-        <item>Haskell</item>
-        <item>Objective C</item>
-        <item>Swift</item>
-        <item>Kotlin</item>
-        <item>jQuery</item>
-        <item>Development</item>
-        <item>Web</item>
-        <item>Ajax</item>
-        <item>Test</item>
-        <item>Testing</item>
-        <item>CookBook</item>
-        <item>Beagle</item>
-        <item>VMware</item>
-        <item>Less.js</item>
-        <item>IDE</item>
-        <item>Arduino</item>
-        <item>Xamarin</item>
-        <item>UI</item>
-        <item>Microsoft</item>
-        <item>Application</item>
-        <item>Development</item>
-        <item>JUnit</item>
-        <item>SQL</item>
-        <item>Beagle</item>
+        <item>Dế mèn phiêu lưu ký</item>
+        <item>Tắt đèn</item>
+        <item>Tam quốc diễn nghĩa</item>
+        <item>Tây Du Ký</item>
+        <item>Doremon</item>
+        <item>Nhà giả kim</item>
+        <item>Thám tử lừng danh Conan</item>
+        <item>Bí Mật Tư Duy Triệu Phú</item>
+        <item>Rừng xà nu</item>
+        <item>Truyện Kiều</item>
+        <item>Chiếc lược ngà</item>
+        <item>Đắc nhân tâm</item>
+        <item>Đất rừng phương Nam</item>
+        <item>Kho tàng truyện cổ tích Việt Nam</item>
+        <item>Những người khốn khổ</item>
+        <item>Thần điêu đại hiệp</item>
+        <item>Kỹ thuật lập trình c</item>
+        <item>Nhật ký trong tù</item>
     </string-array>
     <string-array name="checkout_step">
         <item>Chọn địa chỉ giao hàng</item>

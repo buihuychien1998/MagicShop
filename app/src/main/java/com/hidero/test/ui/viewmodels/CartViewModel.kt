@@ -7,6 +7,7 @@ import com.hidero.test.data.api.APIUtil
 import com.hidero.test.data.repository.remote.CoroutineRepository
 import com.hidero.test.data.valueobject.Account
 import com.hidero.test.data.valueobject.Cart
+import com.hidero.test.data.valueobject.Rating
 import com.hidero.test.ui.base.BaseViewModel
 import com.hidero.test.util.DELAY_LOAD
 import com.hidero.test.util.baseUrl
@@ -21,7 +22,7 @@ class CartViewModel : BaseViewModel() {
     private val parentJob = Job()
 
     private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Default
+        get() = parentJob + Dispatchers.IO
 
     private val scope = CoroutineScope(coroutineContext)
 
@@ -30,12 +31,18 @@ class CartViewModel : BaseViewModel() {
     private val _total = MutableLiveData<Float>()
     val total: LiveData<Float>
         get() = _total
+    private val _rating = MutableLiveData<MutableList<Rating>>()
+    val ratings: LiveData<MutableList<Rating>>
+        get() = _rating
+
+    private val _rate = MutableLiveData<Float>()
+    val rate: LiveData<Float>
+        get() = _rate
     private val _quantity = MutableLiveData<String>()
     val quantity: LiveData<String>
         get() = _quantity
     val cart = MutableLiveData<MutableList<Cart>>()
     val insertResponse = MutableLiveData<String>()
-    val acc = MutableLiveData<Account?>()
     fun fetchCart(username: String?) {
         scope.launch {
             try {
@@ -58,7 +65,7 @@ class CartViewModel : BaseViewModel() {
     fun fetchUser(email: String?) {
         scope.launch {
             try {
-                acc.postValue(repository.fetchUser(email))
+                postAcc(repository.fetchUser(email))
             } catch (ex: Exception) {
                 Timber.e(ex)
             }
@@ -132,6 +139,29 @@ class CartViewModel : BaseViewModel() {
         }
         _total.postValue(tmp)
         _quantity.postValue("$q")
+    }
+
+    fun getRating(bookId: Int?) {
+        scope.launch {
+            try {
+                _rating.postValue(repository.getRating(bookId))
+                updateRate(ratings.value)
+            } catch (ex: Exception) {
+                Timber.e(ex)
+            }
+        }
+    }
+    private fun updateRate(rate: MutableList<Rating>?) {
+        var tmp = 0F
+        rate?.forEach {
+           it.rating?.apply {
+               tmp += this
+           }
+        }
+        rate?.size?.let {
+            tmp /= it
+        }
+        _rate.postValue(tmp)
     }
 
     private fun cancelAllRequests() = coroutineContext.cancel()

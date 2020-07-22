@@ -45,7 +45,7 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>() {
             override fun onItemClick(position: Int) {
                 val bundle = Bundle()
                 bundle.putString(RECEIVERID, userAdapter.getItem(position).id)
-                findNavController().navigate(R.id.action_messageFragment_to_chatFragment, bundle)
+//                findNavController().navigate(R.id.action_messageFragment_to_chatFragment, bundle)
             }
 
         }

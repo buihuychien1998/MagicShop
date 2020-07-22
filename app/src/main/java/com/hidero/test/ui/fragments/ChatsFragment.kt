@@ -38,7 +38,6 @@ class ChatsFragment : BaseFragment<FragmentChatsBinding>() {
 
     override fun initViews(view: View) {
         fuser = FirebaseAuth.getInstance().currentUser
-        binding.recyclerView.setHasFixedSize(true)
         mUsers = ArrayList()
         userAdapter = UserAdapter(requireContext(), mUsers, true)
         binding.recyclerView.adapter = userAdapter
@@ -46,7 +45,7 @@ class ChatsFragment : BaseFragment<FragmentChatsBinding>() {
             override fun onItemClick(position: Int) {
                 val bundle = Bundle()
                 bundle.putString(RECEIVERID, userAdapter.getItem(position).id)
-                findNavController().navigate(R.id.action_messageFragment_to_chatFragment, bundle)
+//                findNavController().navigate(R.id.action_messageFragment_to_chatFragment, bundle)
             }
 
         }
@@ -93,9 +92,9 @@ class ChatsFragment : BaseFragment<FragmentChatsBinding>() {
             override fun onDataChange(@NonNull dataSnapshot: DataSnapshot) {
                 mUsers.clear()
                 for (snapshot in dataSnapshot.children) {
-                    val user = snapshot.getValue<User>(User::class.java)!!
+                    val user = snapshot.getValue(User::class.java)!!
                     for (chatList in usersList) {
-                        if (user.id.equals(chatList.id)) {
+                        if (user.id == chatList.id) {
                             mUsers.add(user)
                         }
                     }

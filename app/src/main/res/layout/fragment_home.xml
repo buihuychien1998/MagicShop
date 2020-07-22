@@ -86,66 +86,6 @@
                     app:sliderStartAutoCycle="true" />
             </androidx.cardview.widget.CardView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCategory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/slider_layout"
-                android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:layout_constraintTop_toBottomOf="@id/slider_layout"
-                app:spanCount="5"
-                tools:listitem="@layout/item_category" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/rlFlashSale"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/rvCategory"
-                android:layout_marginTop="@dimen/dp4"
-                app:layout_constraintTop_toBottomOf="@id/rvCategory">
-
-                <TextView
-                    android:id="@+id/tvFlashSale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_8sdp"
-                    android:fontFamily="@font/squaresharpsitalic"
-                    android:text="@string/flash_sale"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@+id/tvMoreFS"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvMoreFS"
-                    style="@style/BorderBackground"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_margin="@dimen/_8sdp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="@string/xem_th_m"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textSize="@dimen/sp12"
-                    android:textStyle="italic"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvFlashSale"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/tvFlashSale"
-                    tools:listitem="@layout/item_product" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
 
             <Button
                 android:id="@+id/tvProduct"
@@ -162,7 +102,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/sp16"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/rlFlashSale" />
+                app:layout_constraintTop_toBottomOf="@id/slider_layout" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -174,16 +114,14 @@
                 <androidx.core.widget.NestedScrollView
                     android:id="@+id/nsvProduct"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:ignore="NestedScrolling">
+                    android:layout_height="match_parent">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvProduct"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:nestedScrollingEnabled="false"
-                        android:smoothScrollbar="true"
-                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -206,8 +144,6 @@
                     style="@style/BorderBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
                     android:gravity="center"
                     android:onClick="@{()->handlers.retry()}"
                     android:visibility="gone"

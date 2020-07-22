@@ -16,7 +16,7 @@ class FavouriteViewModel(application: Application) : BaseViewModel() {
     private val parentJob = Job()
 
     private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Default
+        get() = parentJob + Dispatchers.IO
 
     private val scope = CoroutineScope(coroutineContext)
     private var repository: FavouriteBookRepository = FavouriteBookRepository(application)

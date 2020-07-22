@@ -14,7 +14,7 @@ import com.hidero.test.ui.activities.MainActivity
 
 abstract class BaseFragment<DB: ViewDataBinding> : Fragment() {
     lateinit var binding: DB
-    private var baseActivity: BaseActivity<*>? = null
+    var baseActivity: BaseActivity<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +37,6 @@ abstract class BaseFragment<DB: ViewDataBinding> : Fragment() {
         // This is used so that the binding can observe LiveData updates
         binding.lifecycleOwner = viewLifecycleOwner
         initViews(view)
-        if (findNavController().currentDestination?.id != findNavController().graph.startDestination) {
-            (baseActivity as MainActivity).visibilityBottomNav(false)
-        } else {
-            (baseActivity as MainActivity).visibilityBottomNav(true)
-        }
-
     }
 
     /**
@@ -58,6 +52,15 @@ abstract class BaseFragment<DB: ViewDataBinding> : Fragment() {
      * @param view
      */
     abstract fun initViews(view: View)
+
+    override fun onResume() {
+        super.onResume()
+        if (findNavController().currentDestination?.id != findNavController().graph.startDestination) {
+            (baseActivity as MainActivity).visibilityBottomNav(false)
+        } else {
+            (baseActivity as MainActivity).visibilityBottomNav(true)
+        }
+    }
 
 
 }

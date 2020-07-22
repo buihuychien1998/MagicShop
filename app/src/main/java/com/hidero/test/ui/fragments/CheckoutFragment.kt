@@ -1,6 +1,7 @@
 package com.hidero.test.ui.fragments
 
 
+import android.annotation.SuppressLint
 import android.os.Handler
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -48,12 +49,20 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun initViews(view: View) {
         handler.postDelayed(runnable, SPLASH_TIME_OUT)
         viewModel = ViewModelProvider(this)[CartViewModel::class.java]
         binding.handlers = viewModel
         checkoutAdapter = CheckoutAdapter()
         binding.rvInfoOder.adapter = checkoutAdapter
+        binding.rgDelivery.setOnCheckedChangeListener { group, checkedId ->
+            if(checkedId == R.id.rbFastDelivery){
+                binding.tvTotal.text = "${viewModel.total.value?.plus(10000)} đ"
+            }else{
+                binding.tvTotal.text = "${viewModel.total.value} đ"
+            }
+        }
         subscribeUi()
     }
 
@@ -63,7 +72,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>() {
             cart.observe(viewLifecycleOwner, Observer {
                 checkoutAdapter?.submitList(it)
             })
-            navigateTo.observe(viewLifecycleOwner, EventObserver{
+            navigateTo.observe(viewLifecycleOwner, EventObserver {
                 handleEvent(it)
             })
         }
@@ -74,7 +83,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>() {
             R.id.btnBack -> {
                 findNavController().navigateUp()
             }
-            R.id.btnCheckout->{
+            R.id.btnCheckout -> {
                 findNavController().navigate(R.id.action_checkoutFragment_to_otpFragment)
             }
 
@@ -82,6 +91,7 @@ class CheckoutFragment : BaseFragment<FragmentCheckoutBinding>() {
         }
 
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         handler.removeCallbacksAndMessages(null)

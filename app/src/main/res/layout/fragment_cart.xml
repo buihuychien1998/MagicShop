@@ -30,9 +30,9 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp8"
                 android:text="@string/gio_ha_ng_cu_a_ba_n"
                 android:textColor="@color/black"
-                android:layout_marginStart="@dimen/dp8"
                 android:textSize="@dimen/sp16"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btnTrash"
@@ -46,6 +46,7 @@
                 android:contentDescription="@string/app_name"
                 android:onClick="@{(v)->handlers.navigateTo(v)}"
                 android:src="@drawable/ic_remove_shopping_cart"
+                android:visibility="@{handlers.total != 0? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

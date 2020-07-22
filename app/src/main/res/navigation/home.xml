@@ -12,10 +12,10 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@anim/fragment_close_enter"
-            app:popExitAnim="@anim/fragment_close_exit" />
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_bottom"
+            app:popExitAnim="@anim/slide_out_bottom" />
         <action
             android:id="@+id/action_homeFragment_to_detailProductFragment"
             app:destination="@id/detailProductFragment"
@@ -42,5 +42,11 @@
         android:id="@+id/detailProductFragment"
         android:name="com.hidero.test.ui.fragments.DetailProductFragment"
         android:label="fragment_detail_product"
-        tools:layout="@layout/fragment_detail_product" />
+        tools:layout="@layout/fragment_detail_product" >
+        <action
+            android:id="@+id/action_detailProductFragment_to_cart"
+            app:destination="@id/cart" />
+    </fragment>
+    <include app:graph="@navigation/cart" />
+
 </navigation>

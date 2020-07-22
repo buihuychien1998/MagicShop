@@ -53,6 +53,15 @@ interface APIService {
     ): Response<MutableList<Cart>>
 
     @FormUrlEncoded
+    @POST("getBill.php")
+    suspend fun getBill(
+        @Field("username") username: String?
+    ): Response<MutableList<Cart>>
+
+    @GET("getNumberBills.php")
+    suspend fun getNumberBills(): Response<String>
+
+    @FormUrlEncoded
     @POST("insertCart.php")
     suspend fun insertCart(
         @Field("username") username: String?,
@@ -87,6 +96,12 @@ interface APIService {
     @GET("genre.php")
     suspend fun getGenre(): Response<MutableList<Genre>>
 
+    @GET("getRating.php")
+    suspend fun getRating(@Query("bookId") bookId: Int?): Response<MutableList<Rating>>
+
+    @GET("uploadImage.php")
+    suspend fun updateImage(@Query("username") username: String?, @Query("url") url: String?): Response<String>
+
     @GET("filter.php")
     fun filter(
         @Query("genreId") genreId: Int, @Query("authorId") authorId: Int
@@ -94,8 +109,12 @@ interface APIService {
         @Query("pageSize") pageSize: Int
     ): Observable<MutableList<Book>>
 
-    @GET("updateBill.php")
-    suspend fun updateBill(): Response<String>
+    @FormUrlEncoded
+    @POST("updateBill.php")
+    suspend fun updateBill(@Field("username") username: String?): Response<String>
+
+    @GET("statistic.php")
+    suspend fun statistic(@Query("year") year: Int?): Response<MutableList<Statistic>>
 
     @POST("fcm/send")
     suspend fun sendNotification(@Body body: Sender?): Response<MyResponse>

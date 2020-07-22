@@ -16,5 +16,10 @@
         android:id="@+id/detailProductFragment"
         android:name="com.hidero.test.ui.fragments.DetailProductFragment"
         android:label="fragment_detail_product"
-        tools:layout="@layout/fragment_detail_product" />
+        tools:layout="@layout/fragment_detail_product" >
+        <action
+            android:id="@+id/action_detailProductFragment_to_cart"
+            app:destination="@id/cart" />
+    </fragment>
+    <include app:graph="@navigation/cart" />
 </navigation>

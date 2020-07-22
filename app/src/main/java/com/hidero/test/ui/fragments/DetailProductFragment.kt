@@ -16,6 +16,7 @@ import com.hidero.test.R
 import com.hidero.test.data.valueobject.Book
 import com.hidero.test.data.valueobject.FavouriteBook
 import com.hidero.test.databinding.FragmentDetailProductBinding
+import com.hidero.test.ui.adapters.CommentAdapter
 import com.hidero.test.ui.base.BaseFragment
 import com.hidero.test.ui.viewmodels.CartViewModel
 import com.hidero.test.ui.viewmodels.EventObserver
@@ -32,6 +33,9 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>() {
     override fun getLayoutId() = R.layout.fragment_detail_product
     private val viewModel by lazy { ViewModelProvider(this)[CartViewModel::class.java] }
     private val favouriteViewModel by lazy { create() }
+    private val ratingAdapter by lazy {
+        CommentAdapter()
+    }
     private lateinit var book: Book
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +50,10 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>() {
         shareViewModel.selected.observe(viewLifecycleOwner) {
             binding.data = it
             book = it
+            viewModel.getRating(it.bookId)
         }
+
+        binding.rvComment.adapter = ratingAdapter
         subscribeUi()
 
     }
@@ -59,13 +66,7 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>() {
         favouriteViewModel.navigateTo.observe(viewLifecycleOwner, EventObserver {
             handleEvent(it)
         })
-        viewModel.insertResponse.observe(viewLifecycleOwner, Observer {
-            if (it == "Success") {
-                requireContext().showToast("Thêm vào giỏ hàng thành công")
-            } else {
-                requireContext().showToast("Bạn chưa đăng nhập!")
-            }
-        })
+
     }
 
     fun handleEvent(view: View) {
@@ -81,6 +82,13 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>() {
                     viewModel.apply {
                         insertCart(account.value?.username, book.bookId, 1, book.cost)
                         fetchCart(account.value?.username)
+                        viewModel.insertResponse.observe(viewLifecycleOwner, Observer {
+                            if (it == "Success") {
+                                requireContext().showToast("Thêm vào giỏ hàng thành công")
+                            } else {
+                                requireContext().showToast("Bạn chưa đăng nhập!")
+                            }
+                        })
                     }
                 }
             }
@@ -91,7 +99,7 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>() {
                         book.bookName,
                         book.bookImage,
                         book.author,
-                        favouriteViewModel.account.value?.username
+                        favouriteViewModel.account.value?.username!!
                     )
                     favouriteViewModel.insert(tmp)
                     Snackbar.make(
@@ -108,6 +116,12 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>() {
             R.id.btnShare -> {
                 requireActivity().createShareIntent(book.bookName)
             }
+
+            R.id.btnCart -> {
+                findNavController().navigate(R.id.action_detailProductFragment_to_cart)
+
+            }
+
 
         }
 

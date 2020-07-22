@@ -2,8 +2,8 @@ package com.hidero.test.ui.fragments
 
 
 import android.graphics.Color
+import android.view.MotionEvent
 import android.view.View
-import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hidero.test.R
 import com.hidero.test.data.valueobject.NetworkState
 import com.hidero.test.databinding.FragmentHomeBinding
@@ -18,16 +19,17 @@ import com.hidero.test.ui.adapters.BookPagedListAdapter
 import com.hidero.test.ui.adapters.OnItemClickListener
 import com.hidero.test.ui.adapters.SliderAdapterExample
 import com.hidero.test.ui.base.BaseFragment
-import com.hidero.test.ui.dialogs.LoadingDialog
 import com.hidero.test.ui.viewmodels.EventObserver
 import com.hidero.test.ui.viewmodels.HomeViewModel
 import com.hidero.test.ui.viewmodels.SharedViewModel
-import com.hidero.test.util.*
+import com.hidero.test.util.DATA_VIEW_TYPE
+import com.hidero.test.util.DELAY_LOAD
+import com.hidero.test.util.SPAN_COUNT
+import com.hidero.test.util.renewItems
 import com.smarteist.autoimageslider.IndicatorAnimations
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import kotlinx.android.synthetic.main.fragment_home.*
-import timber.log.Timber
 import java.util.*
 
 
@@ -70,25 +72,45 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     else 3                                              // NETWORK_VIEW_TYPE will occupy all 3 span
                 }
             }
+
         }
         with(rvProduct) {
             adapter = bookAdapter
             layoutManager = gridLayoutManager
+//            addOnItemTouchListener(object: RecyclerView.OnItemTouchListener{
+//                override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {
+//
+//                }
+//
+//                override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+//                    when (e.action) {
+//                        MotionEvent.ACTION_MOVE -> rv.parent
+//                            .requestDisallowInterceptTouchEvent(true)
+//                    }
+//                    return false
+//                }
+//
+//                override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+//
+//                }
+//
+//            })
         }
     }
 
 
     private fun subscribeUi() {
-        val loadingDialog = LoadingDialog(requireContext()).apply {
-            show()
-        }
+//        val loadingDialog = LoadingDialog(requireContext()).apply {
+//            show()
+//        }
         viewModel.run {
             bookList.observe(viewLifecycleOwner, Observer { data ->
                 Timer().schedule(object : TimerTask() {
                     override fun run() { // this code will be executed after 2 seconds
                         requireActivity().runOnUiThread {
+
                             bookAdapter.submitList(data)
-                            loadingDialog.dismiss()
+//                            loadingDialog.dismiss()
                         }
                     }
                 }, DELAY_LOAD)
@@ -137,7 +159,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             startAutoCycle()
         }
     }
-
 
     private fun create(): HomeViewModel {
         return ViewModelProvider(viewModelStore, object : ViewModelProvider.Factory {

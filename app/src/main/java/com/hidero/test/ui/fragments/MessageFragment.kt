@@ -9,13 +9,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.hidero.test.R
-import com.hidero.test.data.valueobject.Account
 import com.hidero.test.data.valueobject.FriendlyMessage
 import com.hidero.test.data.valueobject.User
 import com.hidero.test.databinding.FragmentMessageBinding
 import com.hidero.test.ui.adapters.ViewPagerAdapter
 import com.hidero.test.ui.base.BaseFragment
-import com.hidero.test.ui.dialogs.LoadingDialog
 import com.hidero.test.ui.viewmodels.MessageViewModel
 import com.hidero.test.util.*
 import java.util.*
@@ -32,15 +30,13 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
     private val viewModel by lazy {
         ViewModelProvider(this)[MessageViewModel::class.java]
     }
-    val loadingDialog by lazy { LoadingDialog(requireContext()) }
+
     override fun getLayoutId() = R.layout.fragment_message
 
 
     override fun initViews(view: View) {
         binding.handlers = viewModel
-        if (SharedPrefs.instance[CURRENT_USER, Account::class.java] != null){
-            loadingDialog.show()
-        }
+
         viewModel.refreshAccount()
         firebaseUser = FirebaseAuth.getInstance().currentUser?.apply {
             reference =
@@ -75,9 +71,7 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
                     viewPagerAdapter.addFragment(UsersFragment(), "Người dùng khác")
                     binding.viewPager.adapter = viewPagerAdapter
                     binding.tabLayout.setupWithViewPager(binding.viewPager)
-                    if (loadingDialog.isShowing) {
-                        loadingDialog.dismiss()
-                    }
+
                 }
 
                 override fun onCancelled(@NonNull databaseError: DatabaseError) {}
@@ -112,8 +106,5 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
     override fun onPause() {
         super.onPause()
         status(OFFLINE)
-        if (loadingDialog.isShowing) {
-            loadingDialog.dismiss()
-        }
     }
 }

@@ -45,7 +45,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/sp16"
             tools:hint="Enter Number"
-            tools:text="+46123456789" />
+            tools:text="+84123456789" />
 
         <com.hidero.test.ui.customviews.OtpEditText
             android:id="@+id/inputCode"

@@ -80,7 +80,7 @@ fun renewItems(adapter: SliderAdapterExample) {
                     }
                     i % 5 == 2 -> {
                         imageUrl =
-                            "https://khuyenmaiviet.vn/wp-content/uploads/2019/11/76793129_2285972111511566_282390569248882688_o.jpg"
+                            "https://cdn.sablanca.vn/ImageNews/khuyenmai%2FFlash%20Sale%2Fcontent-web.png"
                     }
                     i % 5 == 3 -> {
                         imageUrl =
@@ -209,7 +209,7 @@ fun BottomNavigationView.show() {
     parent.overlay.add(drawable)
     ValueAnimator.ofInt(parent.height, top).apply {
         startDelay = 100L
-        duration = 300L
+        duration = 200L
         interpolator = AnimationUtils.loadInterpolator(
             context,
             android.R.interpolator.linear_out_slow_in
@@ -259,4 +259,12 @@ fun BottomNavigationView.hide() {
         }
         start()
     }
+}
+
+fun View.setOnSingleClickListener(l: View.OnClickListener) {
+    setOnClickListener(OnSingleClickListener(l))
+}
+
+fun View.setOnSingleClickListener(l: (View) -> Unit) {
+    setOnClickListener(OnSingleClickListener(l))
 }

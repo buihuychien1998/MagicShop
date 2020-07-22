@@ -126,7 +126,7 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <string name="y_u_thi_ch_ncu_a_t_i">Yêu thích\ncủa tôi</string>
     <string name="thay_i_s_i_n_thoa_i">Thay đổi số điện thoại</string>
     <string name="g_i_cho_t_i_ca_c_th_ng_ba_o_va_khuy_n_ma_i_c_bi_t">Gửi cho tôi các thông báo và khuyến mại đặc biệt.</string>
-    <string name="tin_nh_n">Tin nhắn</string>
+    <string name="tin_nh_n">Báo cáo</string>
     <string name="vietnam_hi_n_ta_i_la_qu_c_gia_cu_a_ba_n">Vietnam hiện tại là quốc gia của bạn.</string>
     <string name="ti_ng_vi_t">Tiếng Việt</string>
     <string name="ng_n_ng_language">Ngôn ngữ - Language</string>
@@ -151,6 +151,13 @@ The lake was formed about 2 million years ago and is a part of the Lake Tahoe Ba
     <!-- String plurals and their related prefix / suffix strings -->
     <string name="watering_needs_prefix" translation_description="Prefix for the text describing how often a plant should be watered. Used in combination with watering_needs_suffix.">Watering needs</string>
     <string name="thay_i">Thay đổi</string>
+    <string name="rate"> %.1f/%s </string>
+    <string name="_0_rating">%d rating</string>
+    <string name="hotline_1900_6041">HOTLINE: 1900-6041</string>
+    <string name="_2020">2020</string>
+    <string name="doanh_thu">Doanh thu</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <plurals name="watering_needs_suffix">
         <item quantity="one" translation_description="Suffix for the text describing how often a plant should be watered, singular. Used in combination with watering_needs_prefix: 'Watering needs: every day'.">every day</item>
         <item quantity="other" translation_description="Suffix for the text describing how often a plant should be watered, plural. Used in combination with watering_needs_prefix: 'Watering needs: every 8 days'.">every %d days</item>

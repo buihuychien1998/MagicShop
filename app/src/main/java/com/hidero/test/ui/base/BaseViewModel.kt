@@ -22,7 +22,9 @@ abstract class BaseViewModel : ViewModel() {
     fun refreshAccount(){
         _account.postValue(SharedPrefs.instance[CURRENT_USER, Account::class.java])
     }
-
+    fun postAcc(acc: Account?){
+        _account.postValue(acc)
+    }
     fun navigateTo(view: View) {
         _navigateTo.value = Event(view)  // Trigger the event by setting a new Event as a new value
     }

@@ -1,5 +1,6 @@
 package com.hidero.test.ui.fragments
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -39,6 +40,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override fun getLayoutId() = R.layout.fragment_search
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initViews(view: View) {
         initAdapter()
         val adapter =

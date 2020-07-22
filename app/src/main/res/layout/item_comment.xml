@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="data"
+            type="com.hidero.test.data.valueobject.Rating" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp4"
+        android:clickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="true"
+        tools:ignore="UnusedAttribute">
+
+        <com.hidero.test.ui.customviews.MaskedCardView
+            android:id="@+id/cvBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivPhoto"
+                    imageUrl="@{data.userPhoto}"
+                    android:layout_width="@dimen/dp48"
+                    android:layout_height="@dimen/dp48"
+                    android:contentDescription="@string/app_name"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/ic_no_image" />
+
+                <TextView
+                    android:id="@+id/tvUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp8"
+                    android:maxLines="1"
+                    android:text="@{data.username}"
+                    android:textColor="@color/colorTextDefault"
+                    android:textSize="@dimen/sp12"
+                    app:layout_constraintStart_toEndOf="@id/ivPhoto"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="name" />
+
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp8"
+                    android:maxLines="1"
+                    android:text="@{data.cd}"
+                    android:textColor="@color/colorTextDefault"
+                    android:textSize="@dimen/sp12"
+                    app:layout_constraintEnd_toStartOf="@id/myRatingBar"
+                    app:layout_constraintStart_toEndOf="@id/tvUsername"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="name" />
+
+                <RatingBar
+                    android:layout_margin="@dimen/dp8"
+                    android:id="@+id/myRatingBar"
+                    style="@style/CustomRatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="@{data.rating}"
+                    android:stepSize="0.1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvDate"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:rating="5" />
+                <TextView
+                    android:id="@+id/tvContent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginEnd="@dimen/dp8"
+                    android:maxLines="1"
+                    android:text="@{data.content}"
+                    android:textColor="@color/colorTextDefault"
+                    android:textSize="@dimen/sp12"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivPhoto"
+                    app:layout_constraintTop_toBottomOf="@id/tvUsername"
+                    tools:text="content" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.hidero.test.ui.customviews.MaskedCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -10,7 +10,7 @@
         android:title="@string/danh_mu_c" />
     <item
         android:id="@+id/message"
-        android:icon="@drawable/ic_forum"
+        android:icon="@drawable/ic_baseline_multiline_chart"
         android:title="@string/tin_nh_n" />
     <item
         android:id="@+id/cart"

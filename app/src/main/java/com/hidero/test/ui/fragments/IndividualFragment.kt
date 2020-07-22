@@ -7,7 +7,9 @@ import android.net.Uri
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.NonNull
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -44,12 +46,20 @@ class IndividualFragment : BaseFragment<FragmentIndividualBinding>() {
     override fun initViews(view: View) {
         viewModel = ViewModelProvider(this)[SettingViewModel::class.java]
         binding.handlers = viewModel
-        viewModel.navigateTo.observe(viewLifecycleOwner, EventObserver {
-            handleEvent(it)
-        })
+        subscribeUi()
         viewModel.refreshAccount()
         storageReference = FirebaseStorage.getInstance().getReference(UPLOADS)
+    }
 
+    private fun subscribeUi() {
+        viewModel.apply {
+            navigateTo.observe(viewLifecycleOwner, EventObserver {
+                handleEvent(it)
+            })
+            imageStatus.observe(viewLifecycleOwner, Observer {
+                Timber.e(it.toString())
+            })
+        }
 
     }
 
@@ -68,6 +78,21 @@ class IndividualFragment : BaseFragment<FragmentIndividualBinding>() {
             R.id.lnlFavourite -> {
                 findNavController().navigate(R.id.action_individualFragment_to_favouriteFragment)
             }
+            R.id.tvPayForWait->{
+                findNavController().navigate(IndividualFragmentDirections.actionIndividualFragmentToBillFragment(0))
+            }
+
+            R.id.tvShipping->{
+                findNavController().navigate(R.id.action_individualFragment_to_billFragment, bundleOf("pos" to 1))
+            }
+
+            R.id.tvDelivery->{
+                findNavController().navigate(R.id.action_individualFragment_to_billFragment, bundleOf("pos" to 2))
+            }
+            R.id.tvWaitRatting->{
+                findNavController().navigate(R.id.action_individualFragment_to_billFragment, bundleOf("pos" to 3))
+            }
+
         }
 
     }
@@ -116,7 +141,7 @@ class IndividualFragment : BaseFragment<FragmentIndividualBinding>() {
     }
 
     private fun uploadImage() {
-        val adb = requireActivity().showDialog("Loading...")
+//        val adb = requireActivity().showDialog("Loading...")
         if (imageUri != null) {
 
             imageUri?.let {
@@ -136,18 +161,25 @@ class IndividualFragment : BaseFragment<FragmentIndividualBinding>() {
                             val mUri = downloadUri.toString()
                             reference = FirebaseDatabase.getInstance().getReference(USERS)
                                 .child(fuser!!.uid)
+                            viewModel.apply {
+                                updateImage(account.value?.username, mUri)
+                                Timber.e(account.value?.username.toString())
+                                SharedPrefs.instance[CURRENT_USER, Account::class.java]?.photoUrl = mUri
+                                Glide.with(requireContext()).load(mUri)
+                                    .into(binding.ivProfile)
+                            }
                             val map =
                                 HashMap<String, Any>()
-                            map[PHOTOURL] = "" + mUri
+                            map[PHOTOURL] = mUri
                             reference.updateChildren(map)
-                            adb.dismiss()
+//                            adb.dismiss()
                         } else {
                             Toast.makeText(context, "Failed!", Toast.LENGTH_SHORT).show()
-                            adb.dismiss()
+//                            adb.dismiss()
                         }
                     }.addOnFailureListener { ex ->
                         Timber.e(ex)
-                        adb.dismiss()
+//                        adb.dismiss()
                     }
                 }
             }

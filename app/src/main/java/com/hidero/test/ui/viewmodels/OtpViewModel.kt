@@ -16,17 +16,17 @@ class OtpViewModel : BaseViewModel() {
     private val parentJob = Job()
 
     private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Default
+        get() = parentJob + Dispatchers.IO
 
     private val scope = CoroutineScope(coroutineContext)
 
     private val repository =
         CoroutineRepository(apiService)
     val status = MutableLiveData<String>()
-    fun updateBill() {
+    fun updateBill(username: String?) {
         scope.launch {
             try {
-                status.postValue(repository.updateBill())
+                status.postValue(repository.updateBill(username))
             } catch (e: Exception) {
                 Timber.e(e)
             }

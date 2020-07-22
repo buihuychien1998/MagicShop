@@ -33,6 +33,7 @@ abstract class BaseActivity<DB : ViewDataBinding> : AppCompatActivity() {
         registerBroadcastReceiver()
         isNetworkState = isNetworkAvailable()
         initViews(savedInstanceState)
+
     }
 
     override fun onResume() {

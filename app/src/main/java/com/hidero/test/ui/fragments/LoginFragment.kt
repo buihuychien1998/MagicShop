@@ -24,6 +24,7 @@ import com.google.firebase.auth.*
 import com.hidero.test.R
 import com.hidero.test.data.valueobject.NetworkState
 import com.hidero.test.databinding.FragmentLoginBinding
+import com.hidero.test.ui.activities.MainActivity
 import com.hidero.test.ui.base.BaseFragment
 import com.hidero.test.ui.viewmodels.CartViewModel
 import com.hidero.test.ui.viewmodels.UserViewModel
@@ -82,6 +83,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                                         SharedPrefs.instance.put(CURRENT_USER, it)
                                         refreshAccount()
                                     }
+                                    (activity as MainActivity).enableStatistic()
                                 }
 
                             })
@@ -122,16 +124,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     }
 
     private fun signIn() {
-        binding.btnFacebookSI.setOnClickListener {
-            LoginManager.getInstance().logInWithReadPermissions(
-                this,
-                listOf("public_profile", "email")
-            )
-        }
-        binding.btnGoogleSI.setOnClickListener {
-            val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, RC_SIGN_IN)
-        }
+//        binding.btnFacebookSI.setOnClickListener {
+//            LoginManager.getInstance().logInWithReadPermissions(
+//                this,
+//                listOf("public_profile", "email")
+//            )
+//        }
+//        binding.btnGoogleSI.setOnClickListener {
+//            val signInIntent = googleSignInClient.signInIntent
+//            startActivityForResult(signInIntent, RC_SIGN_IN)
+//        }
 
         binding.tvForgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_authenticationFragment_to_resetPasswordFragment)
@@ -195,10 +197,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private fun updateUI(mFirebaseUser: FirebaseUser?) {
         cartViewModel.fetchUser(mFirebaseUser?.email)
         lifecycleScope.launch {
-            cartViewModel.acc.observe(viewLifecycleOwner, Observer {
+            cartViewModel.account.observe(viewLifecycleOwner, Observer {
                 Timber.e(it?.username.toString())
             })
-            Timber.e(cartViewModel.acc.value?.username.toString())
         }
 
 //

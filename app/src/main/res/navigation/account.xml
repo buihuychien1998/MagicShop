@@ -30,6 +30,14 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
+
+        <action
+            android:id="@+id/action_individualFragment_to_billFragment"
+            app:destination="@id/billFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_close_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
@@ -81,4 +89,12 @@
         android:name="com.hidero.test.ui.fragments.FavouriteFragment"
         android:label="fragment_favourite"
         tools:layout="@layout/fragment_favourite" />
+    <fragment
+        android:id="@+id/billFragment"
+        android:name="com.hidero.test.ui.fragments.BillFragment"
+        android:label="BillFragment" >
+        <argument android:name="pos"
+            android:defaultValue="0"
+            app:argType="integer"/>
+    </fragment>
 </navigation>

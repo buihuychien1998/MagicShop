@@ -1,5 +1,6 @@
 package com.hidero.test.util
 const val RESOLVE_HINT = 1
+const val REQUEST_PERMISSION = 123
 const val REQ_USER_CONSENT = 1
 const val OTP_LENGTH = 6
 const val CURRENT_USER = "CURRENT_USER"
@@ -17,7 +18,7 @@ const val DRAWABLE_TOP = 1
 const val DRAWABLE_END = 2
 const val DRAWABLE_BOTTOM = 3
 const val FIRST_PAGE = 1
-const val pageSize = 10
+const val pageSize = 1
 const val SPAN_COUNT = 3
 const val CHANNEL_ID = "com.example.mychatapp"
 const val CHANNEL_NAME = "mychatapp"
@@ -50,3 +51,4 @@ const val MSG_TYPE_RIGHT = 1
 const val RC_SIGN_IN = 1
 const val DATA_VIEW_TYPE = 1
 const val NETWORK_VIEW_TYPE = 2
+const val ARG_OBJECT = "object"

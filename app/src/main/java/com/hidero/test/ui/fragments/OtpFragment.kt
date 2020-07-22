@@ -50,6 +50,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(), MySMSBroadcastReceiver.O
 
         override fun onVerificationFailed(e: FirebaseException) {
             binding.progressBar.visibility = View.GONE
+            Timber.e(e)
         }
 
         override fun onCodeSent(
@@ -57,6 +58,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(), MySMSBroadcastReceiver.O
             forceResendingToken: ForceResendingToken
         ) {
             super.onCodeSent(verificationId, forceResendingToken)
+            Timber.e("onCodeSent")
             mResendToken = forceResendingToken
         }
 
@@ -71,10 +73,12 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(), MySMSBroadcastReceiver.O
             receiver,
             IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
         )
+
         receiver.initOTPListener(this)
         viewModel = ViewModelProvider(this).get(OtpViewModel::class.java)
+
         binding.apply {
-            val phoneNumber = "+84${viewModel.account.value?.phone}"
+            val phoneNumber = "${viewModel.account.value?.phone}"
             if (!TextUtils.isEmpty(phoneNumber)) {
                 numberText.text = phoneNumber
             }
@@ -89,11 +93,11 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(), MySMSBroadcastReceiver.O
                 if (!TextUtils.isEmpty(code)) {
                     verificationCode?.let {
                         if (code == it) {
-                            viewModel.updateBill()
-                            viewModel.status.observe(viewLifecycleOwner, Observer {
-                                if (it == "Success") {
+                            viewModel.updateBill(viewModel.account.value?.username)
+                            viewModel.status.observe(viewLifecycleOwner, Observer { state ->
+                                if (state == "Success") {
                                     requireActivity().showToast("Đã đặt đơn hàng!")
-                                    findNavController().navigate(R.id.action_otpFragment_to_homeFragment)
+                                    findNavController().navigate(OtpFragmentDirections.actionOtpFragmentToCartFragment())
                                 } else {
                                     requireActivity().showToast("Quá trình đặt đơn bị lỗi")
                                 }
@@ -101,6 +105,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(), MySMSBroadcastReceiver.O
                         } else {
                             requireActivity().showToast(resources.getString(R.string.wrong_otp))
                         }
+
                     }
                 } else {
                     requireActivity().showToast("Bạn chưa nhập mã otp!")
@@ -108,28 +113,24 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(), MySMSBroadcastReceiver.O
 
             }
             btnSend.setOnClickListener {
-                phoneNumber?.let { phoneNumber ->
-                    if (mResendToken == null) {
-                        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                            phoneNumber,                     // Phone number to verify
-                            30,                           // Timeout duration
-                            TimeUnit.SECONDS,                // Unit of timeout
-                            requireActivity(),        // Activity (for callback binding)
-                            mCallback
-                        )
-                    } else {
-                        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                            phoneNumber,                     // Phone number to verify
-                            30,                           // Timeout duration
-                            TimeUnit.SECONDS,                // Unit of timeout
-                            requireActivity(),        // Activity (for callback binding)
-                            mCallback,
-                            mResendToken
-                        )
-                    }
-
+                if (mResendToken == null) {
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                        phoneNumber,                     // Phone number to verify
+                        30,                           // Timeout duration
+                        TimeUnit.SECONDS,                // Unit of timeout
+                        requireActivity(),        // Activity (for callback binding)
+                        mCallback
+                    )
+                } else {
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                        phoneNumber,                     // Phone number to verify
+                        30,                           // Timeout duration
+                        TimeUnit.SECONDS,                // Unit of timeout
+                        requireActivity(),        // Activity (for callback binding)
+                        mCallback,
+                        mResendToken
+                    )
                 }
-
                 startSmsUserConsent()
                 simulateProgress()
             }
@@ -142,7 +143,7 @@ class OtpFragment : BaseFragment<FragmentOtpBinding>(), MySMSBroadcastReceiver.O
         val client = SmsRetriever.getClient(requireActivity() /* context */)
 
         client.startSmsUserConsent(null).addOnSuccessListener {
-            requireActivity().showToast("On Success")
+//            requireActivity().showToast("On Success")
         }.addOnFailureListener {
             Timber.e(it)
         }

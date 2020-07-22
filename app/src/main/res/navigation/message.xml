@@ -3,22 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/message"
-    app:startDestination="@id/messageFragment">
+    app:startDestination="@id/supportFragment">
+
     <fragment
-        android:id="@+id/messageFragment"
-        android:name="com.hidero.test.ui.fragments.MessageFragment"
-        android:label="fragment_message"
-        tools:layout="@layout/fragment_message" >
+        android:id="@+id/supportFragment"
+        android:name="com.hidero.test.ui.fragments.SupportFragment"
+        android:label="fragment_support"
+        tools:layout="@layout/fragment_support" >
         <action
-            android:id="@+id/action_messageFragment_to_chatFragment"
-            app:destination="@id/chatFragment" />
-        <argument android:name="receiverId"
-            app:argType="string"/>
+            android:id="@+id/action_supportFragment_to_statisticFragment"
+            app:destination="@id/statisticFragment" />
+        <action
+            android:id="@+id/action_supportFragment_to_updateBillFragment"
+            app:destination="@id/updateBillFragment" />
     </fragment>
     <fragment
-        android:id="@+id/chatFragment"
-        android:name="com.hidero.test.ui.fragments.ChatFragment"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        android:id="@+id/statisticFragment"
+        android:name="com.hidero.test.ui.fragments.StatisticFragment"
+        android:label="StatisticFragment"
+        tools:layout="@layout/fragment_statistic"/>
+    <fragment
+        android:id="@+id/updateBillFragment"
+        android:name="com.hidero.test.ui.fragments.UpdateBillFragment"
+        android:label="fragment_update_bill"
+        tools:layout="@layout/fragment_update_bill" />
 
 </navigation>

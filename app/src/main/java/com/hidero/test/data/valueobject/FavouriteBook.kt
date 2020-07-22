@@ -1,15 +1,16 @@
 package com.hidero.test.data.valueobject
 
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.DiffUtil
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "book_table")
+@Entity(tableName = "book_table", primaryKeys = ["bookId", "username"])
 data class FavouriteBook(
-    @PrimaryKey
     @ColumnInfo(name = "bookId")
-    val bookId: Int?,
+    @NonNull
+    val bookId: Int,
     @ColumnInfo(name = "bookName")
     val bookName: String?,
     @ColumnInfo(name = "bookImage")
@@ -17,7 +18,8 @@ data class FavouriteBook(
     @ColumnInfo(name = "author")
     val author: String?,
     @ColumnInfo(name = "username")
-    val username: String?
+    @NonNull
+    val username: String
 )
 
 class FavouriteCallBack : DiffUtil.ItemCallback<FavouriteBook>() {

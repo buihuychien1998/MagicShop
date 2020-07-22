@@ -1,10 +1,12 @@
 package com.hidero.test.util
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -14,6 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import android.webkit.MimeTypeMap
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleOwner
@@ -134,4 +137,24 @@ fun Activity.createShareIntent(value: String?){
     sharingIntent.putExtra(Intent.EXTRA_TEXT, value)
     sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject")
     startActivity(Intent.createChooser(sharingIntent, "Share using"))
+}
+
+fun Activity.createCallIntent(){
+    val callIntent = Intent(Intent.ACTION_CALL)
+    callIntent.data = Uri.parse("tel:0823457190")
+    if (ActivityCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CALL_PHONE
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+        // TODO: Consider calling
+        //    ActivityCompat#requestPermissions
+        // here to request the missing permissions, and then overriding
+        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+        //                                          int[] grantResults)
+        // to handle the case where the user grants the permission. See the documentation
+        // for ActivityCompat#requestPermissions for more details.
+        return
+    }
+    startActivity(callIntent)
 }

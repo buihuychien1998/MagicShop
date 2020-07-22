@@ -94,12 +94,16 @@
     </style>
 
     <style name="BorderBackground">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
         <item name="android:theme">@style/SelectableItemTheme</item>
         <item name="android:background">?android:attr/selectableItemBackground</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
     </style>
 
     <style name="BorderLessBackground">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
         <item name="android:theme">@style/SelectableItemTheme</item>
         <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
@@ -162,6 +166,14 @@
         <item name="colorPrimaryDark">@color/send_otp_blue_dark</item>        
         <item name="colorAccent">@color/colorAccent</item>
             
+    </style>
+
+    <style name="LoadingDialog" parent="ThemeOverlay.AppCompat.Light">
+        <item name="windowMinWidthMajor">100%</item>
+        <item name="windowMinWidthMinor">100%</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

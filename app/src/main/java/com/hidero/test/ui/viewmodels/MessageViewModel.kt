@@ -20,7 +20,7 @@ class MessageViewModel: BaseViewModel() {
     private val parentJob = Job()
 
     private val coroutineContext: CoroutineContext
-        get() = parentJob + Dispatchers.Default
+        get() = parentJob + Dispatchers.IO
     private val scope = CoroutineScope(coroutineContext)
     val repository = CoroutineRepository(apiService)
     fun sendNotification(body: Sender){

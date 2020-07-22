@@ -94,55 +94,55 @@
                     app:spinning_bar_width="4dp" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:gravity="center"
-                    android:weightSum="12">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="30dp"-->
+<!--                    android:gravity="center"-->
+<!--                    android:weightSum="12">-->
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="3"
-                        android:background="@color/colorPrimaryDark" />
+<!--                    <View-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:layout_weight="3"-->
+<!--                        android:background="@color/colorPrimaryDark" />-->
 
-                    <TextView
-                        style="@style/viewParent.headerText.NoMode"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:text="@string/ng_nh_p_b_ng_ta_i_khoa_n_kha_c"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/sp12" />
+<!--                    <TextView-->
+<!--                        style="@style/viewParent.headerText.NoMode"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_weight="6"-->
+<!--                        android:text="@string/ng_nh_p_b_ng_ta_i_khoa_n_kha_c"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textSize="@dimen/sp12" />-->
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="3"
-                        android:background="@color/colorPrimaryDark" />
+<!--                    <View-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:layout_weight="3"-->
+<!--                        android:background="@color/colorPrimaryDark" />-->
 
-                </LinearLayout>
+<!--                </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:gravity="center">-->
 
-                    <ImageButton
-                        android:id="@+id/btnFacebookSI"
-                        style="@style/CustomImageButton"
-                        android:contentDescription="@string/app_name"
-                        android:src="@drawable/ic_facebook" />
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/btnFacebookSI"-->
+<!--                        style="@style/CustomImageButton"-->
+<!--                        android:contentDescription="@string/app_name"-->
+<!--                        android:src="@drawable/ic_facebook" />-->
 
-                    <ImageButton
-                        android:id="@+id/btnGoogleSI"
-                        style="@style/CustomImageButton"
-                        android:layout_marginStart="10dp"
-                        android:contentDescription="@string/app_name"
-                        android:src="@drawable/ic_google_plus" />
-                </LinearLayout>
+<!--                    <ImageButton-->
+<!--                        android:id="@+id/btnGoogleSI"-->
+<!--                        style="@style/CustomImageButton"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:contentDescription="@string/app_name"-->
+<!--                        android:src="@drawable/ic_google_plus" />-->
+<!--                </LinearLayout>-->
 
             </LinearLayout>
         </ScrollView>
